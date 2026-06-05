@@ -9,31 +9,7 @@ import { cn } from "@/lib/utils"
 import { COMPANY } from "@/lib/constants/company"
 import { PUBLIC_NAV } from "@/lib/constants/navigation"
 import { Button } from "@/components/ui/button"
-
-function LogoMark({ className }: { className?: string }) {
-  return (
-    <div className={cn("relative", className)}>
-      <div className="absolute inset-0 rounded-lg bg-gradient-to-br from-brand-secondary to-brand-accent blur-md opacity-50" />
-      <div className="relative flex h-10 w-10 items-center justify-center rounded-lg bg-gradient-to-br from-brand-secondary via-brand-accent to-brand-secondary shadow-lg">
-        <svg
-          viewBox="0 0 24 24"
-          fill="none"
-          className="h-5 w-5 text-white"
-          stroke="currentColor"
-          strokeWidth="2.2"
-          strokeLinecap="round"
-          strokeLinejoin="round"
-          aria-hidden="true"
-        >
-          <path d="M10 17h4V5H2v12h3" />
-          <path d="M20 17h2v-3.34a4 4 0 0 0-1.17-2.83L19 9h-5" />
-          <circle cx="7.5" cy="17.5" r="2.5" />
-          <circle cx="17.5" cy="17.5" r="2.5" />
-        </svg>
-      </div>
-    </div>
-  )
-}
+import { Logo } from "@/components/shared/logo"
 
 export function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false)
@@ -92,27 +68,14 @@ export function Navbar() {
         <div className="flex items-center justify-between h-16 lg:h-20 py-2">
           <Link
             href="/"
-            className="group flex items-center gap-3 transition-opacity duration-300 hover:opacity-90"
+            className="group flex items-center transition-opacity duration-300 hover:opacity-90"
           >
-            <LogoMark />
-            <div className="flex flex-col">
-              <span
-                className={cn(
-                  "text-base sm:text-lg font-display font-bold leading-none tracking-tight transition-colors duration-500",
-                  isTransparent ? "text-brand-primary" : "text-white",
-                )}
-              >
-                {COMPANY.name}
-              </span>
-              <span
-                className={cn(
-                  "text-[10px] sm:text-xs font-medium tracking-wider uppercase mt-0.5 transition-colors duration-500",
-                  isTransparent ? "text-brand-secondary" : "text-brand-secondary",
-                )}
-              >
-                Logistics
-              </span>
-            </div>
+            <Logo
+              variant="full"
+              size="md"
+              tone={isTransparent ? "gradient" : "white"}
+              showTagline={false}
+            />
           </Link>
 
           <nav

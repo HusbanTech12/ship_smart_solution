@@ -7,6 +7,7 @@ import { toast } from "sonner"
 import { COMPANY } from "@/lib/constants/company"
 import { PUBLIC_NAV } from "@/lib/constants/navigation"
 import { SERVICES } from "@/lib/constants/services"
+import { Logo } from "@/components/shared/logo"
 
 type SocialIconProps = { className?: string }
 
@@ -109,36 +110,12 @@ export function Footer() {
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-10 lg:gap-12">
             <div className="lg:col-span-4 space-y-6">
               <div className="space-y-4">
-                <div className="flex items-center gap-3">
-                  <div className="relative">
-                    <div className="absolute inset-0 rounded-lg bg-gradient-to-br from-brand-secondary to-brand-accent blur-md opacity-50" />
-                    <div className="relative flex h-10 w-10 items-center justify-center rounded-lg bg-gradient-to-br from-brand-secondary via-brand-accent to-brand-secondary">
-                      <svg
-                        viewBox="0 0 24 24"
-                        fill="none"
-                        className="h-5 w-5 text-white"
-                        stroke="currentColor"
-                        strokeWidth="2.2"
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        aria-hidden="true"
-                      >
-                        <path d="M10 17h4V5H2v12h3" />
-                        <path d="M20 17h2v-3.34a4 4 0 0 0-1.17-2.83L19 9h-5" />
-                        <circle cx="7.5" cy="17.5" r="2.5" />
-                        <circle cx="17.5" cy="17.5" r="2.5" />
-                      </svg>
-                    </div>
-                  </div>
-                  <div className="flex flex-col">
-                    <span className="text-lg font-display font-bold text-white leading-none tracking-tight">
-                      {COMPANY.name}
-                    </span>
-                    <span className="text-[10px] text-brand-secondary font-medium tracking-wider uppercase mt-0.5">
-                      Logistics
-                    </span>
-                  </div>
-                </div>
+                <Logo
+                  variant="full"
+                  size="md"
+                  tone="white"
+                  showTagline={true}
+                />
 
                 <p className="text-sm text-gray-400 leading-relaxed max-w-sm">
                   {COMPANY.tagline}. Enterprise-grade trucking and logistics services across all 48 contiguous US states.
