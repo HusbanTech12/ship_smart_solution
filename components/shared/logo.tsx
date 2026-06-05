@@ -1,3 +1,6 @@
+"use client"
+
+import { useId } from "react"
 import { cn } from "@/lib/utils"
 
 type LogoVariant = "mark" | "wordmark" | "full"
@@ -27,7 +30,8 @@ function LogoMark({
   className?: string
   tone?: "gradient" | "white" | "dark"
 }) {
-  const id = `ship-smart-logo-${size}-${tone}-${Math.random().toString(36).slice(2, 8)}`
+  const reactId = useId()
+  const id = `ship-smart-logo-${size}-${tone}-${reactId}`
 
   const isWhite = tone === "white"
   const isDark = tone === "dark"
