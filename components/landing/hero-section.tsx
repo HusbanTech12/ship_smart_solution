@@ -9,7 +9,6 @@ import {
   Package,
   CheckCircle2,
   ShieldCheck,
-  ChevronDown,
 } from "lucide-react"
 import Link from "next/link"
 import { Button } from "@/components/ui/button"
@@ -393,16 +392,6 @@ export function HeroSection() {
         </div>
       </div>
 
-      <motion.div
-        initial={anim ? { opacity: 0, y: -10 } : undefined}
-        animate={anim ? { opacity: 1, y: 0 } : undefined}
-        transition={{ duration: 0.6, delay: 0.8 }}
-        className="absolute bottom-4 left-1/2 -translate-x-1/2 z-20 hidden md:flex flex-col items-center gap-1 text-brand-muted"
-        aria-hidden="true"
-      >
-        <span className="text-[10px] font-semibold uppercase tracking-widest">Scroll</span>
-        <ChevronDown className="h-4 w-4 animate-bounce" />
-      </motion.div>
     </section>
   )
 }
