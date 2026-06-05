@@ -1,0 +1,31 @@
+export const COMPANY = {
+  name: "Ship Smart Solutions",
+  tagline: "Ship Smarter with Us",
+  phone: "(331) 215-4701",
+  phoneHref: "tel:+13312154701",
+  email: "operations@ship-solutions.net",
+  emailHref: "mailto:operations@ship-solutions.net",
+  address: "650 E Diehl Rd, Naperville IL, 60563",
+  coverage: "All 48 contiguous US states",
+  stats: {
+    onTimeRate: "99%+",
+    operations: "24/7",
+    warehouseSpace: "3.7M+",
+    truckloadsPerMonth: "500+",
+    totalAssets: "3,600+",
+    unitsFulfilledPerMonth: "15M+",
+  },
+  services: [
+    "Dedicated 53' Reefers",
+    "Dedicated 53' Dry Vans",
+    "Specialized Open Deck",
+  ],
+  clients: [
+    "Amazon",
+    "FedEx",
+    "Walmart",
+    "Costco",
+    "TDU Tires",
+    "Moesle Meat",
+  ],
+} as const
