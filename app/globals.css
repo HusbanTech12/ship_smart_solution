@@ -38,6 +38,25 @@ body {
   font-family: var(--font-sans), Arial, Helvetica, sans-serif;
 }
 
+@layer base {
+  button:not(:disabled),
+  a[href],
+  [role="button"]:not([aria-disabled="true"]),
+  [role="link"]:not([aria-disabled="true"]),
+  label[for],
+  select,
+  summary,
+  [tabindex]:not([tabindex="-1"]):not([aria-disabled="true"]) {
+    cursor: pointer;
+  }
+
+  button:disabled,
+  [aria-disabled="true"],
+  [role="button"][aria-disabled="true"] {
+    cursor: not-allowed;
+  }
+}
+
 @keyframes float {
   0%, 100% { transform: translateY(0) scale(1); opacity: 0.3; }
   50% { transform: translateY(-30px) scale(1.1); opacity: 0.6; }
