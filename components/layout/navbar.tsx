@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from "react"
 import { motion, AnimatePresence } from "framer-motion"
-import { Menu, X, ArrowRight, Phone } from "lucide-react"
+import { Menu, X, ArrowRight } from "lucide-react"
 import Link from "next/link"
 import { usePathname } from "next/navigation"
 import { cn } from "@/lib/utils"
@@ -114,27 +114,6 @@ export function Navbar() {
           </nav>
 
           <div className="hidden lg:flex items-center gap-3">
-            <a
-              href={COMPANY.phoneHref}
-              className={cn(
-                "hidden xl:flex items-center gap-2 text-sm transition-colors duration-500 group",
-                isTransparent ? "text-brand-primary hover:text-brand-secondary" : "text-white/80 hover:text-white",
-              )}
-              aria-label="Call us"
-            >
-              <span
-                className={cn(
-                  "flex h-9 w-9 items-center justify-center rounded-full border transition-all duration-200",
-                  isTransparent
-                    ? "border-brand-secondary/30 bg-white/40 group-hover:border-brand-secondary group-hover:bg-brand-secondary/15"
-                    : "border-white/10 bg-white/5 group-hover:border-brand-secondary/40 group-hover:bg-brand-secondary/10",
-                )}
-              >
-                <Phone className="h-3.5 w-3.5" />
-              </span>
-              <span className="font-medium tabular-nums">{COMPANY.phone}</span>
-            </a>
-
             <ThemeToggle
               className={cn(
                 isTransparent
@@ -285,13 +264,6 @@ export function Navbar() {
                     <ArrowRight className="ml-2 h-4 w-4" />
                   </Button>
                 </Link>
-                <a
-                  href={COMPANY.phoneHref}
-                  className="flex items-center justify-center gap-2 rounded-lg border border-white/10 bg-white/5 py-3 text-sm font-medium text-white/90"
-                >
-                  <Phone className="h-4 w-4" />
-                  {COMPANY.phone}
-                </a>
               </motion.div>
             </nav>
           </motion.div>
