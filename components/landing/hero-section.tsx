@@ -1,14 +1,33 @@
 "use client"
 
-import { useReducedMotion } from "framer-motion"
-import { ArrowRight, Truck, MapPin, Package, CheckCircle2, Sparkles } from "lucide-react"
+import { useEffect, useState } from "react"
+import { motion, useReducedMotion } from "framer-motion"
+import {
+  ArrowRight,
+  Truck,
+  MapPin,
+  Package,
+  CheckCircle2,
+  ShieldCheck,
+  ChevronDown,
+} from "lucide-react"
 import Link from "next/link"
 import { Button } from "@/components/ui/button"
+import { AnimatedCounter } from "@/components/shared/animated-counter"
+import { COMPANY } from "@/lib/constants/company"
 
 const trustSignals = [
   "No minimums",
   "Instant quoting",
   "24/7 support",
+]
+
+const industries = [
+  "Retail",
+  "Food & Bev",
+  "Pharma",
+  "Auto",
+  "Manufacturing",
 ]
 
 const routeSteps = [
@@ -23,8 +42,35 @@ const truckStats = [
   { label: "Status", value: "On time" },
 ]
 
+const heroStats = [
+  { value: 99, suffix: "%+", label: "On-time delivery" },
+  { value: 500, suffix: "+", label: "Loads / month" },
+  { value: 3600, suffix: "+", label: "Assets" },
+  { value: 48, suffix: "", label: "States covered" },
+]
+
+const clientColors: Record<string, string> = {
+  Amazon: "#fb923c",
+  FedEx: "#a855f7",
+  Walmart: "#3b82f6",
+  Costco: "#ef4444",
+  "TDU Tires": "#6b7280",
+  "Moesle Meat": "#f43f5e",
+}
+
 export function HeroSection() {
   const prefersReduced = useReducedMotion()
+  const anim = !prefersReduced
+  const [progress, setProgress] = useState(0)
+
+  useEffect(() => {
+    if (prefersReduced) {
+      setProgress(55)
+      return
+    }
+    const t = setTimeout(() => setProgress(55), 400)
+    return () => clearTimeout(t)
+  }, [prefersReduced])
 
   return (
     <section className="relative min-h-screen flex flex-col overflow-hidden bg-white">
@@ -32,23 +78,23 @@ export function HeroSection() {
         className="absolute inset-0"
         style={{
           background:
-            "radial-gradient(ellipse 70% 50% at 0% 0%, rgba(232,115,42,0.10) 0%, transparent 55%), radial-gradient(ellipse 60% 40% at 100% 0%, rgba(0,38,77,0.06) 0%, transparent 55%), radial-gradient(ellipse 50% 40% at 50% 100%, rgba(245,166,35,0.08) 0%, transparent 60%)",
+            "radial-gradient(ellipse 70% 50% at 0% 0%, rgba(232,115,42,0.12) 0%, transparent 55%), radial-gradient(ellipse 60% 40% at 100% 0%, rgba(0,38,77,0.08) 0%, transparent 55%), radial-gradient(ellipse 50% 40% at 50% 100%, rgba(245,166,35,0.10) 0%, transparent 60%)",
         }}
       />
 
       {!prefersReduced && (
         <>
-          <div className="absolute top-1/4 left-[5%] h-72 w-72 rounded-full bg-brand-secondary/15 blur-3xl animate-float" />
-          <div className="absolute top-1/2 right-[10%] h-64 w-64 rounded-full bg-brand-accent/10 blur-3xl animate-float-delayed" />
-          <div className="absolute bottom-1/4 left-1/3 h-80 w-80 rounded-full bg-brand-primary/5 blur-3xl animate-float-slow" />
+          <div className="absolute top-1/4 left-[5%] h-96 w-96 rounded-full bg-brand-secondary/15 blur-3xl animate-float" />
+          <div className="absolute top-1/2 right-[10%] h-80 w-80 rounded-full bg-brand-accent/12 blur-3xl animate-float-delayed" />
+          <div className="absolute bottom-1/4 left-1/3 h-96 w-96 rounded-full bg-brand-primary/5 blur-3xl animate-float-slow" />
         </>
       )}
 
       <div
-        className="absolute inset-0 opacity-[0.4]"
+        className="absolute inset-0 opacity-[0.35]"
         style={{
           backgroundImage:
-            "linear-gradient(rgba(0,38,77,0.06) 1px, transparent 1px), linear-gradient(90deg, rgba(0,38,77,0.06) 1px, transparent 1px)",
+            "linear-gradient(rgba(0,38,77,0.05) 1px, transparent 1px), linear-gradient(90deg, rgba(0,38,77,0.05) 1px, transparent 1px)",
           backgroundSize: "64px 64px",
           maskImage:
             "radial-gradient(ellipse 80% 60% at 50% 50%, black 30%, transparent 80%)",
@@ -58,15 +104,25 @@ export function HeroSection() {
       />
 
       <div className="flex-1 flex items-center relative z-10">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full pt-24 lg:pt-32 pb-16">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full pt-24 lg:pt-32 pb-12">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
             <div className="text-center lg:text-left">
-              <div className="inline-flex items-center gap-2 rounded-full border border-brand-secondary/30 bg-brand-secondary/10 px-4 py-1.5 text-xs font-semibold text-brand-secondary mb-8 backdrop-blur-sm">
-                <Sparkles className="h-3 w-3" />
+              <motion.div
+                initial={anim ? { opacity: 0, y: 10 } : undefined}
+                animate={anim ? { opacity: 1, y: 0 } : undefined}
+                transition={{ duration: 0.5 }}
+                className="inline-flex items-center gap-2 rounded-full border border-brand-secondary/30 bg-brand-secondary/10 px-4 py-1.5 text-xs font-semibold text-brand-secondary mb-8 backdrop-blur-sm"
+              >
+                <ShieldCheck className="h-3 w-3" />
                 Trusted by Fortune 500 companies nationwide
-              </div>
+              </motion.div>
 
-              <h1 className="text-5xl sm:text-6xl lg:text-7xl font-display font-bold text-brand-primary leading-[1.02] tracking-tight">
+              <motion.h1
+                initial={anim ? { opacity: 0, y: 20 } : undefined}
+                animate={anim ? { opacity: 1, y: 0 } : undefined}
+                transition={{ duration: 0.6, delay: 0.1, ease: [0.21, 0.47, 0.32, 0.98] as const }}
+                className="text-5xl sm:text-6xl lg:text-7xl font-display font-bold text-brand-primary leading-[1.02] tracking-tight"
+              >
                 Ship Smarter.
                 <br />
                 <span className="relative inline-block mt-2">
@@ -74,7 +130,7 @@ export function HeroSection() {
                     Scale Faster.
                   </span>
                   <svg
-                    className="absolute -bottom-2 left-0 w-full h-3 text-brand-secondary/40"
+                    className="absolute -bottom-3 left-0 w-full h-3 text-brand-secondary/50"
                     viewBox="0 0 200 12"
                     fill="none"
                     preserveAspectRatio="none"
@@ -89,13 +145,40 @@ export function HeroSection() {
                     />
                   </svg>
                 </span>
-              </h1>
+              </motion.h1>
 
-              <p className="mt-8 text-lg sm:text-xl text-brand-muted max-w-xl mx-auto lg:mx-0 leading-relaxed">
+              <motion.p
+                initial={anim ? { opacity: 0, y: 20 } : undefined}
+                animate={anim ? { opacity: 1, y: 0 } : undefined}
+                transition={{ duration: 0.6, delay: 0.2, ease: [0.21, 0.47, 0.32, 0.98] as const }}
+                className="mt-8 text-lg sm:text-xl text-brand-muted max-w-xl mx-auto lg:mx-0 leading-relaxed"
+              >
                 Enterprise-grade freight solutions with team-driven 53&apos; reefers, dry vans, and flatbed services across all 48 states.
-              </p>
+              </motion.p>
 
-              <div className="mt-10 flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4">
+              <motion.div
+                initial={anim ? { opacity: 0, y: 10 } : undefined}
+                animate={anim ? { opacity: 1, y: 0 } : undefined}
+                transition={{ duration: 0.5, delay: 0.25 }}
+                className="mt-5 flex flex-wrap items-center justify-center lg:justify-start gap-x-2 gap-y-1.5 text-xs text-brand-muted"
+              >
+                <span className="font-semibold text-brand-primary">Built for</span>
+                {industries.map((ind, i) => (
+                  <span key={ind} className="inline-flex items-center gap-x-2">
+                    <span>{ind}</span>
+                    {i < industries.length - 1 && (
+                      <span className="h-1 w-1 rounded-full bg-brand-secondary/40" />
+                    )}
+                  </span>
+                ))}
+              </motion.div>
+
+              <motion.div
+                initial={anim ? { opacity: 0, y: 20 } : undefined}
+                animate={anim ? { opacity: 1, y: 0 } : undefined}
+                transition={{ duration: 0.6, delay: 0.3, ease: [0.21, 0.47, 0.32, 0.98] as const }}
+                className="mt-10 flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4"
+              >
                 <Link href="/contact" className="w-full sm:w-auto">
                   <Button
                     variant="secondary"
@@ -111,27 +194,59 @@ export function HeroSection() {
                 </Link>
                 <Link href="/services" className="w-full sm:w-auto">
                   <Button
-                    variant="ghost"
+                    variant="outline"
                     size="lg"
-                    className="group w-full border-brand-primary/20 text-brand-primary hover:bg-brand-primary/5"
+                    className="group w-full"
                   >
                     Explore Services
                     <ArrowRight className="ml-2 h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" />
                   </Button>
                 </Link>
-              </div>
+              </motion.div>
 
-              <div className="mt-10 flex flex-wrap items-center justify-center lg:justify-start gap-x-8 gap-y-3 text-sm text-brand-muted">
+              <motion.div
+                initial={anim ? { opacity: 0, y: 20 } : undefined}
+                animate={anim ? { opacity: 1, y: 0 } : undefined}
+                transition={{ duration: 0.6, delay: 0.4, ease: [0.21, 0.47, 0.32, 0.98] as const }}
+                className="mt-8 flex flex-wrap items-center justify-center lg:justify-start gap-x-8 gap-y-3 text-sm text-brand-muted"
+              >
                 {trustSignals.map((signal) => (
                   <span key={signal} className="flex items-center gap-2">
                     <CheckCircle2 className="h-4 w-4 text-brand-secondary" />
                     {signal}
                   </span>
                 ))}
-              </div>
+              </motion.div>
+
+              <motion.div
+                initial={anim ? { opacity: 0, y: 10 } : undefined}
+                animate={anim ? { opacity: 1, y: 0 } : undefined}
+                transition={{ duration: 0.6, delay: 0.5 }}
+                className="mt-8 pt-8 border-t border-gray-200"
+              >
+                <p className="text-[10px] font-semibold uppercase tracking-widest text-brand-muted mb-3">
+                  Powering logistics for
+                </p>
+                <div className="flex flex-wrap items-center justify-center lg:justify-start gap-x-6 gap-y-2">
+                  {COMPANY.clients.map((client) => (
+                    <span
+                      key={client}
+                      className="text-sm sm:text-base font-heading font-bold tracking-tight transition-all duration-300 hover:scale-105 cursor-default"
+                      style={{ color: clientColors[client] }}
+                    >
+                      {client}
+                    </span>
+                  ))}
+                </div>
+              </motion.div>
             </div>
 
-            <div className="relative lg:pl-8">
+            <motion.div
+              initial={anim ? { opacity: 0, x: 20 } : undefined}
+              animate={anim ? { opacity: 1, x: 0 } : undefined}
+              transition={{ duration: 0.7, delay: 0.3, ease: [0.21, 0.47, 0.32, 0.98] as const }}
+              className="relative lg:pl-8"
+            >
               <div className="absolute -top-6 -right-6 h-32 w-32 rounded-full bg-brand-accent/20 blur-2xl" />
               <div className="absolute -bottom-8 -left-8 h-40 w-40 rounded-full bg-brand-secondary/15 blur-2xl" />
 
@@ -164,7 +279,24 @@ export function HeroSection() {
 
                   <div className="relative my-6 px-2">
                     <div className="absolute top-1/2 left-0 right-0 h-0.5 bg-gray-200 -translate-y-1/2" />
-                    <div className="absolute top-1/2 left-0 h-0.5 bg-gradient-to-r from-brand-secondary to-brand-accent -translate-y-1/2" style={{ width: "55%" }} />
+                    <div
+                      className="absolute top-1/2 left-0 h-0.5 bg-gradient-to-r from-brand-secondary to-brand-accent -translate-y-1/2 transition-all duration-[1500ms] ease-out"
+                      style={{ width: `${progress}%` }}
+                    />
+
+                    {!prefersReduced && (
+                      <div
+                        className="absolute top-1/2 -translate-y-1/2 -translate-x-1/2 z-10"
+                        style={{
+                          left: `${progress}%`,
+                          transition: "left 1500ms ease-out",
+                        }}
+                      >
+                        <div className="flex h-7 w-7 items-center justify-center rounded-full bg-white border-2 border-brand-secondary shadow-md">
+                          <Truck className="h-3.5 w-3.5 text-brand-secondary" />
+                        </div>
+                      </div>
+                    )}
 
                     <div className="relative flex justify-between">
                       {routeSteps.map((step) => (
@@ -181,7 +313,7 @@ export function HeroSection() {
                             {step.status === "done" ? (
                               <CheckCircle2 className="h-4 w-4 text-white" />
                             ) : step.status === "active" ? (
-                              <Truck className="h-4 w-4 text-brand-secondary" />
+                              <MapPin className="h-4 w-4 text-brand-secondary" />
                             ) : (
                               <MapPin className="h-4 w-4 text-gray-400" />
                             )}
@@ -236,10 +368,41 @@ export function HeroSection() {
                   </div>
                 </div>
               </div>
-            </div>
+            </motion.div>
           </div>
         </div>
       </div>
+
+      <div className="relative z-10 border-t border-gray-200/80 bg-gradient-to-b from-transparent to-brand-surface/50 backdrop-blur-sm">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
+          <div className="grid grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-8">
+            {heroStats.map((stat) => (
+              <div
+                key={stat.label}
+                className="text-center lg:text-left border-l-2 border-brand-secondary/30 lg:pl-4 first:border-l-0 first:pl-0"
+              >
+                <div className="text-3xl sm:text-4xl font-heading font-bold text-brand-primary">
+                  <AnimatedCounter end={stat.value} suffix={stat.suffix} />
+                </div>
+                <div className="mt-1 text-xs sm:text-sm font-medium text-brand-muted uppercase tracking-wider">
+                  {stat.label}
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+
+      <motion.div
+        initial={anim ? { opacity: 0, y: -10 } : undefined}
+        animate={anim ? { opacity: 1, y: 0 } : undefined}
+        transition={{ duration: 0.6, delay: 0.8 }}
+        className="absolute bottom-4 left-1/2 -translate-x-1/2 z-20 hidden md:flex flex-col items-center gap-1 text-brand-muted"
+        aria-hidden="true"
+      >
+        <span className="text-[10px] font-semibold uppercase tracking-widest">Scroll</span>
+        <ChevronDown className="h-4 w-4 animate-bounce" />
+      </motion.div>
     </section>
   )
 }
