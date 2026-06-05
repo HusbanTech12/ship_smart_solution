@@ -4,7 +4,6 @@ import { Activity, Clock, Globe, Shield, Users, Zap, ArrowRight } from "lucide-r
 import { motion, useReducedMotion } from "framer-motion"
 import Link from "next/link"
 import { Button } from "@/components/ui/button"
-import { cn } from "@/lib/utils"
 
 const features = [
   {
@@ -107,10 +106,14 @@ export function HomeFeaturesSection() {
           {features.map((feature) => {
             const Icon = feature.icon
             return (
-              <motion.div key={feature.title} variants={anim ? cardVariants : undefined}>
+              <motion.div
+                key={feature.title}
+                variants={anim ? cardVariants : undefined}
+                className="h-full"
+              >
                 <Link
                   href={feature.href}
-                  className="group relative flex flex-col rounded-xl border border-gray-200 bg-white p-6 transition-all duration-300 hover:-translate-y-1.5 hover:border-brand-secondary/40 hover:shadow-xl hover:shadow-brand-secondary/10"
+                  className="group relative flex h-full flex-col rounded-xl border border-gray-200 bg-white p-6 transition-all duration-300 hover:-translate-y-1.5 hover:border-brand-secondary/40 hover:shadow-xl hover:shadow-brand-secondary/10"
                 >
                   {feature.featured && (
                     <div className="absolute top-6 right-6 inline-flex items-center gap-1.5 rounded-full bg-brand-secondary/10 px-2.5 py-1 text-[10px] font-semibold uppercase tracking-widest text-brand-secondary">
@@ -130,31 +133,15 @@ export function HomeFeaturesSection() {
                     <Icon className="h-5 w-5" />
                   </motion.div>
 
-                  <h3
-                    className={cn(
-                      "mt-5 font-semibold text-brand-primary",
-                      feature.featured ? "text-2xl" : "text-base",
-                    )}
-                  >
+                  <h3 className="mt-5 text-base font-semibold text-brand-primary">
                     {feature.title}
                   </h3>
 
-                  <p
-                    className={cn(
-                      "mt-2 text-brand-muted leading-relaxed",
-                      feature.featured ? "text-base max-w-md" : "text-sm",
-                    )}
-                  >
+                  <p className="mt-2 text-sm text-brand-muted leading-relaxed">
                     {feature.description}
                   </p>
 
-                  <div
-                    className={cn(
-                      "absolute right-6 flex items-center gap-1 text-xs font-semibold text-brand-secondary opacity-0 -translate-x-1 transition-all duration-300 pointer-fine:group-hover:opacity-100 pointer-fine:group-hover:translate-x-0",
-                      "bottom-6",
-                      "[@media(hover:none)]:opacity-100 [@media(hover:none)]:translate-x-0",
-                    )}
-                  >
+                  <div className="absolute right-6 bottom-6 flex items-center gap-1 text-xs font-semibold text-brand-secondary opacity-0 -translate-x-1 transition-all duration-300 pointer-fine:group-hover:opacity-100 pointer-fine:group-hover:translate-x-0 [@media(hover:none)]:opacity-100 [@media(hover:none)]:translate-x-0">
                     Learn more
                     <ArrowRight className="h-3.5 w-3.5" />
                   </div>
