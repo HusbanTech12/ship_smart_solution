@@ -1,5 +1,9 @@
 import type { Metadata } from "next"
 import { HeroSection } from "@/components/landing/hero-section"
+import { HomeFeaturesSection } from "@/components/landing/home-features-section"
+import { HomeServicesPreviewSection } from "@/components/landing/home-services-preview-section"
+import { HomeProcessSection } from "@/components/landing/home-process-section"
+import { HomeIndustriesSection } from "@/components/landing/home-industries-section"
 
 export const metadata: Metadata = {
   title: "Ship Smart Solutions — Professional Trucking Services",
@@ -22,5 +26,13 @@ export const metadata: Metadata = {
 }
 
 export default function LandingPage() {
-  return <HeroSection />
+  return (
+    <>
+      <HeroSection />
+      <HomeFeaturesSection />
+      <HomeServicesPreviewSection />
+      <HomeProcessSection />
+      <HomeIndustriesSection />
+    </>
+  )
 }
