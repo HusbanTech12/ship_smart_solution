@@ -3,6 +3,7 @@
 import { ClipboardList, CalendarCheck, MapPin, ArrowRight } from "lucide-react"
 import { motion, useReducedMotion } from "framer-motion"
 import Link from "next/link"
+import { Button } from "@/components/ui/button"
 
 const steps = [
   {
@@ -71,15 +72,15 @@ export function HomeProcessSection() {
           whileInView={anim ? { opacity: 1, y: 0 } : undefined}
           viewport={{ once: true }}
           transition={{ duration: 0.6, ease: [0.21, 0.47, 0.32, 0.98] as const }}
-          className="max-w-2xl mb-12"
+          className="text-center mb-12 lg:mb-16"
         >
-          <p className="text-xs font-semibold uppercase tracking-widest text-brand-secondary mb-3">
+          <span className="inline-block rounded-full border border-brand-secondary/20 bg-brand-secondary/10 px-4 py-1 text-xs font-semibold text-brand-secondary mb-6">
             How It Works
-          </p>
-          <h2 className="text-3xl sm:text-4xl font-heading font-bold text-brand-primary tracking-tight">
+          </span>
+          <h2 className="text-4xl sm:text-5xl font-heading font-bold text-brand-primary tracking-tight">
             From quote to delivery in three steps
           </h2>
-          <p className="mt-3 text-brand-muted leading-relaxed">
+          <p className="mt-4 text-brand-muted max-w-2xl mx-auto text-lg leading-relaxed">
             We&apos;ve stripped out the back-and-forth. No phone tag, no surprise fees.
           </p>
         </motion.div>
@@ -139,15 +140,17 @@ export function HomeProcessSection() {
           whileInView={anim ? { opacity: 1, y: 0 } : undefined}
           viewport={{ once: true }}
           transition={{ duration: 0.6, delay: 0.3, ease: [0.21, 0.47, 0.32, 0.98] as const }}
-          className="mt-10"
+          className="mt-12 text-center"
         >
-          <Link
+          <Button
             href="/contact"
-            className="group inline-flex items-center gap-1.5 text-sm font-semibold text-brand-secondary hover:text-brand-accent transition-colors"
+            variant="primary"
+            size="md"
+            className="shadow-lg shadow-brand-primary/10"
           >
             Ready to get started?
-            <ArrowRight className="h-4 w-4 transition-transform duration-200 group-hover:translate-x-0.5" />
-          </Link>
+            <ArrowRight className="h-4 w-4" />
+          </Button>
         </motion.div>
       </div>
     </section>

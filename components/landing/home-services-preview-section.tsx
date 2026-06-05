@@ -3,6 +3,7 @@
 import { Snowflake, Container, Truck, ArrowRight, Check, Sparkles } from "lucide-react"
 import { motion, useReducedMotion } from "framer-motion"
 import Link from "next/link"
+import { Button } from "@/components/ui/button"
 import { cn } from "@/lib/utils"
 
 const previews = [
@@ -54,39 +55,34 @@ export function HomeServicesPreviewSection() {
   return (
     <section id="services" className="py-20 lg:py-28 bg-brand-surface">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-4 mb-12">
-          <motion.div
-            initial={anim ? { opacity: 0, y: 20 } : undefined}
-            whileInView={anim ? { opacity: 1, y: 0 } : undefined}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6, ease: [0.21, 0.47, 0.32, 0.98] as const }}
-            className="max-w-2xl"
-          >
-            <p className="text-xs font-semibold uppercase tracking-widest text-brand-secondary mb-3">
-              Our Services
-            </p>
-            <h2 className="text-3xl sm:text-4xl font-heading font-bold text-brand-primary tracking-tight">
-              Three modes. One platform.
-            </h2>
-            <p className="mt-3 text-brand-muted leading-relaxed">
-              Pick the trailer type that fits your freight. We handle the rest.
-            </p>
-          </motion.div>
-          <motion.div
-            initial={anim ? { opacity: 0, y: 20 } : undefined}
-            whileInView={anim ? { opacity: 1, y: 0 } : undefined}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6, delay: 0.1, ease: [0.21, 0.47, 0.32, 0.98] as const }}
-          >
-            <Link
+        <motion.div
+          initial={anim ? { opacity: 0, y: 20 } : undefined}
+          whileInView={anim ? { opacity: 1, y: 0 } : undefined}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6, ease: [0.21, 0.47, 0.32, 0.98] as const }}
+          className="text-center mb-12 lg:mb-16"
+        >
+          <span className="inline-block rounded-full border border-brand-secondary/20 bg-brand-secondary/10 px-4 py-1 text-xs font-semibold text-brand-secondary mb-6">
+            Our Services
+          </span>
+          <h2 className="text-4xl sm:text-5xl font-heading font-bold text-brand-primary tracking-tight">
+            Three modes. One platform.
+          </h2>
+          <p className="mt-4 text-brand-muted max-w-2xl mx-auto text-lg leading-relaxed">
+            Pick the trailer type that fits your freight. We handle the rest.
+          </p>
+          <div className="mt-8 flex justify-center">
+            <Button
               href="/services"
-              className="group inline-flex items-center gap-1.5 text-sm font-semibold text-brand-secondary hover:text-brand-accent transition-colors"
+              variant="primary"
+              size="md"
+              className="shadow-lg shadow-brand-primary/10"
             >
               View all services
-              <ArrowRight className="h-4 w-4 transition-transform duration-200 group-hover:translate-x-0.5" />
-            </Link>
-          </motion.div>
-        </div>
+              <ArrowRight className="h-4 w-4" />
+            </Button>
+          </div>
+        </motion.div>
 
         <motion.div
           initial={anim ? "hidden" : undefined}

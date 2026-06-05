@@ -3,6 +3,7 @@
 import { Activity, Clock, Globe, Shield, Users, Zap, ArrowRight } from "lucide-react"
 import { motion, useReducedMotion } from "framer-motion"
 import Link from "next/link"
+import { Button } from "@/components/ui/button"
 import { cn } from "@/lib/utils"
 
 const features = [
@@ -67,36 +68,34 @@ export function HomeFeaturesSection() {
   return (
     <section id="features" className="py-20 lg:py-28 bg-brand-surface">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-6 mb-12">
-          <motion.div
-            initial={anim ? { opacity: 0, y: 20 } : undefined}
-            whileInView={anim ? { opacity: 1, y: 0 } : undefined}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6, ease: [0.21, 0.47, 0.32, 0.98] as const }}
-            className="max-w-2xl"
-          >
-            <p className="text-xs font-semibold uppercase tracking-widest text-brand-secondary mb-3">
-              Why Ship Smart
-            </p>
-            <h2 className="text-3xl sm:text-4xl font-heading font-bold text-brand-primary tracking-tight">
-              Built for teams that ship every day
-            </h2>
-            <p className="mt-3 text-brand-muted leading-relaxed">
-              Six reasons enterprise operations choose us as their logistics partner.
-            </p>
-          </motion.div>
-          <motion.a
-            initial={anim ? { opacity: 0, y: 20 } : undefined}
-            whileInView={anim ? { opacity: 1, y: 0 } : undefined}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6, delay: 0.1, ease: [0.21, 0.47, 0.32, 0.98] as const }}
-            href="/contact"
-            className="group inline-flex items-center gap-1.5 text-sm font-semibold text-brand-secondary hover:text-brand-accent transition-colors"
-          >
-            Talk to our team
-            <ArrowRight className="h-4 w-4 transition-transform duration-200 group-hover:translate-x-0.5" />
-          </motion.a>
-        </div>
+        <motion.div
+          initial={anim ? { opacity: 0, y: 20 } : undefined}
+          whileInView={anim ? { opacity: 1, y: 0 } : undefined}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6, ease: [0.21, 0.47, 0.32, 0.98] as const }}
+          className="text-center mb-12 lg:mb-16"
+        >
+          <span className="inline-block rounded-full border border-brand-secondary/20 bg-brand-secondary/10 px-4 py-1 text-xs font-semibold text-brand-secondary mb-6">
+            Why Ship Smart
+          </span>
+          <h2 className="text-4xl sm:text-5xl font-heading font-bold text-brand-primary tracking-tight">
+            Built for teams that ship every day
+          </h2>
+          <p className="mt-4 text-brand-muted max-w-2xl mx-auto text-lg leading-relaxed">
+            Six reasons enterprise operations choose us as their logistics partner.
+          </p>
+          <div className="mt-8 flex justify-center">
+            <Button
+              href="/contact"
+              variant="primary"
+              size="md"
+              className="shadow-lg shadow-brand-primary/10"
+            >
+              Talk to our team
+              <ArrowRight className="h-4 w-4" />
+            </Button>
+          </div>
+        </motion.div>
 
         <motion.div
           initial={anim ? "hidden" : undefined}
