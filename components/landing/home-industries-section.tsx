@@ -70,7 +70,7 @@ export function HomeIndustriesSection() {
           whileInView={anim ? "visible" : undefined}
           viewport={{ once: true, margin: "-48px" }}
           variants={containerVariants}
-          className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 border-t border-l border-gray-200"
+          className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-4"
         >
           {industries.map((industry) => {
             const Icon = industry.icon
@@ -78,7 +78,7 @@ export function HomeIndustriesSection() {
               <motion.div key={industry.name} variants={anim ? cellVariants : undefined}>
                 <Link
                   href={industry.href}
-                  className="group relative block border-r border-b border-gray-200 p-5 transition-all duration-300 hover:z-10 hover:bg-white hover:shadow-[inset_0_0_0_1px_rgba(232,115,42,0.15)]"
+                  className="group relative flex flex-col rounded-xl border border-gray-200 bg-white p-5 transition-all duration-300 hover:-translate-y-1.5 hover:border-brand-secondary/40 hover:shadow-xl hover:shadow-brand-secondary/10"
                 >
                   <motion.div
                     className="flex h-9 w-9 items-center justify-center rounded-md bg-brand-primary/5 text-brand-primary transition-colors duration-300 group-hover:bg-brand-primary group-hover:text-white"

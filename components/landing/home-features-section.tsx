@@ -65,7 +65,7 @@ export function HomeFeaturesSection() {
   }
 
   return (
-    <section id="features" className="py-20 lg:py-28 bg-white">
+    <section id="features" className="py-20 lg:py-28 bg-brand-surface">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-6 mb-12">
           <motion.div
@@ -103,7 +103,7 @@ export function HomeFeaturesSection() {
           whileInView={anim ? "visible" : undefined}
           viewport={{ once: true, margin: "-48px" }}
           variants={containerVariants}
-          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 border-t border-l border-gray-200"
+          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4"
         >
           {features.map((feature) => {
             const Icon = feature.icon
@@ -111,13 +111,7 @@ export function HomeFeaturesSection() {
               <motion.div key={feature.title} variants={anim ? cardVariants : undefined}>
                 <Link
                   href={feature.href}
-                  className={cn(
-                    "group relative block border-r border-b border-gray-200 transition-all duration-300",
-                    "hover:z-10 hover:bg-brand-surface hover:shadow-[inset_0_0_0_1px_rgba(232,115,42,0.15)]",
-                    feature.featured
-                      ? "sm:col-span-2 p-6 lg:p-10 bg-gradient-to-br from-brand-surface via-white to-brand-surface/60"
-                      : "p-6 lg:p-8",
-                  )}
+                  className="group relative flex flex-col rounded-xl border border-gray-200 bg-white p-6 transition-all duration-300 hover:-translate-y-1.5 hover:border-brand-secondary/40 hover:shadow-xl hover:shadow-brand-secondary/10"
                 >
                   {feature.featured && (
                     <div className="absolute top-6 right-6 inline-flex items-center gap-1.5 rounded-full bg-brand-secondary/10 px-2.5 py-1 text-[10px] font-semibold uppercase tracking-widest text-brand-secondary">

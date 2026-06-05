@@ -64,7 +64,7 @@ export function HomeProcessSection() {
   }
 
   return (
-    <section id="process" className="py-20 lg:py-28 bg-white">
+    <section id="process" className="py-20 lg:py-28 bg-brand-surface">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <motion.div
           initial={anim ? { opacity: 0, y: 20 } : undefined}
