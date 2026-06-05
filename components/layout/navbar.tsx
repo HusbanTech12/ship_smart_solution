@@ -5,6 +5,7 @@ import { motion, AnimatePresence } from "framer-motion"
 import { Menu, X, ArrowRight } from "lucide-react"
 import Link from "next/link"
 import { usePathname } from "next/navigation"
+import { useUser } from "@clerk/nextjs"
 import { cn } from "@/lib/utils"
 import { COMPANY } from "@/lib/constants/company"
 import { PUBLIC_NAV } from "@/lib/constants/navigation"
@@ -12,19 +13,14 @@ import { Button } from "@/components/ui/button"
 import { Logo } from "@/components/shared/logo"
 import { ThemeToggle } from "@/components/ui/theme-toggle"
 
+const ADMIN_EMAILS = ["usman@elitesolutionscpa.com", "husbantech08@gmail.com"]
+
 export function Navbar() {
-  const [isScrolled, setIsScrolled] = useState(false)
   const [isMobileOpen, setIsMobileOpen] = useState(false)
   const pathname = usePathname()
-
-  const isTransparent = !isScrolled && pathname === "/"
-
-  useEffect(() => {
-    const onScroll = () => setIsScrolled(window.scrollY > 20)
-    window.addEventListener("scroll", onScroll, { passive: true })
-    onScroll()
-    return () => window.removeEventListener("scroll", onScroll)
-  }, [])
+  const { user } = useUser()
+  const userEmail = user?.primaryEmailAddress?.emailAddress
+  const isAdmin = userEmail ? ADMIN_EMAILS.includes(userEmail) : false
 
   useEffect(() => {
     if (isMobileOpen) {
@@ -48,22 +44,9 @@ export function Navbar() {
       <div
         className={cn(
           "absolute inset-0 transition-all duration-500 ease-out",
-          isTransparent
-            ? "bg-transparent"
-            : isScrolled
-            ? "bg-brand-dark/90 backdrop-blur-xl shadow-2xl shadow-black/20 border-b border-white/5"
-            : "bg-brand-dark/95 backdrop-blur-xl border-b border-white/5",
+          "bg-transparent",
         )}
       />
-      {isTransparent && (
-        <div
-          className="absolute inset-0 opacity-50"
-          style={{
-            background:
-              "linear-gradient(180deg, rgba(255,255,255,0.65) 0%, transparent 100%)",
-          }}
-        />
-      )}
 
       <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16 lg:h-20 py-2">
@@ -74,17 +57,15 @@ export function Navbar() {
             <Logo
               variant="full"
               size="md"
-              tone={isTransparent ? "gradient" : "white"}
+              tone="dark"
               showTagline={false}
             />
           </Link>
 
           <nav
             className={cn(
-              "hidden lg:flex items-center gap-1 rounded-full backdrop-blur-md p-1.5 transition-all duration-500",
-              isTransparent
-                ? "border border-brand-secondary/20 bg-white/40"
-                : "border border-white/10 bg-white/5",
+              "hidden lg:flex items-center gap-1 rounded-full p-1.5 transition-all duration-500",
+              "border border-brand-primary/15 bg-white/60 dark:bg-white/5",
             )}
           >
             {PUBLIC_NAV.map((item) => {
@@ -95,54 +76,48 @@ export function Navbar() {
                   href={item.href}
                   className={cn(
                     "relative px-5 py-2 text-sm font-medium rounded-full transition-all duration-300",
-                    isTransparent
-                      ? isActive
-                        ? "text-brand-secondary bg-brand-secondary/15 shadow-inner"
-                        : "text-brand-secondary/80 hover:text-brand-secondary hover:bg-brand-secondary/10"
-                      : isActive
-                      ? "text-white bg-white/10 shadow-inner"
-                      : "text-white/70 hover:text-white hover:bg-white/5",
+                    isActive
+                      ? "text-brand-primary bg-brand-primary/10 shadow-inner"
+                      : "text-brand-muted hover:text-brand-primary hover:bg-brand-primary/5",
                   )}
                 >
                   {item.label}
                   {isActive && (
-                    <span className="absolute -bottom-0.5 left-1/2 -translate-x-1/2 h-1 w-1 rounded-full bg-brand-secondary" />
+                    <span className="absolute -bottom-0.5 left-1/2 -translate-x-1/2 h-1 w-1 rounded-full bg-brand-primary" />
                   )}
                 </Link>
               )
             })}
+            {isAdmin && (
+              <Link
+                href="/dashboard"
+                className={cn(
+                  "relative px-5 py-2 text-sm font-medium rounded-full transition-all duration-300",
+                  pathname.startsWith("/dashboard")
+                    ? "text-brand-primary bg-brand-primary/10 shadow-inner"
+                    : "text-brand-muted hover:text-brand-primary hover:bg-brand-primary/5",
+                )}
+              >
+                Dashboard
+                {pathname.startsWith("/dashboard") && (
+                  <span className="absolute -bottom-0.5 left-1/2 -translate-x-1/2 h-1 w-1 rounded-full bg-brand-primary" />
+                )}
+              </Link>
+            )}
           </nav>
 
           <div className="hidden lg:flex items-center gap-3">
             <ThemeToggle
               className={cn(
-                isTransparent
-                  ? "border-brand-secondary/30 bg-white/40 text-brand-primary hover:bg-brand-secondary/10"
-                  : "border-white/10 bg-white/5 text-white/70 hover:bg-white/10 hover:text-white",
+                "border-brand-primary/20 bg-white/60 text-brand-muted hover:text-brand-primary hover:bg-brand-primary/10 dark:bg-white/5 dark:border-white/10",
               )}
             />
-
-            <Link
-              href="/dashboard"
-              className={cn(
-                "text-sm font-medium transition-colors duration-300",
-                isTransparent
-                  ? "text-brand-primary hover:text-brand-secondary"
-                  : "text-white/80 hover:text-white",
-              )}
-            >
-              Dashboard
-            </Link>
 
             <Link href="/sign-in">
               <Button
                 variant="ghost"
                 size="sm"
-                className={cn(
-                  isTransparent
-                    ? "border-brand-secondary/30 text-brand-primary hover:bg-brand-secondary/10"
-                    : "border-white/20 text-white/90 hover:bg-white/10",
-                )}
+                className="border-brand-primary/20 text-brand-muted hover:text-brand-primary hover:bg-brand-primary/10"
               >
                 Sign In
               </Button>
@@ -169,10 +144,7 @@ export function Navbar() {
 
           <button
             onClick={() => setIsMobileOpen(!isMobileOpen)}
-            className={cn(
-              "lg:hidden p-2 rounded-md transition-colors",
-              isTransparent ? "text-brand-primary hover:bg-brand-secondary/10" : "text-white hover:bg-white/10",
-            )}
+            className="lg:hidden p-2 rounded-md text-brand-muted hover:text-brand-primary hover:bg-brand-primary/10 transition-colors"
             aria-label={isMobileOpen ? "Close menu" : "Open menu"}
             aria-expanded={isMobileOpen}
           >
@@ -223,25 +195,27 @@ export function Navbar() {
                 </motion.div>
               ))}
 
-              <motion.div
-                initial={{ opacity: 0, x: -20 }}
-                animate={{ opacity: 1, x: 0 }}
-                transition={{ delay: PUBLIC_NAV.length * 0.06, duration: 0.3 }}
-                className="border-b border-white/5"
-              >
-                <Link
-                  href="/dashboard"
-                  className={cn(
-                    "flex items-center justify-between py-5 text-2xl font-heading font-semibold transition-colors",
-                    pathname === "/dashboard" ? "text-brand-secondary" : "text-white/90 hover:text-white",
-                  )}
+              {isAdmin && (
+                <motion.div
+                  initial={{ opacity: 0, x: -20 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  transition={{ delay: PUBLIC_NAV.length * 0.06, duration: 0.3 }}
+                  className="border-b border-white/5"
                 >
-                  Dashboard
-                  {pathname === "/dashboard" && (
-                    <span className="h-2 w-2 rounded-full bg-brand-secondary" />
-                  )}
-                </Link>
-              </motion.div>
+                  <Link
+                    href="/dashboard"
+                    className={cn(
+                      "flex items-center justify-between py-5 text-2xl font-heading font-semibold transition-colors",
+                      pathname.startsWith("/dashboard") ? "text-brand-secondary" : "text-white/90 hover:text-white",
+                    )}
+                  >
+                    Dashboard
+                    {pathname.startsWith("/dashboard") && (
+                      <span className="h-2 w-2 rounded-full bg-brand-secondary" />
+                    )}
+                  </Link>
+                </motion.div>
+              )}
 
               <motion.div
                 initial={{ opacity: 0, y: 20 }}

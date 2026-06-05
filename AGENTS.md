@@ -206,12 +206,12 @@ ship-smart-solutions/
 ```ts
 colors: {
   brand: {
-    primary:   '#00264D',   // Deep navy — primary backgrounds, headers
-    secondary: '#E8732A',   // Trucking orange — CTAs, highlights
-    accent:    '#F5A623',   // Amber — badges, warnings, stars
-    surface:   '#F8F9FA',   // Off-white — page backgrounds
-    muted:     '#6B7280',   // Gray — secondary text
-    dark:      '#0A0F1E',   // Near-black — dark mode bg
+    primary:   '#F97316',   // Warm orange — primary backgrounds, headers
+    secondary: '#FB923C',   // Light orange — CTAs, highlights
+    accent:    '#FDE68A',   // Light amber — badges, warnings, stars
+    surface:   '#FFF7ED',   // Warm off-white — page backgrounds
+    muted:     '#78716C',   // Warm gray — secondary text
+    dark:      '#292524',   // Warm dark — dark mode bg
   },
   status: {
     success:   '#16A34A',
@@ -356,45 +356,8 @@ User types → ChatWidget (client) → POST /api/chat → Claude API → streame
 ### 7.2 API Route
 
 ```ts
-// app/api/chat/route.ts
-import Anthropic from '@anthropic-ai/sdk'
-
-const client = new Anthropic()
-
-const SYSTEM_PROMPT = `
-You are the Ship Smart Solutions virtual assistant. You help clients with:
-- Getting freight quotes for reefer, dry van, and flatbed loads
-- Tracking shipment status
-- Understanding services and capabilities
-- Connecting with the operations team
-
-Company info:
-- Phone: (331) 215-4701
-- Email: operations@ship-solutions.net  
-- Address: 650 E Diehl Rd, Naperville IL, 60563
-- Coverage: All 48 contiguous US states
-- Services: 53' Reefers (team drivers), 53' Dry Vans (team drivers), Flatbed/Step Deck/RGN
-- Stats: 99%+ on-time delivery, 500+ truckloads/month, 3,600+ assets
-
-Keep answers concise, professional, and logistics-focused.
-If asked about something outside logistics/shipping, politely redirect.
-Always offer to connect them with a human agent for complex requests.
-`
-
-export async function POST(req: Request) {
-  const { messages } = await req.json()
-
-  const stream = await client.messages.stream({
-    model: 'claude-sonnet-4-20250514',
-    max_tokens: 1024,
-    system: SYSTEM_PROMPT,
-    messages,
-  })
-
-  return new Response(stream.toReadableStream(), {
-    headers: { 'Content-Type': 'text/event-stream' },
-  })
-}
+// app/api/chat/route.ts — uses Google Gemini (free tier)
+// Requires GEMINI_API_KEY in .env (get one at https://aistudio.google.com/apikey)
 ```
 
 ### 7.3 ChatWidget Component Behavior
@@ -710,8 +673,9 @@ NEXT_PUBLIC_CLERK_AFTER_SIGN_IN_URL=/dashboard
 NEXT_PUBLIC_CLERK_AFTER_SIGN_UP_URL=/dashboard
 CLERK_WEBHOOK_SECRET=
 
-# Anthropic (Chatbot)
-ANTHROPIC_API_KEY=
+# Gemini (Chatbot) — get a free API key at https://aistudio.google.com/apikey
+GEMINI_API_KEY=
+GEMINI_MODEL=gemini-2.0-flash
 
 # App
 NEXT_PUBLIC_APP_URL=http://localhost:3000

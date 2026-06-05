@@ -4,9 +4,9 @@
   --color-background: var(--background);
   --color-foreground: var(--foreground);
 
-  --color-brand-primary: #00264d;
-  --color-brand-secondary: #e8732a;
-  --color-brand-accent: #f5a623;
+  --color-brand-primary: #f97316;
+  --color-brand-secondary: #fb923c;
+  --color-brand-accent: #fde68a;
   --color-brand-surface: var(--surface);
   --color-brand-muted: var(--muted);
   --color-brand-dark: var(--dark);
@@ -21,10 +21,10 @@
   --color-status-error: #dc2626;
   --color-status-info: #2563eb;
 
-  --color-gradient-start: #00264d;
-  --color-gradient-mid: #0a3a6b;
-  --color-gradient-end: #1a1a3e;
-  --color-glow: rgba(232, 115, 42, 0.15);
+  --color-gradient-start: #f97316;
+  --color-gradient-mid: #fb923c;
+  --color-gradient-end: #fde68a;
+  --color-glow: rgba(249, 115, 22, 0.15);
 
   --font-sans: var(--font-dm-sans);
   --font-heading: var(--font-dm-sans);
@@ -33,27 +33,27 @@
 }
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
-  --surface: #f8f9fa;
-  --muted: #6b7280;
-  --dark: #0a0f1e;
+  --background: #fffbeb;
+  --foreground: #1c1917;
+  --surface: #fff7ed;
+  --muted: #78716c;
+  --dark: #292524;
   --card: #ffffff;
-  --border: #e5e7eb;
-  --border-light: #f3f4f6;
-  --subtle: #f9fafb;
+  --border: #fed7aa;
+  --border-light: #ffedd5;
+  --subtle: #fff7ed;
 }
 
 .dark {
-  --background: #0a0f1e;
-  --foreground: #f8f9fa;
-  --surface: #0a0f1e;
-  --muted: #9ca3af;
-  --dark: #030712;
-  --card: #1a1f2e;
-  --border: #374151;
-  --border-light: #1f2937;
-  --subtle: #111827;
+  --background: #1c1917;
+  --foreground: #fff7ed;
+  --surface: #292524;
+  --muted: #a8a29e;
+  --dark: #0c0a09;
+  --card: #292524;
+  --border: #44403c;
+  --border-light: #292524;
+  --subtle: #1c1917;
 }
 
 body {
@@ -87,8 +87,8 @@ body {
 }
 
 @keyframes pulse-glow {
-  0%, 100% { box-shadow: 0 0 20px rgba(232, 115, 42, 0.1); }
-  50% { box-shadow: 0 0 40px rgba(232, 115, 42, 0.25); }
+  0%, 100% { box-shadow: 0 0 20px rgba(249, 115, 22, 0.1); }
+  50% { box-shadow: 0 0 40px rgba(249, 115, 22, 0.25); }
 }
 
 @keyframes slide-in-up {
@@ -107,8 +107,8 @@ body {
 }
 
 @keyframes border-dance {
-  0%, 100% { border-color: rgba(232, 115, 42, 0.3); }
-  50% { border-color: rgba(232, 115, 42, 0.6); }
+  0%, 100% { border-color: rgba(249, 115, 22, 0.3); }
+  50% { border-color: rgba(249, 115, 22, 0.6); }
 }
 
 .animate-float {

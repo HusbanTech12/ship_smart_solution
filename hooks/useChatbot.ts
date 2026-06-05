@@ -1,6 +1,6 @@
 "use client"
 
-import { useState, useCallback } from "react"
+import { useState, useCallback, useRef, useEffect } from "react"
 import type { ChatMessage } from "@/types/chat"
 
 const STORAGE_KEY = "ship-smart-chat-history"
@@ -8,7 +8,7 @@ const SUGGESTED_PROMPTS = [
   "Get a freight quote",
   "Track my shipment",
   "Talk to a human agent",
-]
+] as const
 
 function loadHistory(): ChatMessage[] {
   if (typeof window === "undefined") return []
@@ -34,6 +34,11 @@ export function useChatbot() {
   const [isOpen, setIsOpen] = useState(false)
   const [isLoading, setIsLoading] = useState(false)
   const [error, setError] = useState<string | null>(null)
+  const messagesRef = useRef(messages)
+
+  useEffect(() => {
+    messagesRef.current = messages
+  }, [messages])
 
   const sendMessage = useCallback(async (content: string) => {
     const userMessage: ChatMessage = {
@@ -43,25 +48,28 @@ export function useChatbot() {
       timestamp: new Date().toISOString(),
     }
 
+    let updatedMessages: ChatMessage[]
+
     setMessages((prev) => {
-      const updated = [...prev, userMessage]
-      saveHistory(updated)
-      return updated
+      updatedMessages = [...prev, userMessage]
+      saveHistory(updatedMessages)
+      return updatedMessages
     })
 
     setIsLoading(true)
     setError(null)
 
     try {
+      const currentMessages = messagesRef.current
+      const apiMessages = [...currentMessages, userMessage].map((m) => ({
+        role: m.role,
+        content: m.content,
+      }))
+
       const response = await fetch("/api/chat", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          messages: [...messages, userMessage].map((m) => ({
-            role: m.role,
-            content: m.content,
-          })),
-        }),
+        body: JSON.stringify({ messages: apiMessages }),
       })
 
       if (!response.ok) {
@@ -78,7 +86,11 @@ export function useChatbot() {
         timestamp: new Date().toISOString(),
       }
 
-      setMessages((prev) => [...prev, assistantMessage])
+      setMessages((prev) => {
+        const updated = [...prev, assistantMessage]
+        saveHistory(updated)
+        return updated
+      })
 
       const decoder = new TextDecoder()
       let done = false
@@ -87,7 +99,7 @@ export function useChatbot() {
         const { value, done: streamDone } = await reader.read()
         done = streamDone
         if (value) {
-          const text = decoder.decode(value)
+          const text = decoder.decode(value, { stream: !done })
           setMessages((prev) => {
             const updated = [...prev]
             const last = updated[updated.length - 1]
@@ -109,7 +121,7 @@ export function useChatbot() {
     } finally {
       setIsLoading(false)
     }
-  }, [messages])
+  }, [])
 
   const toggleChat = useCallback(() => {
     setIsOpen((prev) => !prev)
