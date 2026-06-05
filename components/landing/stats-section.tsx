@@ -37,7 +37,7 @@ export function StatsSection() {
       <div
         className="absolute inset-0"
         style={{
-          background: "linear-gradient(135deg, #f8f9fa 0%, #ffffff 30%, #fff7ed 70%, #f8f9fa 100%)",
+          background: "linear-gradient(135deg, var(--surface) 0%, var(--card) 30%, #fff7ed 70%, var(--surface) 100%)",
         }}
       />
 
@@ -63,7 +63,7 @@ export function StatsSection() {
           <span className="inline-block rounded-full border border-brand-secondary/20 bg-brand-secondary/10 px-4 py-1 text-xs font-semibold text-brand-secondary mb-6 backdrop-blur-sm">
             By the Numbers
           </span>
-          <h2 className="text-4xl sm:text-5xl font-heading font-bold text-brand-primary">
+          <h2 className="text-4xl sm:text-5xl font-heading font-bold text-brand-primary dark:text-foreground">
             We{" "}
             <span className="bg-gradient-to-r from-brand-secondary to-brand-accent bg-clip-text text-transparent">
               deliver
@@ -89,7 +89,7 @@ export function StatsSection() {
               <motion.div
                 key={stat.label}
                 variants={statCardVariants}
-                className="group relative rounded-2xl border border-gray-200 bg-white/80 backdrop-blur-sm p-6 text-center transition-all duration-300 hover:bg-white hover:border-brand-secondary/30 hover:shadow-xl"
+                className="group relative rounded-2xl border border-border bg-card/80 backdrop-blur-sm p-6 text-center transition-all duration-300 hover:bg-card hover:border-brand-secondary/30 hover:shadow-xl"
               >
                 {!prefersReduced && (
                   <div className="absolute inset-0 rounded-2xl bg-gradient-to-b from-brand-secondary/5 to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
@@ -102,7 +102,7 @@ export function StatsSection() {
                     </div>
                   </div>
 
-                  <div className="text-3xl sm:text-4xl font-heading font-bold text-brand-primary">
+                  <div className="text-3xl sm:text-4xl font-heading font-bold text-brand-primary dark:text-foreground">
                     {stat.label === "Operations" ? (
                       "24/7"
                     ) : stat.label === "Sq Ft Warehouse" ? (

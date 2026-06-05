@@ -74,7 +74,7 @@ export function AboutValues() {
           <span className="inline-block rounded-full border border-brand-secondary/20 bg-brand-secondary/10 px-4 py-1 text-xs font-semibold text-brand-secondary mb-6">
             What We Stand For
           </span>
-          <h2 className="text-4xl sm:text-5xl font-heading font-bold text-brand-primary tracking-tight">
+          <h2 className="text-4xl sm:text-5xl font-heading font-bold text-brand-primary dark:text-foreground tracking-tight">
             Our core{" "}
             <span className="bg-gradient-to-r from-brand-secondary to-brand-accent bg-clip-text text-transparent">
               values
@@ -99,7 +99,7 @@ export function AboutValues() {
               <motion.div
                 key={value.title}
                 variants={anim ? cardVariants : undefined}
-                className="group h-full rounded-xl border border-gray-200 bg-white p-6 transition-all duration-300 hover:-translate-y-1.5 hover:border-brand-secondary/40 hover:shadow-xl hover:shadow-brand-secondary/10"
+                className="group h-full rounded-xl border border-border bg-card p-6 transition-all duration-300 hover:-translate-y-1.5 hover:border-brand-secondary/40 hover:shadow-xl hover:shadow-brand-secondary/10"
               >
                 <motion.div
                   className="flex h-12 w-12 items-center justify-center rounded-xl bg-gradient-to-br from-brand-primary to-brand-primary/80 text-white shadow-lg transition-all duration-300 group-hover:from-brand-secondary group-hover:to-brand-accent"
@@ -109,7 +109,7 @@ export function AboutValues() {
                   <Icon className="h-6 w-6" />
                 </motion.div>
 
-                <h3 className="mt-5 text-lg font-heading font-semibold text-brand-primary">
+                <h3 className="mt-5 text-lg font-heading font-semibold text-brand-primary dark:text-foreground">
                   {value.title}
                 </h3>
                 <p className="mt-2 text-sm text-brand-muted leading-relaxed">

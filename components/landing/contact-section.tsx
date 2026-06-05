@@ -33,7 +33,7 @@ const highlights = [
 
 export function ContactSection() {
   return (
-    <section className="relative py-24 lg:py-32 bg-gradient-to-b from-brand-surface to-white overflow-hidden" id="contact">
+    <section className="relative py-24 lg:py-32 bg-gradient-to-b from-brand-surface to-card overflow-hidden" id="contact">
       <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-brand-secondary/30 to-transparent" />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -55,7 +55,7 @@ export function ContactSection() {
 
         <div className="grid grid-cols-1 lg:grid-cols-5 gap-8 lg:gap-12">
           <div className="lg:col-span-2 space-y-8">
-            <div className="rounded-2xl border border-gray-200 bg-white p-8 space-y-8">
+            <div className="rounded-2xl border border-border bg-card p-8 space-y-8">
               {contactInfo.map((info) => {
                 const Icon = info.icon
                 return (
@@ -99,7 +99,7 @@ export function ContactSection() {
           </div>
 
           <div className="lg:col-span-3">
-            <div className="rounded-2xl border border-gray-200 bg-white p-8 lg:p-10 shadow-xl">
+            <div className="rounded-2xl border border-border bg-card p-8 lg:p-10 shadow-xl">
               <ContactForm />
             </div>
           </div>

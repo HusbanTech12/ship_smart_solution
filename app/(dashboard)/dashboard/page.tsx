@@ -148,7 +148,7 @@ function MetricCard({ metric }: { metric: Metric }) {
         : "text-brand-muted"
 
   return (
-    <div className="group rounded-xl border border-gray-200 bg-white p-5 shadow-sm transition-all duration-200 hover:-translate-y-0.5 hover:border-brand-primary/30 hover:shadow-md sm:p-6">
+    <div className="group rounded-xl border border-border bg-card p-5 shadow-sm transition-all duration-200 hover:-translate-y-0.5 hover:border-brand-primary/30 hover:shadow-md sm:p-6">
       <div className="flex items-start justify-between gap-3">
         <div className="min-w-0">
           <p className="text-xs font-semibold uppercase tracking-wider text-brand-muted">
@@ -169,8 +169,8 @@ function MetricCard({ metric }: { metric: Metric }) {
 
 function RecentShipments() {
   return (
-    <div className="rounded-xl border border-gray-200 bg-white shadow-sm overflow-hidden">
-      <div className="flex items-center justify-between border-b border-gray-200 px-5 py-4 sm:px-6">
+    <div className="rounded-xl border border-border bg-card shadow-sm overflow-hidden">
+      <div className="flex items-center justify-between border-b border-border px-5 py-4 sm:px-6">
         <div>
           <h2 className="text-base font-heading font-semibold text-foreground">
             Recent Shipments
@@ -190,7 +190,7 @@ function RecentShipments() {
 
       <div className="hidden md:block">
         <table className="w-full text-left text-sm">
-          <thead className="border-b border-gray-200 bg-gray-50/50 text-xs uppercase tracking-wider text-brand-muted">
+          <thead className="border-b border-border bg-subtle text-xs uppercase tracking-wider text-brand-muted">
             <tr>
               <th className="px-6 py-3 font-semibold">Tracking</th>
               <th className="px-6 py-3 font-semibold">Route</th>
@@ -199,7 +199,7 @@ function RecentShipments() {
               <th className="px-6 py-3 font-semibold">ETA</th>
             </tr>
           </thead>
-          <tbody className="divide-y divide-gray-100">
+          <tbody className="divide-y divide-border-light">
             {RECENT_SHIPMENTS.map((s) => (
               <tr
                 key={s.id}
@@ -210,7 +210,7 @@ function RecentShipments() {
                 </td>
                 <td className="px-6 py-3 text-brand-muted">
                   <span className="text-foreground">{s.origin}</span>
-                  <span className="mx-1.5 text-gray-300">→</span>
+                  <span className="mx-1.5 text-gray-300 dark:text-gray-600">→</span>
                   <span className="text-foreground">{s.destination}</span>
                 </td>
                 <td className="px-6 py-3 capitalize text-brand-muted">
@@ -230,7 +230,7 @@ function RecentShipments() {
         </table>
       </div>
 
-      <ul className="divide-y divide-gray-100 md:hidden">
+      <ul className="divide-y divide-border-light md:hidden">
         {RECENT_SHIPMENTS.map((s) => (
           <li key={s.id} className="px-5 py-4">
             <div className="flex items-start justify-between gap-3">
@@ -239,7 +239,7 @@ function RecentShipments() {
                   {s.trackingNumber}
                 </p>
                 <p className="mt-1 text-sm text-foreground">
-                  {s.origin} <span className="text-gray-300">→</span> {s.destination}
+                  {s.origin} <span className="text-gray-300 dark:text-gray-600">→</span> {s.destination}
                 </p>
                 <p className="mt-0.5 text-xs text-brand-muted">
                   ETA {formatDate(s.estimatedDelivery)}
@@ -278,7 +278,7 @@ function MetricsSkeleton() {
 
 function WelcomeBanner({ firstName }: { firstName: string | null }) {
   return (
-    <div className="relative overflow-hidden rounded-xl border border-gray-200 bg-white p-6 shadow-sm sm:p-8">
+    <div className="relative overflow-hidden rounded-xl border border-border bg-card p-6 shadow-sm sm:p-8">
       <div
         className="pointer-events-none absolute -right-20 -top-20 h-64 w-64 rounded-full bg-brand-secondary/10 blur-3xl"
         aria-hidden="true"
@@ -304,7 +304,7 @@ function WelcomeBanner({ firstName }: { firstName: string | null }) {
             help? Reach our team at{" "}
             <a
               href={COMPANY.phoneHref}
-              className="font-medium text-brand-primary hover:underline"
+              className="font-medium text-brand-primary dark:text-brand-secondary hover:underline"
             >
               {COMPANY.phone}
             </a>
@@ -331,7 +331,7 @@ function QuickActions() {
     <div className="grid grid-cols-1 gap-3 sm:grid-cols-3">
       <Link
         href="/dashboard/quote"
-        className="group flex items-center gap-3 rounded-xl border border-gray-200 bg-white p-4 shadow-sm transition-all duration-200 hover:-translate-y-0.5 hover:border-brand-secondary/40 hover:shadow-md"
+        className="group flex items-center gap-3 rounded-xl border border-border bg-card p-4 shadow-sm transition-all duration-200 hover:-translate-y-0.5 hover:border-brand-secondary/40 hover:shadow-md"
       >
         <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-brand-secondary/10 text-brand-secondary transition-colors duration-200 group-hover:bg-brand-secondary/15">
           <FileText className="h-5 w-5" aria-hidden="true" />
@@ -343,7 +343,7 @@ function QuickActions() {
       </Link>
       <Link
         href="/dashboard/shipments"
-        className="group flex items-center gap-3 rounded-xl border border-gray-200 bg-white p-4 shadow-sm transition-all duration-200 hover:-translate-y-0.5 hover:border-brand-primary/40 hover:shadow-md"
+        className="group flex items-center gap-3 rounded-xl border border-border bg-card p-4 shadow-sm transition-all duration-200 hover:-translate-y-0.5 hover:border-brand-primary/40 hover:shadow-md"
       >
         <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-brand-primary/10 text-brand-primary transition-colors duration-200 group-hover:bg-brand-primary/15">
           <Package className="h-5 w-5" aria-hidden="true" />
@@ -355,7 +355,7 @@ function QuickActions() {
       </Link>
       <Link
         href="/dashboard/documents"
-        className="group flex items-center gap-3 rounded-xl border border-gray-200 bg-white p-4 shadow-sm transition-all duration-200 hover:-translate-y-0.5 hover:border-brand-accent/40 hover:shadow-md"
+        className="group flex items-center gap-3 rounded-xl border border-border bg-card p-4 shadow-sm transition-all duration-200 hover:-translate-y-0.5 hover:border-brand-accent/40 hover:shadow-md"
       >
         <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-brand-accent/10 text-brand-accent transition-colors duration-200 group-hover:bg-brand-accent/15">
           <Upload className="h-5 w-5" aria-hidden="true" />

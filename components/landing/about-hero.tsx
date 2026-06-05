@@ -38,7 +38,7 @@ export function AboutHero() {
   const anim = !prefersReduced
 
   return (
-    <section className="relative overflow-hidden bg-gradient-to-b from-brand-surface via-white to-brand-surface py-20 lg:py-28">
+    <section className="relative overflow-hidden bg-gradient-to-b from-brand-surface via-card to-brand-surface py-20 lg:py-28">
       <div className="absolute inset-0 opacity-[0.4]">
         <div
           className="absolute inset-0"
@@ -76,7 +76,7 @@ export function AboutHero() {
             initial={anim ? { opacity: 0, y: 20 } : undefined}
             animate={anim ? { opacity: 1, y: 0 } : undefined}
             transition={{ duration: 0.6, delay: 0.1, ease: [0.21, 0.47, 0.32, 0.98] as const }}
-            className="text-4xl sm:text-5xl lg:text-6xl font-heading font-bold text-brand-primary tracking-tight max-w-3xl mx-auto"
+            className="text-4xl sm:text-5xl lg:text-6xl font-heading font-bold text-brand-primary dark:text-foreground tracking-tight max-w-3xl mx-auto"
           >
             We move America.{" "}
             <span className="bg-gradient-to-r from-brand-secondary via-brand-accent to-brand-secondary bg-clip-text text-transparent">
@@ -104,13 +104,13 @@ export function AboutHero() {
             transition={{ duration: 0.6, delay: 0.3, ease: [0.21, 0.47, 0.32, 0.98] as const }}
             className="lg:col-span-2 space-y-6"
           >
-            <div className="rounded-2xl border border-gray-200 bg-white p-6 shadow-sm transition-all duration-300 hover:border-brand-secondary/40 hover:shadow-xl hover:shadow-brand-secondary/5">
+            <div className="rounded-2xl border border-border bg-card p-6 shadow-sm transition-all duration-300 hover:border-brand-secondary/40 hover:shadow-xl hover:shadow-brand-secondary/5">
               <div className="flex items-start gap-4">
                 <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-gradient-to-br from-brand-primary to-brand-primary/80 text-white shadow-lg">
                   <Building2 className="h-6 w-6" />
                 </div>
                 <div>
-                  <h3 className="font-heading font-semibold text-brand-primary">
+                  <h3 className="font-heading font-semibold text-brand-primary dark:text-foreground">
                     Headquarters
                   </h3>
                   <p className="mt-1 text-sm text-brand-muted leading-relaxed">
@@ -120,13 +120,13 @@ export function AboutHero() {
               </div>
             </div>
 
-            <div className="rounded-2xl border border-gray-200 bg-white p-6 shadow-sm transition-all duration-300 hover:border-brand-secondary/40 hover:shadow-xl hover:shadow-brand-secondary/5">
+            <div className="rounded-2xl border border-border bg-card p-6 shadow-sm transition-all duration-300 hover:border-brand-secondary/40 hover:shadow-xl hover:shadow-brand-secondary/5">
               <div className="flex items-start gap-4">
                 <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-gradient-to-br from-brand-secondary to-brand-accent text-white shadow-lg">
                   <MapPin className="h-6 w-6" />
                 </div>
                 <div>
-                  <h3 className="font-heading font-semibold text-brand-primary">
+                  <h3 className="font-heading font-semibold text-brand-primary dark:text-foreground">
                     Coverage Area
                   </h3>
                   <p className="mt-1 text-sm text-brand-muted leading-relaxed">
@@ -136,13 +136,13 @@ export function AboutHero() {
               </div>
             </div>
 
-            <div className="rounded-2xl border border-gray-200 bg-white p-6 shadow-sm transition-all duration-300 hover:border-brand-secondary/40 hover:shadow-xl hover:shadow-brand-secondary/5">
+            <div className="rounded-2xl border border-border bg-card p-6 shadow-sm transition-all duration-300 hover:border-brand-secondary/40 hover:shadow-xl hover:shadow-brand-secondary/5">
               <div className="flex items-start gap-4">
                 <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-gradient-to-br from-brand-accent to-brand-secondary text-white shadow-lg">
                   <Users className="h-6 w-6" />
                 </div>
                 <div>
-                  <h3 className="font-heading font-semibold text-brand-primary">
+                  <h3 className="font-heading font-semibold text-brand-primary dark:text-foreground">
                     Operations
                   </h3>
                   <p className="mt-1 text-sm text-brand-muted leading-relaxed">
@@ -160,7 +160,7 @@ export function AboutHero() {
             transition={{ duration: 0.7, delay: 0.4, ease: [0.21, 0.47, 0.32, 0.98] as const }}
             className="lg:col-span-3"
           >
-            <div className="relative aspect-[4/3] rounded-2xl border border-gray-200 bg-white p-6 shadow-lg overflow-hidden">
+            <div className="relative aspect-[4/3] rounded-2xl border border-border bg-card p-6 shadow-lg overflow-hidden">
               <div className="absolute inset-0 opacity-[0.03]">
                 <div
                   className="absolute inset-0"
@@ -275,7 +275,7 @@ export function AboutHero() {
                 ))}
               </svg>
 
-              <div className="absolute bottom-4 left-4 right-4 flex items-center justify-between rounded-lg border border-gray-100 bg-white/80 backdrop-blur-sm px-4 py-2 text-xs">
+              <div className="absolute bottom-4 left-4 right-4 flex items-center justify-between rounded-lg border border-border-light bg-card/80 backdrop-blur-sm px-4 py-2 text-xs">
                 <div className="flex items-center gap-2">
                   <div className="h-2 w-2 rounded-full bg-brand-secondary" />
                   <span className="text-brand-muted">Hub</span>

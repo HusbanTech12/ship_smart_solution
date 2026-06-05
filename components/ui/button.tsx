@@ -12,7 +12,7 @@ const variants = {
   ghost:
     "bg-transparent text-brand-primary border border-brand-primary/30 hover:bg-brand-primary/5 hover:scale-[1.02] active:scale-[0.98] focus-visible:ring-brand-primary",
   outline:
-    "bg-white text-brand-primary border border-gray-200 hover:border-brand-primary hover:shadow-md hover:-translate-y-0.5 active:scale-[0.98] focus-visible:ring-brand-primary",
+    "bg-card text-brand-primary border border-border hover:border-brand-primary hover:shadow-md hover:-translate-y-0.5 active:scale-[0.98] focus-visible:ring-brand-primary",
   danger:
     "bg-status-error text-white hover:brightness-110 hover:scale-[1.02] active:scale-[0.98] focus-visible:ring-status-error",
 } as const

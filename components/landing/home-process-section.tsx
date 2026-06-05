@@ -43,7 +43,7 @@ function StepConnector() {
         whileInView={{ opacity: 1, scale: 1 }}
         viewport={{ once: true }}
         transition={{ duration: 0.3, delay: 0.15 }}
-        className="flex h-9 w-9 items-center justify-center rounded-full border border-gray-200 bg-white shadow-sm"
+        className="flex h-9 w-9 items-center justify-center rounded-full border border-border bg-card shadow-sm"
       >
         <ArrowRight className="h-4 w-4 text-brand-secondary/60" />
       </motion.div>
@@ -77,7 +77,7 @@ export function HomeProcessSection() {
           <span className="inline-block rounded-full border border-brand-secondary/20 bg-brand-secondary/10 px-4 py-1 text-xs font-semibold text-brand-secondary mb-6">
             How It Works
           </span>
-          <h2 className="text-4xl sm:text-5xl font-heading font-bold text-brand-primary tracking-tight">
+          <h2 className="text-4xl sm:text-5xl font-heading font-bold text-brand-primary dark:text-foreground tracking-tight">
             From quote to delivery in three steps
           </h2>
           <p className="mt-4 text-brand-muted max-w-2xl mx-auto text-lg leading-relaxed">
@@ -99,7 +99,7 @@ export function HomeProcessSection() {
                 >
                   <Link
                     href={step.href}
-                    className="group relative flex flex-1 flex-col rounded-xl border border-gray-200 bg-white p-6 transition-all duration-300 hover:-translate-y-1.5 hover:border-brand-secondary/40 hover:shadow-xl hover:shadow-brand-secondary/10"
+                    className="group relative flex flex-1 flex-col rounded-xl border border-border bg-card p-6 transition-all duration-300 hover:-translate-y-1.5 hover:border-brand-secondary/40 hover:shadow-xl hover:shadow-brand-secondary/10"
                   >
                     <div className="flex items-start justify-between mb-5">
                       <motion.div
@@ -114,7 +114,7 @@ export function HomeProcessSection() {
                       </span>
                     </div>
 
-                    <h3 className="text-base font-semibold text-brand-primary">
+                    <h3 className="text-base font-semibold text-brand-primary dark:text-foreground">
                       {step.title}
                     </h3>
 
@@ -122,7 +122,7 @@ export function HomeProcessSection() {
                       {step.description}
                     </p>
 
-                    <div className="mt-5 pt-4 border-t border-gray-100">
+                    <div className="mt-5 pt-4 border-t border-border-light">
                       <p className="text-xs font-semibold uppercase tracking-wider text-brand-secondary">
                         {step.meta}
                       </p>

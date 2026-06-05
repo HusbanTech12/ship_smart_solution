@@ -38,7 +38,7 @@ export function AboutStory() {
   const anim = !prefersReduced
 
   return (
-    <section className="py-20 lg:py-28 bg-white">
+    <section className="py-20 lg:py-28 bg-card">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center mb-20">
           <motion.div
@@ -48,7 +48,7 @@ export function AboutStory() {
             transition={{ duration: 0.7, ease: [0.21, 0.47, 0.32, 0.98] as const }}
             className="relative"
           >
-            <div className="relative aspect-[5/4] rounded-2xl border border-gray-200 bg-gradient-to-br from-brand-surface via-white to-brand-surface overflow-hidden">
+            <div className="relative aspect-[5/4] rounded-2xl border border-border bg-gradient-to-br from-brand-surface via-card to-brand-surface overflow-hidden">
               <svg
                 viewBox="0 0 500 400"
                 className="absolute inset-0 h-full w-full"
@@ -121,15 +121,15 @@ export function AboutStory() {
                 </motion.g>
               </svg>
 
-              <div className="absolute top-4 right-4 inline-flex items-center gap-1.5 rounded-full bg-white/90 backdrop-blur-sm border border-gray-200 px-3 py-1 text-xs font-semibold text-brand-primary shadow-sm">
+              <div className="absolute top-4 right-4 inline-flex items-center gap-1.5 rounded-full bg-card/90 backdrop-blur-sm border border-border px-3 py-1 text-xs font-semibold text-brand-primary dark:text-foreground shadow-sm">
                 <span className="h-1.5 w-1.5 rounded-full bg-status-success animate-pulse" />
                 Live fleet
               </div>
             </div>
 
             <div className="absolute -bottom-6 -right-6 hidden sm:block">
-              <div className="rounded-2xl border border-gray-200 bg-white p-4 shadow-xl">
-                <div className="text-3xl font-heading font-bold text-brand-primary">
+              <div className="rounded-2xl border border-border bg-card p-4 shadow-xl">
+                <div className="text-3xl font-heading font-bold text-brand-primary dark:text-foreground">
                   99<span className="text-brand-secondary">%</span>+
                 </div>
                 <div className="text-xs text-brand-muted font-medium">
@@ -148,7 +148,7 @@ export function AboutStory() {
             <span className="inline-block rounded-full border border-brand-secondary/20 bg-brand-secondary/10 px-4 py-1 text-xs font-semibold text-brand-secondary mb-6">
               Our Story
             </span>
-            <h2 className="text-4xl sm:text-5xl font-heading font-bold text-brand-primary tracking-tight">
+            <h2 className="text-4xl sm:text-5xl font-heading font-bold text-brand-primary dark:text-foreground tracking-tight">
               Built by operators, for{" "}
               <span className="bg-gradient-to-r from-brand-secondary to-brand-accent bg-clip-text text-transparent">
                 shippers
@@ -177,10 +177,10 @@ export function AboutStory() {
                     whileInView={anim ? { opacity: 1, y: 0 } : undefined}
                     viewport={{ once: true }}
                     transition={{ duration: 0.4, delay: 0.3 + i * 0.08 }}
-                    className="rounded-xl border border-gray-200 bg-white p-4 transition-all duration-300 hover:border-brand-secondary/30 hover:shadow-md"
+                    className="rounded-xl border border-border bg-card p-4 transition-all duration-300 hover:border-brand-secondary/30 hover:shadow-md"
                   >
                     <Icon className="h-5 w-5 text-brand-secondary" />
-                    <h3 className="mt-2 text-sm font-semibold text-brand-primary">
+                    <h3 className="mt-2 text-sm font-semibold text-brand-primary dark:text-foreground">
                       {h.title}
                     </h3>
                     <p className="mt-1 text-xs text-brand-muted leading-relaxed">
@@ -193,12 +193,12 @@ export function AboutStory() {
           </motion.div>
         </div>
 
-        <div className="rounded-2xl border border-gray-200 bg-white p-8 lg:p-12 shadow-sm">
+        <div className="rounded-2xl border border-border bg-card p-8 lg:p-12 shadow-sm">
           <div className="text-center mb-10">
             <span className="inline-block rounded-full border border-brand-secondary/20 bg-brand-secondary/10 px-4 py-1 text-xs font-semibold text-brand-secondary mb-4">
               Milestones
             </span>
-            <h3 className="text-2xl sm:text-3xl font-heading font-bold text-brand-primary">
+            <h3 className="text-2xl sm:text-3xl font-heading font-bold text-brand-primary dark:text-foreground">
               A decade of growth
             </h3>
           </div>
@@ -213,11 +213,11 @@ export function AboutStory() {
                 transition={{ duration: 0.5, delay: i * 0.1 }}
                 className="relative pl-6 border-l-2 border-brand-secondary/30"
               >
-                <div className="absolute -left-[9px] top-0 h-4 w-4 rounded-full bg-brand-secondary ring-4 ring-white" />
+                <div className="absolute -left-[9px] top-0 h-4 w-4 rounded-full bg-brand-secondary ring-4 ring-card" />
                 <div className="text-xs font-mono font-bold text-brand-secondary tracking-wider">
                   {m.year}
                 </div>
-                <h4 className="mt-1 text-lg font-heading font-semibold text-brand-primary">
+                <h4 className="mt-1 text-lg font-heading font-semibold text-brand-primary dark:text-foreground">
                   {m.title}
                 </h4>
                 <p className="mt-2 text-sm text-brand-muted leading-relaxed">

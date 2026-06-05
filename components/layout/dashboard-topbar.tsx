@@ -7,6 +7,7 @@ import { UserButton } from "@clerk/nextjs"
 import { cn } from "@/lib/utils"
 import { DASHBOARD_NAV } from "@/lib/constants/navigation"
 import { COMPANY } from "@/lib/constants/company"
+import { ThemeToggle } from "@/components/ui/theme-toggle"
 
 interface DashboardTopbarProps {
   onMobileMenuClick: () => void
@@ -38,13 +39,13 @@ export function DashboardTopbar({ onMobileMenuClick }: DashboardTopbarProps) {
   return (
     <header
       className={cn(
-        "sticky top-0 z-30 flex h-16 shrink-0 items-center gap-3 border-b border-gray-200 bg-white/85 px-4 backdrop-blur-md sm:gap-4 sm:px-6",
+        "sticky top-0 z-30 flex h-16 shrink-0 items-center gap-3 border-b border-border bg-card/85 px-4 backdrop-blur-md sm:gap-4 sm:px-6",
       )}
     >
       <button
         type="button"
         onClick={onMobileMenuClick}
-        className="-ml-1 flex h-10 w-10 items-center justify-center rounded-lg text-brand-muted transition-colors duration-200 hover:bg-gray-100 hover:text-foreground lg:hidden"
+        className="-ml-1 flex h-10 w-10 items-center justify-center rounded-lg text-brand-muted transition-colors duration-200 hover:bg-subtle hover:text-foreground lg:hidden"
         aria-label="Open sidebar"
         aria-expanded={false}
       >
@@ -64,13 +65,13 @@ export function DashboardTopbar({ onMobileMenuClick }: DashboardTopbarProps) {
                   className="flex items-center gap-1 capitalize"
                 >
                   {i > 0 && (
-                    <span aria-hidden="true" className="text-gray-300">
+                    <span aria-hidden="true" className="text-gray-300 dark:text-gray-600">
                       /
                     </span>
                   )}
                   <span
                     className={cn(
-                      i === breadcrumbs.length - 1 && "text-brand-primary font-medium",
+                      i === breadcrumbs.length - 1 && "text-brand-primary dark:text-foreground font-medium",
                     )}
                   >
                     {segment.replace(/-/g, " ")}
@@ -94,19 +95,21 @@ export function DashboardTopbar({ onMobileMenuClick }: DashboardTopbarProps) {
           <input
             type="search"
             placeholder="Search shipments, quotes..."
-            className="h-10 w-56 rounded-lg border border-gray-200 bg-white pl-9 pr-3 text-sm text-foreground placeholder:text-brand-muted transition-colors duration-200 hover:border-brand-primary/40 focus:border-brand-primary focus:outline-none focus:ring-2 focus:ring-brand-primary/20 lg:w-64"
+            className="h-10 w-56 rounded-lg border border-border bg-card pl-9 pr-3 text-sm text-foreground placeholder:text-brand-muted transition-colors duration-200 hover:border-brand-primary/40 focus:border-brand-primary focus:outline-none focus:ring-2 focus:ring-brand-primary/20 lg:w-64"
           />
         </label>
       </div>
 
+      <ThemeToggle />
+
       <button
         type="button"
-        className="relative flex h-10 w-10 items-center justify-center rounded-lg text-brand-muted transition-colors duration-200 hover:bg-gray-100 hover:text-foreground"
+        className="relative flex h-10 w-10 items-center justify-center rounded-lg text-brand-muted transition-colors duration-200 hover:bg-subtle hover:text-foreground"
         aria-label={`Notifications from ${COMPANY.name}`}
       >
         <Bell className="h-5 w-5" aria-hidden="true" />
         <span
-          className="absolute right-2.5 top-2.5 h-2 w-2 rounded-full bg-brand-secondary ring-2 ring-white"
+          className="absolute right-2.5 top-2.5 h-2 w-2 rounded-full bg-brand-secondary ring-2 ring-white dark:ring-card"
           aria-hidden="true"
         />
       </button>
@@ -116,7 +119,7 @@ export function DashboardTopbar({ onMobileMenuClick }: DashboardTopbarProps) {
           appearance={{
             elements: {
               avatarBox:
-                "h-9 w-9 ring-2 ring-white shadow-sm hover:ring-brand-primary/30 transition-all duration-200",
+                "h-9 w-9 ring-2 ring-white dark:ring-card shadow-sm hover:ring-brand-primary/30 transition-all duration-200",
               userButtonPopoverCard:
                 "shadow-xl border border-gray-200 rounded-xl",
               userButtonPopoverActionButton:

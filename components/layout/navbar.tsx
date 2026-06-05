@@ -10,6 +10,7 @@ import { COMPANY } from "@/lib/constants/company"
 import { PUBLIC_NAV } from "@/lib/constants/navigation"
 import { Button } from "@/components/ui/button"
 import { Logo } from "@/components/shared/logo"
+import { ThemeToggle } from "@/components/ui/theme-toggle"
 
 export function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false)
@@ -134,6 +135,40 @@ export function Navbar() {
               <span className="font-medium tabular-nums">{COMPANY.phone}</span>
             </a>
 
+            <ThemeToggle
+              className={cn(
+                isTransparent
+                  ? "border-brand-secondary/30 bg-white/40 text-brand-primary hover:bg-brand-secondary/10"
+                  : "border-white/10 bg-white/5 text-white/70 hover:bg-white/10 hover:text-white",
+              )}
+            />
+
+            <Link
+              href="/dashboard"
+              className={cn(
+                "text-sm font-medium transition-colors duration-300",
+                isTransparent
+                  ? "text-brand-primary hover:text-brand-secondary"
+                  : "text-white/80 hover:text-white",
+              )}
+            >
+              Dashboard
+            </Link>
+
+            <Link href="/sign-in">
+              <Button
+                variant="ghost"
+                size="sm"
+                className={cn(
+                  isTransparent
+                    ? "border-brand-secondary/30 text-brand-primary hover:bg-brand-secondary/10"
+                    : "border-white/20 text-white/90 hover:bg-white/10",
+                )}
+              >
+                Sign In
+              </Button>
+            </Link>
+
             <Link href="/contact" className="group relative">
               <div
                 className="absolute -inset-0.5 rounded-lg bg-gradient-to-r from-brand-secondary via-brand-accent to-brand-secondary opacity-70 blur-sm transition-opacity duration-300 group-hover:opacity-100"
@@ -210,12 +245,40 @@ export function Navbar() {
               ))}
 
               <motion.div
+                initial={{ opacity: 0, x: -20 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ delay: PUBLIC_NAV.length * 0.06, duration: 0.3 }}
+                className="border-b border-white/5"
+              >
+                <Link
+                  href="/dashboard"
+                  className={cn(
+                    "flex items-center justify-between py-5 text-2xl font-heading font-semibold transition-colors",
+                    pathname === "/dashboard" ? "text-brand-secondary" : "text-white/90 hover:text-white",
+                  )}
+                >
+                  Dashboard
+                  {pathname === "/dashboard" && (
+                    <span className="h-2 w-2 rounded-full bg-brand-secondary" />
+                  )}
+                </Link>
+              </motion.div>
+
+              <motion.div
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0, y: 20 }}
-                transition={{ delay: PUBLIC_NAV.length * 0.06, duration: 0.3 }}
+                transition={{ delay: (PUBLIC_NAV.length + 1) * 0.06, duration: 0.3 }}
                 className="mt-8 space-y-4"
               >
+                <div className="flex items-center gap-3">
+                  <ThemeToggle className="shrink-0 border-white/10 bg-white/5 text-white/70 hover:bg-white/10 hover:text-white" />
+                  <Link href="/sign-in" className="flex-1">
+                    <Button variant="outline" size="lg" className="w-full border-white/20 text-white/90 hover:bg-white/10">
+                      Sign In
+                    </Button>
+                  </Link>
+                </div>
                 <Link href="/contact" className="block">
                   <Button variant="secondary" size="lg" className="w-full">
                     Get a Free Quote

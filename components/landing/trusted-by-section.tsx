@@ -33,10 +33,10 @@ export function TrustedBySection() {
   const prefersReduced = useReducedMotion()
 
   return (
-    <section className="relative py-20 lg:py-24 border-y border-gray-100 overflow-hidden bg-white">
+    <section className="relative py-20 lg:py-24 border-y border-border-light overflow-hidden bg-card">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-10">
-          <span className="inline-block rounded-full border border-gray-200 bg-gray-50 px-4 py-1 text-xs font-semibold text-brand-muted mb-4">
+          <span className="inline-block rounded-full border border-border bg-subtle px-4 py-1 text-xs font-semibold text-brand-muted mb-4">
             Trusted Partners
           </span>
           <p className="text-sm sm:text-base font-medium text-brand-muted">
@@ -57,7 +57,7 @@ export function TrustedBySection() {
               variants={logoVariants}
               className="group relative flex items-center justify-center"
             >
-              <div className="flex h-16 w-40 items-center justify-center rounded-xl border border-gray-100 bg-gray-50/50 px-6 transition-all duration-300 hover:border-brand-secondary/30 hover:shadow-lg hover:-translate-y-0.5">
+              <div className="flex h-16 w-40 items-center justify-center rounded-xl border border-border-light bg-subtle/50 px-6 transition-all duration-300 hover:border-brand-secondary/30 hover:shadow-lg hover:-translate-y-0.5">
                 <span className="text-base sm:text-lg font-heading font-bold text-gray-400 transition-all duration-300 group-hover:bg-gradient-to-r group-hover:bg-clip-text group-hover:text-transparent whitespace-nowrap select-none"
                   style={{
                     backgroundImage: prefersReduced ? undefined : `linear-gradient(135deg, ${clientColors[client]?.replace("from-", "").replace("to-", "").replace("orange-400", "#fb923c").replace("orange-600", "#ea580c").replace("purple-500", "#a855f7").replace("purple-700", "#7e22ce").replace("blue-500", "#3b82f6").replace("blue-700", "#1d4ed8").replace("red-500", "#ef4444").replace("red-700", "#b91c1c").replace("gray-500", "#6b7280").replace("gray-700", "#374151").replace("rose-500", "#f43f5e").replace("rose-700", "#be123c") || "#e8732a"})`,

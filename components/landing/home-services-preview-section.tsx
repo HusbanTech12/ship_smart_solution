@@ -65,23 +65,12 @@ export function HomeServicesPreviewSection() {
           <span className="inline-block rounded-full border border-brand-secondary/20 bg-brand-secondary/10 px-4 py-1 text-xs font-semibold text-brand-secondary mb-6">
             Our Services
           </span>
-          <h2 className="text-4xl sm:text-5xl font-heading font-bold text-brand-primary tracking-tight">
+          <h2 className="text-4xl sm:text-5xl font-heading font-bold text-brand-primary dark:text-foreground tracking-tight">
             Three modes. One platform.
           </h2>
           <p className="mt-4 text-brand-muted max-w-2xl mx-auto text-lg leading-relaxed">
             Pick the trailer type that fits your freight. We handle the rest.
           </p>
-          <div className="mt-8 flex justify-center">
-            <Button
-              href="/services"
-              variant="primary"
-              size="md"
-              className="shadow-lg shadow-brand-primary/10"
-            >
-              View all services
-              <ArrowRight className="h-4 w-4" />
-            </Button>
-          </div>
         </motion.div>
 
         <motion.div
@@ -98,7 +87,7 @@ export function HomeServicesPreviewSection() {
                 <Link
                   href={preview.href}
                   className={cn(
-                    "group relative flex flex-col rounded-xl border border-gray-200 bg-white p-6 transition-all duration-300",
+                    "group relative flex flex-col rounded-xl border border-border bg-card p-6 transition-all duration-300",
                     "hover:-translate-y-1.5 hover:border-brand-secondary/40 hover:shadow-xl hover:shadow-brand-secondary/10",
                   )}
                 >
@@ -117,7 +106,7 @@ export function HomeServicesPreviewSection() {
                     <Icon className="h-5 w-5" />
                   </motion.div>
 
-                  <h3 className="mt-5 text-lg font-semibold text-brand-primary">
+                  <h3 className="mt-5 text-lg font-semibold text-brand-primary dark:text-foreground">
                     {preview.title}
                   </h3>
 
@@ -125,7 +114,7 @@ export function HomeServicesPreviewSection() {
                     {preview.description}
                   </p>
 
-                  <ul className="mt-5 space-y-2.5 border-t border-gray-100 pt-4">
+                  <ul className="mt-5 space-y-2.5 border-t border-border-light pt-4">
                     {preview.details.map((detail) => (
                       <li
                         key={detail}
@@ -145,6 +134,24 @@ export function HomeServicesPreviewSection() {
               </motion.div>
             )
           })}
+        </motion.div>
+
+        <motion.div
+          initial={anim ? { opacity: 0, y: 20 } : undefined}
+          whileInView={anim ? { opacity: 1, y: 0 } : undefined}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6, ease: [0.21, 0.47, 0.32, 0.98] as const, delay: 0.3 }}
+          className="mt-12 flex justify-center"
+        >
+          <Button
+            href="/services"
+            variant="primary"
+            size="md"
+            className="shadow-lg shadow-brand-primary/10"
+          >
+            View all services
+            <ArrowRight className="h-4 w-4" />
+          </Button>
         </motion.div>
       </div>
     </section>

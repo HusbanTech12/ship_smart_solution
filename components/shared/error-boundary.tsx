@@ -66,7 +66,7 @@ export class ErrorBoundary extends Component<
             Our team has been notified. Please try again or contact us at{" "}
             <a
               href={COMPANY.phoneHref}
-              className="font-medium text-brand-primary hover:underline"
+              className="font-medium text-brand-primary dark:text-brand-secondary hover:underline"
             >
               {COMPANY.phone}
             </a>
@@ -78,7 +78,7 @@ export class ErrorBoundary extends Component<
             </Button>
             <a
               href="/dashboard"
-              className="inline-flex items-center justify-center h-10 px-5 text-sm font-medium rounded-lg border border-brand-primary/30 text-brand-primary hover:bg-brand-primary/5 transition-all duration-200"
+              className="inline-flex items-center justify-center h-10 px-5 text-sm font-medium rounded-lg border border-brand-primary/30 text-brand-primary dark:text-foreground hover:bg-brand-primary/5 transition-all duration-200"
             >
               Go to Dashboard
             </a>

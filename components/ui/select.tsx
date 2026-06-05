@@ -14,12 +14,12 @@ export const Select = forwardRef<HTMLSelectElement, SelectProps>(
         ref={ref}
         className={cn(
           "flex h-10 w-full rounded-lg border px-3 py-2 text-sm transition-colors duration-200 ease-out appearance-none",
-          "bg-white",
+          "bg-card",
           "text-foreground",
-          "border-gray-300",
+          "border-gray-300 dark:border-gray-600",
           "hover:border-brand-primary/50",
           "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-primary/30 focus-visible:border-brand-primary",
-          "disabled:cursor-not-allowed disabled:opacity-50 disabled:bg-gray-50",
+          "disabled:cursor-not-allowed disabled:opacity-50 disabled:bg-subtle",
           error &&
             "border-status-error focus-visible:ring-status-error/30 focus-visible:border-status-error",
           className,

@@ -32,7 +32,7 @@ export function ServicesSection() {
   const prefersReduced = useReducedMotion()
 
   return (
-    <section className="relative py-24 lg:py-32 bg-gradient-to-b from-brand-surface to-white overflow-hidden" id="services">
+    <section className="relative py-24 lg:py-32 bg-gradient-to-b from-brand-surface to-card overflow-hidden" id="services">
       <div className="absolute inset-0 bg-[radial-gradient(ellipse_60%_50%_at_50%_0%,rgba(232,115,42,0.04)_0%,transparent_60%)]" />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
@@ -66,7 +66,7 @@ export function ServicesSection() {
               <motion.div
                 key={service.id}
                 variants={cardVariants}
-                className="group relative bg-white rounded-2xl border border-gray-200 p-8 transition-all duration-500 ease-out hover:shadow-2xl hover:-translate-y-2 hover:border-brand-secondary/30"
+                className="group relative bg-card rounded-2xl border border-border p-8 transition-all duration-500 ease-out hover:shadow-2xl hover:-translate-y-2 hover:border-brand-secondary/30"
               >
                 {!prefersReduced && (
                   <div className="absolute inset-0 rounded-2xl bg-gradient-to-b from-brand-secondary/5 to-transparent opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
@@ -101,7 +101,7 @@ export function ServicesSection() {
                     ))}
                   </ul>
 
-                  <div className="mt-8 pt-6 border-t border-gray-100">
+                  <div className="mt-8 pt-6 border-t border-border-light">
                     <Link
                       href="/contact"
                       className="inline-flex items-center gap-2 text-sm font-semibold text-brand-secondary transition-all duration-300 group-hover:gap-3"

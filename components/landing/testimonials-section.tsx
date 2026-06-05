@@ -58,7 +58,7 @@ export function TestimonialsSection() {
   const prefersReduced = useReducedMotion()
 
   return (
-    <section className="relative py-24 lg:py-32 bg-gradient-to-b from-brand-surface to-white overflow-hidden" id="testimonials">
+    <section className="relative py-24 lg:py-32 bg-gradient-to-b from-brand-surface to-card overflow-hidden" id="testimonials">
       <div className="absolute inset-0 bg-[radial-gradient(ellipse_60%_40%_at_50%_100%,rgba(232,115,42,0.04)_0%,transparent_60%)]" />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
@@ -89,7 +89,7 @@ export function TestimonialsSection() {
             <motion.div
               key={t.name}
               variants={cardVariants}
-              className="group relative bg-white rounded-2xl border border-gray-200 p-8 transition-all duration-500 ease-out hover:shadow-2xl hover:-translate-y-2"
+              className="group relative bg-card rounded-2xl border border-border p-8 transition-all duration-500 ease-out hover:shadow-2xl hover:-translate-y-2"
             >
               {!prefersReduced && (
                 <div className="absolute inset-0 rounded-2xl bg-gradient-to-b from-brand-secondary/5 to-transparent opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
@@ -133,7 +133,7 @@ export function TestimonialsSection() {
         </motion.div>
 
         <div className="mt-12 text-center">
-          <div className="inline-flex items-center gap-2 rounded-full border border-gray-200 bg-white px-6 py-3 text-sm text-brand-muted">
+          <div className="inline-flex items-center gap-2 rounded-full border border-border bg-card px-6 py-3 text-sm text-brand-muted">
             <span className="flex -space-x-2">
               {testimonials.map((t) => (
                 <div
@@ -145,7 +145,7 @@ export function TestimonialsSection() {
               ))}
             </span>
             <span className="ml-2">
-              <strong className="text-foreground">4.9</strong> average rating from 200+ reviews
+              <strong className="text-foreground dark:text-white">4.9</strong> average rating from 200+ reviews
             </span>
           </div>
         </div>

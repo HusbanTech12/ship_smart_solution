@@ -54,7 +54,7 @@ export function HeroSection() {
   }, [prefersReduced])
 
   return (
-    <section className="relative min-h-screen flex flex-col overflow-hidden bg-white">
+    <section className="relative min-h-screen flex flex-col overflow-hidden bg-card">
       <div
         className="absolute inset-0"
         style={{
@@ -102,7 +102,7 @@ export function HeroSection() {
                 initial={anim ? { opacity: 0, y: 20 } : undefined}
                 animate={anim ? { opacity: 1, y: 0 } : undefined}
                 transition={{ duration: 0.6, delay: 0.1, ease: [0.21, 0.47, 0.32, 0.98] as const }}
-                className="text-5xl sm:text-6xl lg:text-7xl font-display font-bold text-brand-primary leading-[1.02] tracking-tight"
+                className="text-5xl sm:text-6xl lg:text-7xl font-display font-bold text-brand-primary dark:text-foreground leading-[1.02] tracking-tight"
               >
                 Ship Smarter.
                 <br />
@@ -143,7 +143,7 @@ export function HeroSection() {
                 transition={{ duration: 0.5, delay: 0.25 }}
                 className="mt-5 flex flex-wrap items-center justify-center lg:justify-start gap-x-2 gap-y-1.5 text-xs text-brand-muted"
               >
-                <span className="font-semibold text-brand-primary">Built for</span>
+                <span className="font-semibold text-brand-primary dark:text-foreground">Built for</span>
                 {industries.map((ind, i) => (
                   <span key={ind} className="inline-flex items-center gap-x-2">
                     <span>{ind}</span>
@@ -212,8 +212,8 @@ export function HeroSection() {
               <div className="relative">
                 <div className="absolute -inset-4 rounded-3xl bg-gradient-to-br from-brand-secondary/20 via-brand-primary/5 to-brand-accent/20 blur-2xl opacity-60" />
 
-                <div className="relative rounded-2xl border border-gray-200/80 bg-white p-6 shadow-2xl shadow-brand-primary/10">
-                  <div className="flex items-center justify-between pb-4 border-b border-gray-100">
+                <div className="relative rounded-2xl border border-border/80 bg-card p-6 shadow-2xl shadow-brand-primary/10">
+                  <div className="flex items-center justify-between pb-4 border-b border-border-light">
                     <div className="flex items-center gap-3">
                       <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-gradient-to-br from-brand-secondary to-brand-accent">
                         <Truck className="h-5 w-5 text-white" />
@@ -237,7 +237,7 @@ export function HeroSection() {
                   </div>
 
                   <div className="relative my-6 px-2">
-                    <div className="absolute top-1/2 left-0 right-0 h-0.5 bg-gray-200 -translate-y-1/2" />
+                    <div className="absolute top-1/2 left-0 right-0 h-0.5 bg-border -translate-y-1/2" />
                     <div
                       className="absolute top-1/2 left-0 h-0.5 bg-gradient-to-r from-brand-secondary to-brand-accent -translate-y-1/2 transition-all duration-[1500ms] ease-out"
                       style={{ width: `${progress}%` }}
@@ -251,7 +251,7 @@ export function HeroSection() {
                           transition: "left 1500ms ease-out",
                         }}
                       >
-                        <div className="flex h-7 w-7 items-center justify-center rounded-full bg-white border-2 border-brand-secondary shadow-md">
+                        <div className="flex h-7 w-7 items-center justify-center rounded-full bg-card border-2 border-brand-secondary shadow-md">
                           <Truck className="h-3.5 w-3.5 text-brand-secondary" />
                         </div>
                       </div>
@@ -264,9 +264,9 @@ export function HeroSection() {
                             className={`flex h-8 w-8 items-center justify-center rounded-full border-2 ${
                               step.status === "done"
                                 ? "bg-brand-secondary border-brand-secondary"
-                                : step.status === "active"
-                                ? "bg-white border-brand-secondary"
-                                : "bg-white border-gray-300"
+                                :                               step.status === "active"
+                                ? "bg-card border-brand-secondary"
+                                : "bg-card border-gray-300 dark:border-gray-600"
                             }`}
                           >
                             {step.status === "done" ? (
@@ -290,7 +290,7 @@ export function HeroSection() {
                     </div>
                   </div>
 
-                  <div className="grid grid-cols-3 gap-3 pt-4 border-t border-gray-100">
+                  <div className="grid grid-cols-3 gap-3 pt-4 border-t border-border-light">
                     {truckStats.map((stat) => (
                       <div key={stat.label} className="text-center">
                         <div className="text-[10px] text-brand-muted uppercase tracking-wider font-semibold">
@@ -304,7 +304,7 @@ export function HeroSection() {
                   </div>
                 </div>
 
-                <div className="absolute -bottom-6 -left-6 rounded-xl border border-gray-200/80 bg-white p-3 shadow-xl flex items-center gap-3 animate-float">
+                <div className="absolute -bottom-6 -left-6 rounded-xl border border-border/80 bg-card p-3 shadow-xl flex items-center gap-3 animate-float">
                   <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-status-success/10">
                     <Package className="h-4 w-4 text-status-success" />
                   </div>
@@ -318,7 +318,7 @@ export function HeroSection() {
                   </div>
                 </div>
 
-                <div className="absolute -top-4 -right-2 rounded-xl border border-gray-200/80 bg-white p-3 shadow-xl animate-float-delayed">
+                <div className="absolute -top-4 -right-2 rounded-xl border border-border/80 bg-card p-3 shadow-xl animate-float-delayed">
                   <div className="text-[10px] text-brand-muted uppercase tracking-wider font-semibold">
                     On-time rate
                   </div>

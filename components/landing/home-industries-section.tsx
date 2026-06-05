@@ -45,7 +45,7 @@ export function HomeIndustriesSection() {
           <span className="inline-block rounded-full border border-brand-secondary/20 bg-brand-secondary/10 px-4 py-1 text-xs font-semibold text-brand-secondary mb-6">
             Industries We Serve
           </span>
-          <h2 className="text-4xl sm:text-5xl font-heading font-bold text-brand-primary tracking-tight">
+          <h2 className="text-4xl sm:text-5xl font-heading font-bold text-brand-primary dark:text-foreground tracking-tight">
             Specialized for your industry
           </h2>
           <p className="mt-4 text-brand-muted max-w-2xl mx-auto text-lg leading-relaxed">
@@ -77,7 +77,7 @@ export function HomeIndustriesSection() {
               <motion.div key={industry.name} variants={anim ? cellVariants : undefined}>
                 <Link
                   href={industry.href}
-                  className="group relative flex flex-col rounded-xl border border-gray-200 bg-white p-5 transition-all duration-300 hover:-translate-y-1.5 hover:border-brand-secondary/40 hover:shadow-xl hover:shadow-brand-secondary/10"
+                  className="group relative flex flex-col rounded-xl border border-border bg-card p-5 transition-all duration-300 hover:-translate-y-1.5 hover:border-brand-secondary/40 hover:shadow-xl hover:shadow-brand-secondary/10"
                 >
                   <motion.div
                     className="flex h-9 w-9 items-center justify-center rounded-md bg-brand-primary/5 text-brand-primary transition-colors duration-300 group-hover:bg-brand-primary group-hover:text-white"
@@ -87,7 +87,7 @@ export function HomeIndustriesSection() {
                     <Icon className="h-4 w-4" />
                   </motion.div>
 
-                  <h3 className="mt-4 text-sm font-semibold text-brand-primary leading-snug">
+                  <h3 className="mt-4 text-sm font-semibold text-brand-primary dark:text-foreground leading-snug">
                     {industry.name}
                   </h3>
 

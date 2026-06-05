@@ -73,7 +73,7 @@ export function Sidebar({
         aria-label="Dashboard navigation"
         aria-hidden={isMobileOpen ? undefined : undefined}
         className={cn(
-          "fixed inset-y-0 left-0 z-50 flex flex-col border-r border-gray-200 bg-white shadow-sm transition-[width,transform] duration-300 ease-out lg:sticky lg:top-0 lg:h-screen lg:translate-x-0",
+          "fixed inset-y-0 left-0 z-50 flex flex-col border-r border-border bg-card shadow-sm transition-[width,transform] duration-300 ease-out lg:sticky lg:top-0 lg:h-screen lg:translate-x-0",
           isMobileOpen ? "translate-x-0" : "-translate-x-full",
           isCollapsed ? "lg:w-[72px]" : "lg:w-[260px]",
           "w-[280px]",
@@ -81,7 +81,7 @@ export function Sidebar({
       >
         <div
           className={cn(
-            "flex h-16 shrink-0 items-center border-b border-gray-200 px-4",
+            "flex h-16 shrink-0 items-center border-b border-border px-4",
             isCollapsed ? "lg:justify-center lg:px-0" : "justify-between",
           )}
         >
@@ -104,7 +104,7 @@ export function Sidebar({
           <button
             type="button"
             onClick={onMobileClose}
-            className="flex h-9 w-9 items-center justify-center rounded-lg text-brand-muted hover:bg-gray-100 hover:text-foreground lg:hidden"
+            className="flex h-9 w-9 items-center justify-center rounded-lg text-brand-muted hover:bg-subtle hover:text-foreground lg:hidden"
             aria-label="Close sidebar"
           >
             <X className="h-5 w-5" />
@@ -141,7 +141,7 @@ export function Sidebar({
                       isCollapsed && "lg:justify-center lg:px-0",
                       active
                         ? "text-white"
-                        : "text-brand-muted hover:bg-brand-primary/5 hover:text-brand-primary",
+                        : "text-brand-muted hover:bg-brand-primary/5 hover:text-brand-primary dark:hover:text-foreground",
                     )}
                     aria-current={active ? "page" : undefined}
                     title={isCollapsed ? item.label : undefined}
@@ -175,12 +175,12 @@ export function Sidebar({
           </ul>
         </nav>
 
-        <div className="shrink-0 border-t border-gray-200 p-3">
+        <div className="shrink-0 border-t border-border p-3">
           <button
             type="button"
             onClick={onToggleCollapse}
             className={cn(
-              "hidden lg:flex w-full items-center gap-3 rounded-lg px-3 py-2.5 text-sm font-medium text-brand-muted transition-colors duration-200 hover:bg-gray-100 hover:text-foreground",
+              "hidden lg:flex w-full items-center gap-3 rounded-lg px-3 py-2.5 text-sm font-medium text-brand-muted transition-colors duration-200 hover:bg-subtle hover:text-foreground",
               isCollapsed && "lg:justify-center lg:px-0",
             )}
             aria-label={isCollapsed ? "Expand sidebar" : "Collapse sidebar"}

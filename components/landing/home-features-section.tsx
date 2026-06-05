@@ -77,23 +77,12 @@ export function HomeFeaturesSection() {
           <span className="inline-block rounded-full border border-brand-secondary/20 bg-brand-secondary/10 px-4 py-1 text-xs font-semibold text-brand-secondary mb-6">
             Why Ship Smart
           </span>
-          <h2 className="text-4xl sm:text-5xl font-heading font-bold text-brand-primary tracking-tight">
+          <h2 className="text-4xl sm:text-5xl font-heading font-bold text-brand-primary dark:text-foreground tracking-tight">
             Built for teams that ship every day
           </h2>
           <p className="mt-4 text-brand-muted max-w-2xl mx-auto text-lg leading-relaxed">
             Six reasons enterprise operations choose us as their logistics partner.
           </p>
-          <div className="mt-8 flex justify-center">
-            <Button
-              href="/contact"
-              variant="primary"
-              size="md"
-              className="shadow-lg shadow-brand-primary/10"
-            >
-              Talk to our team
-              <ArrowRight className="h-4 w-4" />
-            </Button>
-          </div>
         </motion.div>
 
         <motion.div
@@ -113,7 +102,7 @@ export function HomeFeaturesSection() {
               >
                 <Link
                   href={feature.href}
-                  className="group relative flex h-full flex-col rounded-xl border border-gray-200 bg-white p-6 transition-all duration-300 hover:-translate-y-1.5 hover:border-brand-secondary/40 hover:shadow-xl hover:shadow-brand-secondary/10"
+                  className="group relative flex h-full flex-col rounded-xl border border-border bg-card p-6 transition-all duration-300 hover:-translate-y-1.5 hover:border-brand-secondary/40 hover:shadow-xl hover:shadow-brand-secondary/10"
                 >
                   {feature.featured && (
                     <div className="absolute top-6 right-6 inline-flex items-center gap-1.5 rounded-full bg-brand-secondary/10 px-2.5 py-1 text-[10px] font-semibold uppercase tracking-widest text-brand-secondary">
@@ -133,7 +122,7 @@ export function HomeFeaturesSection() {
                     <Icon className="h-5 w-5" />
                   </motion.div>
 
-                  <h3 className="mt-5 text-base font-semibold text-brand-primary">
+                  <h3 className="mt-5 text-base font-semibold text-brand-primary dark:text-foreground">
                     {feature.title}
                   </h3>
 
@@ -149,6 +138,24 @@ export function HomeFeaturesSection() {
               </motion.div>
             )
           })}
+        </motion.div>
+
+        <motion.div
+          initial={anim ? { opacity: 0, y: 20 } : undefined}
+          whileInView={anim ? { opacity: 1, y: 0 } : undefined}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6, ease: [0.21, 0.47, 0.32, 0.98] as const, delay: 0.3 }}
+          className="mt-12 flex justify-center"
+        >
+          <Button
+            href="/contact"
+            variant="primary"
+            size="md"
+            className="shadow-lg shadow-brand-primary/10"
+          >
+            Talk to our team
+            <ArrowRight className="h-4 w-4" />
+          </Button>
         </motion.div>
       </div>
     </section>

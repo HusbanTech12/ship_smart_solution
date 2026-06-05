@@ -7,9 +7,14 @@
   --color-brand-primary: #00264d;
   --color-brand-secondary: #e8732a;
   --color-brand-accent: #f5a623;
-  --color-brand-surface: #f8f9fa;
-  --color-brand-muted: #6b7280;
-  --color-brand-dark: #0a0f1e;
+  --color-brand-surface: var(--surface);
+  --color-brand-muted: var(--muted);
+  --color-brand-dark: var(--dark);
+
+  --color-card: var(--card);
+  --color-border: var(--border);
+  --color-border-light: var(--border-light);
+  --color-subtle: var(--subtle);
 
   --color-status-success: #16a34a;
   --color-status-warning: #d97706;
@@ -30,6 +35,25 @@
 :root {
   --background: #ffffff;
   --foreground: #171717;
+  --surface: #f8f9fa;
+  --muted: #6b7280;
+  --dark: #0a0f1e;
+  --card: #ffffff;
+  --border: #e5e7eb;
+  --border-light: #f3f4f6;
+  --subtle: #f9fafb;
+}
+
+.dark {
+  --background: #0a0f1e;
+  --foreground: #f8f9fa;
+  --surface: #0a0f1e;
+  --muted: #9ca3af;
+  --dark: #030712;
+  --card: #1a1f2e;
+  --border: #374151;
+  --border-light: #1f2937;
+  --subtle: #111827;
 }
 
 body {
