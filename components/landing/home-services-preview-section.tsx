@@ -1,7 +1,8 @@
 "use client"
 
-import { Snowflake, Container, Truck, ArrowRight } from "lucide-react"
+import { Snowflake, Container, Truck, ArrowRight, Check, Sparkles } from "lucide-react"
 import Link from "next/link"
+import { cn } from "@/lib/utils"
 
 const previews = [
   {
@@ -10,6 +11,7 @@ const previews = [
     description:
       "Temperature-controlled with real-time monitoring for perishables and pharma.",
     details: ["Team drivers", "Temp monitoring", "GPS tracking"],
+    popular: true,
   },
   {
     icon: Container,
@@ -29,7 +31,7 @@ const previews = [
 
 export function HomeServicesPreviewSection() {
   return (
-    <section className="py-20 lg:py-28 bg-brand-surface">
+    <section id="services" className="py-20 lg:py-28 bg-brand-surface">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-4 mb-12">
           <div className="max-w-2xl">
@@ -58,9 +60,19 @@ export function HomeServicesPreviewSection() {
             return (
               <div
                 key={preview.title}
-                className="group relative rounded-lg border border-gray-200 bg-white p-6 transition-all duration-200 hover:border-brand-primary/30 hover:shadow-sm"
+                className={cn(
+                  "group relative flex flex-col rounded-xl border border-gray-200 bg-white p-6 transition-all duration-300",
+                  "hover:-translate-y-1 hover:border-brand-secondary/40 hover:shadow-lg hover:shadow-brand-secondary/5",
+                )}
               >
-                <div className="flex h-10 w-10 items-center justify-center rounded-md bg-brand-primary text-white">
+                {preview.popular && (
+                  <div className="absolute -top-3 left-6 inline-flex items-center gap-1 rounded-full bg-gradient-to-r from-brand-secondary to-brand-accent px-2.5 py-1 text-[10px] font-semibold uppercase tracking-widest text-white shadow-md">
+                    <Sparkles className="h-3 w-3" />
+                    Most popular
+                  </div>
+                )}
+
+                <div className="flex h-10 w-10 items-center justify-center rounded-md bg-brand-primary/5 text-brand-primary transition-colors duration-300 group-hover:bg-brand-primary group-hover:text-white">
                   <Icon className="h-5 w-5" />
                 </div>
 
@@ -72,13 +84,13 @@ export function HomeServicesPreviewSection() {
                   {preview.description}
                 </p>
 
-                <ul className="mt-5 space-y-2 border-t border-gray-100 pt-4">
+                <ul className="mt-5 space-y-2.5 border-t border-gray-100 pt-4">
                   {preview.details.map((detail) => (
                     <li
                       key={detail}
-                      className="flex items-center gap-2 text-xs text-brand-muted"
+                      className="flex items-center gap-2.5 text-sm text-brand-muted"
                     >
-                      <span className="h-1 w-1 rounded-full bg-brand-secondary" />
+                      <Check className="h-3.5 w-3.5 text-brand-secondary shrink-0" strokeWidth={3} />
                       {detail}
                     </li>
                   ))}
@@ -86,7 +98,7 @@ export function HomeServicesPreviewSection() {
 
                 <Link
                   href="/services"
-                  className="mt-6 inline-flex items-center gap-1 text-sm font-semibold text-brand-secondary transition-colors hover:text-brand-accent"
+                  className="mt-6 inline-flex items-center gap-1 text-sm font-semibold text-brand-secondary transition-all duration-200 group-hover:gap-2 hover:text-brand-accent"
                 >
                   Learn more
                   <ArrowRight className="h-3.5 w-3.5" />
