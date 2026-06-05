@@ -86,24 +86,15 @@ export function Footer() {
   }
 
   return (
-    <footer className="relative bg-brand-dark text-white overflow-hidden">
+    <footer className="relative bg-gray-950 dark:bg-black text-white">
       <div
-        className="absolute inset-0"
-        style={{
-          background:
-            "linear-gradient(180deg, #0a0f1e 0%, #00264d 50%, #0a0f1e 100%)",
-        }}
-      />
-      <div
-        className="absolute inset-0 opacity-[0.04]"
+        className="absolute inset-0 opacity-[0.03]"
         style={{
           backgroundImage:
-            "radial-gradient(circle at 1px 1px, rgba(255,255,255,0.4) 1px, transparent 0)",
+            "radial-gradient(circle at 1px 1px, rgba(255,255,255,0.3) 1px, transparent 0)",
           backgroundSize: "32px 32px",
         }}
       />
-      <div className="absolute top-0 left-1/4 h-96 w-96 rounded-full bg-brand-secondary/10 blur-3xl pointer-events-none" />
-      <div className="absolute bottom-0 right-1/4 h-96 w-96 rounded-full bg-brand-accent/5 blur-3xl pointer-events-none" />
 
       <div className="relative z-10">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-16 lg:pt-20 pb-12">

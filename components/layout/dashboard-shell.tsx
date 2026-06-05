@@ -1,10 +1,14 @@
 "use client"
 
 import { useCallback, useEffect, useState } from "react"
+import { useUser } from "@clerk/nextjs"
 import { Sidebar } from "@/components/layout/sidebar"
 import { DashboardTopbar } from "@/components/layout/dashboard-topbar"
+import { Navbar } from "@/components/layout/navbar"
 import { ErrorBoundary } from "@/components/shared/error-boundary"
 import { cn } from "@/lib/utils"
+
+const ADMIN_EMAILS = ["usman@elitesolutionscpa.com", "husbantech08@gmail.com"]
 
 const COLLAPSED_STORAGE_KEY = "ship-smart-sidebar-collapsed"
 
@@ -16,6 +20,9 @@ export function DashboardShell({ children }: DashboardShellProps) {
   const [isCollapsed, setIsCollapsed] = useState(false)
   const [isMobileOpen, setIsMobileOpen] = useState(false)
   const [hydrated, setHydrated] = useState(false)
+  const { user } = useUser()
+  const userEmail = user?.primaryEmailAddress?.emailAddress
+  const isAdmin = userEmail ? ADMIN_EMAILS.includes(userEmail) : false
 
   useEffect(() => {
     try {
@@ -60,13 +67,16 @@ export function DashboardShell({ children }: DashboardShellProps) {
   }, [])
 
   return (
-    <div
-      className={cn(
-        "flex min-h-screen w-full bg-brand-surface",
-        "transition-[padding] duration-300",
-      )}
-    >
-      <Sidebar
+    <>
+      {isAdmin && <Navbar />}
+      <div
+        className={cn(
+          "flex min-h-screen w-full bg-brand-surface",
+          "transition-[padding] duration-300",
+          isAdmin && "pt-16 lg:pt-20",
+        )}
+      >
+        <Sidebar
         isCollapsed={isCollapsed}
         onToggleCollapse={handleToggleCollapse}
         isMobileOpen={isMobileOpen}
@@ -82,5 +92,6 @@ export function DashboardShell({ children }: DashboardShellProps) {
         </main>
       </div>
     </div>
+    </>
   )
 }

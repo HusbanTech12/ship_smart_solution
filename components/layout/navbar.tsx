@@ -44,7 +44,7 @@ export function Navbar() {
       <div
         className={cn(
           "absolute inset-0 transition-all duration-500 ease-out",
-          "bg-brand-surface dark:bg-brand-dark/80",
+          "bg-white dark:bg-brand-dark border-b border-gray-200 dark:border-gray-800",
         )}
       />
 
@@ -64,8 +64,7 @@ export function Navbar() {
 
           <nav
             className={cn(
-              "hidden lg:flex items-center gap-1 rounded-full p-1.5 transition-all duration-500",
-              "border border-brand-primary/15 bg-white/60 dark:bg-white/5",
+              "hidden lg:flex items-center gap-1",
             )}
           >
             {PUBLIC_NAV.map((item) => {
@@ -75,15 +74,15 @@ export function Navbar() {
                   key={item.href}
                   href={item.href}
                   className={cn(
-                    "relative px-5 py-2 text-sm font-medium rounded-full transition-all duration-300",
+                    "relative px-4 py-2 text-sm font-medium transition-colors duration-200",
                     isActive
-                      ? "text-brand-primary bg-brand-primary/10 shadow-inner"
-                      : "text-brand-muted hover:text-brand-primary hover:bg-brand-primary/5",
+                      ? "text-brand-primary"
+                      : "text-gray-600 hover:text-brand-primary dark:text-gray-400 dark:hover:text-white",
                   )}
                 >
                   {item.label}
                   {isActive && (
-                    <span className="absolute -bottom-0.5 left-1/2 -translate-x-1/2 h-1 w-1 rounded-full bg-brand-primary" />
+                    <span className="absolute bottom-0 left-1/2 -translate-x-1/2 h-0.5 w-4 rounded-full bg-brand-primary" />
                   )}
                 </Link>
               )
@@ -92,15 +91,15 @@ export function Navbar() {
               <Link
                 href="/dashboard"
                 className={cn(
-                  "relative px-5 py-2 text-sm font-medium rounded-full transition-all duration-300",
+                  "relative px-4 py-2 text-sm font-medium transition-colors duration-200",
                   pathname.startsWith("/dashboard")
-                    ? "text-brand-primary bg-brand-primary/10 shadow-inner"
-                    : "text-brand-muted hover:text-brand-primary hover:bg-brand-primary/5",
+                    ? "text-brand-primary"
+                    : "text-gray-600 hover:text-brand-primary dark:text-gray-400 dark:hover:text-white",
                 )}
               >
                 Dashboard
                 {pathname.startsWith("/dashboard") && (
-                  <span className="absolute -bottom-0.5 left-1/2 -translate-x-1/2 h-1 w-1 rounded-full bg-brand-primary" />
+                  <span className="absolute bottom-0 left-1/2 -translate-x-1/2 h-0.5 w-4 rounded-full bg-brand-primary" />
                 )}
               </Link>
             )}
@@ -109,7 +108,7 @@ export function Navbar() {
           <div className="hidden lg:flex items-center gap-3">
             <ThemeToggle
               className={cn(
-                "border-brand-primary/20 bg-white/60 text-brand-muted hover:text-brand-primary hover:bg-brand-primary/10 dark:bg-white/5 dark:border-white/10",
+                "border-gray-200 dark:border-gray-700 text-gray-500 hover:text-brand-primary dark:text-gray-400",
               )}
             />
 
@@ -117,34 +116,23 @@ export function Navbar() {
               <Button
                 variant="ghost"
                 size="sm"
-                className="border-brand-primary/20 text-brand-muted hover:text-brand-primary hover:bg-brand-primary/10"
+                className="text-gray-600 hover:text-brand-primary dark:text-gray-400 dark:hover:text-white"
               >
                 Sign In
               </Button>
             </Link>
 
-            <Link href="/contact" className="group relative">
-              <div
-                className="absolute -inset-0.5 rounded-lg bg-gradient-to-r from-brand-secondary via-brand-accent to-brand-secondary opacity-70 blur-sm transition-opacity duration-300 group-hover:opacity-100"
-                aria-hidden="true"
-              />
-              <Button
-                variant="secondary"
-                size="sm"
-                className="relative overflow-hidden shadow-lg"
-              >
-                <span className="relative z-10 flex items-center gap-2">
-                  Get a Free Quote
-                  <ArrowRight className="h-3.5 w-3.5 transition-transform duration-300 group-hover:translate-x-0.5" />
-                </span>
-                <span className="absolute inset-0 -z-10 bg-gradient-to-r from-brand-accent to-brand-secondary opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
+            <Link href="/contact">
+              <Button variant="primary" size="sm">
+                Get a Free Quote
+                <ArrowRight className="h-3.5 w-3.5 ml-1" />
               </Button>
             </Link>
           </div>
 
           <button
             onClick={() => setIsMobileOpen(!isMobileOpen)}
-            className="lg:hidden p-2 rounded-md text-brand-muted hover:text-brand-primary hover:bg-brand-primary/10 transition-colors"
+            className="lg:hidden p-2 rounded-md text-gray-600 hover:text-brand-primary dark:text-gray-400 dark:hover:text-white transition-colors"
             aria-label={isMobileOpen ? "Close menu" : "Open menu"}
             aria-expanded={isMobileOpen}
           >
