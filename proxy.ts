@@ -2,9 +2,16 @@ import { clerkMiddleware, createRouteMatcher } from "@clerk/nextjs/server"
 
 const isPublicRoute = createRouteMatcher([
   "/",
+  "/services",
+  "/services/(.*)",
+  "/about",
+  "/testimonials",
+  "/contact",
+  "/contact/(.*)",
   "/sign-in(.*)",
   "/sign-up(.*)",
   "/api/webhooks(.*)",
+  "/api/contact",
 ])
 
 const proxy = clerkMiddleware((auth, req) => {
