@@ -44,7 +44,7 @@ export function Navbar() {
       <div
         className={cn(
           "absolute inset-0 transition-all duration-500 ease-out",
-          "bg-transparent",
+          "bg-brand-surface dark:bg-brand-dark/80",
         )}
       />
 
@@ -57,7 +57,7 @@ export function Navbar() {
             <Logo
               variant="full"
               size="md"
-              tone="dark"
+              tone="gradient"
               showTagline={false}
             />
           </Link>
