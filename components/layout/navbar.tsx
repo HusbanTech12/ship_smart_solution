@@ -40,6 +40,8 @@ export function Navbar() {
   const [isMobileOpen, setIsMobileOpen] = useState(false)
   const pathname = usePathname()
 
+  const isTransparent = !isScrolled && pathname === "/"
+
   useEffect(() => {
     const onScroll = () => setIsScrolled(window.scrollY > 20)
     window.addEventListener("scroll", onScroll, { passive: true })
@@ -69,19 +71,19 @@ export function Navbar() {
       <div
         className={cn(
           "absolute inset-0 transition-all duration-500 ease-out",
-          isScrolled
-            ? "bg-brand-dark/90 backdrop-blur-xl shadow-2xl shadow-black/20 border-b border-white/5"
-            : pathname === "/"
+          isTransparent
             ? "bg-transparent"
+            : isScrolled
+            ? "bg-brand-dark/90 backdrop-blur-xl shadow-2xl shadow-black/20 border-b border-white/5"
             : "bg-brand-dark/95 backdrop-blur-xl border-b border-white/5",
         )}
       />
-      {!isScrolled && pathname === "/" && (
+      {isTransparent && (
         <div
           className="absolute inset-0 opacity-50"
           style={{
             background:
-              "linear-gradient(180deg, rgba(0,38,77,0.5) 0%, transparent 100%)",
+              "linear-gradient(180deg, rgba(255,255,255,0.65) 0%, transparent 100%)",
           }}
         />
       )}
@@ -94,42 +96,76 @@ export function Navbar() {
           >
             <LogoMark />
             <div className="flex flex-col">
-              <span className="text-base sm:text-lg font-display font-bold text-white leading-none tracking-tight">
+              <span
+                className={cn(
+                  "text-base sm:text-lg font-display font-bold leading-none tracking-tight transition-colors duration-500",
+                  isTransparent ? "text-brand-primary" : "text-white",
+                )}
+              >
                 {COMPANY.name}
               </span>
-              <span className="text-[10px] sm:text-xs text-brand-secondary font-medium tracking-wider uppercase mt-0.5">
+              <span
+                className={cn(
+                  "text-[10px] sm:text-xs font-medium tracking-wider uppercase mt-0.5 transition-colors duration-500",
+                  isTransparent ? "text-brand-secondary" : "text-brand-secondary",
+                )}
+              >
                 Logistics
               </span>
             </div>
           </Link>
 
-          <nav className="hidden lg:flex items-center gap-1 rounded-full border border-white/10 bg-white/5 backdrop-blur-md p-1.5">
-            {PUBLIC_NAV.map((item) => (
-              <Link
-                key={item.href}
-                href={item.href}
-                className={cn(
-                  "relative px-5 py-2 text-sm font-medium rounded-full transition-all duration-300",
-                  pathname === item.href
-                    ? "text-white bg-white/10 shadow-inner"
-                    : "text-white/70 hover:text-white hover:bg-white/5",
-                )}
-              >
-                {item.label}
-                {pathname === item.href && (
-                  <span className="absolute -bottom-0.5 left-1/2 -translate-x-1/2 h-1 w-1 rounded-full bg-brand-secondary" />
-                )}
-              </Link>
-            ))}
+          <nav
+            className={cn(
+              "hidden lg:flex items-center gap-1 rounded-full backdrop-blur-md p-1.5 transition-all duration-500",
+              isTransparent
+                ? "border border-brand-secondary/20 bg-white/40"
+                : "border border-white/10 bg-white/5",
+            )}
+          >
+            {PUBLIC_NAV.map((item) => {
+              const isActive = pathname === item.href
+              return (
+                <Link
+                  key={item.href}
+                  href={item.href}
+                  className={cn(
+                    "relative px-5 py-2 text-sm font-medium rounded-full transition-all duration-300",
+                    isTransparent
+                      ? isActive
+                        ? "text-brand-secondary bg-brand-secondary/15 shadow-inner"
+                        : "text-brand-secondary/80 hover:text-brand-secondary hover:bg-brand-secondary/10"
+                      : isActive
+                      ? "text-white bg-white/10 shadow-inner"
+                      : "text-white/70 hover:text-white hover:bg-white/5",
+                  )}
+                >
+                  {item.label}
+                  {isActive && (
+                    <span className="absolute -bottom-0.5 left-1/2 -translate-x-1/2 h-1 w-1 rounded-full bg-brand-secondary" />
+                  )}
+                </Link>
+              )
+            })}
           </nav>
 
           <div className="hidden lg:flex items-center gap-3">
             <a
               href={COMPANY.phoneHref}
-              className="hidden xl:flex items-center gap-2 text-sm text-white/80 hover:text-white transition-colors duration-200 group"
+              className={cn(
+                "hidden xl:flex items-center gap-2 text-sm transition-colors duration-500 group",
+                isTransparent ? "text-brand-primary hover:text-brand-secondary" : "text-white/80 hover:text-white",
+              )}
               aria-label="Call us"
             >
-              <span className="flex h-9 w-9 items-center justify-center rounded-full border border-white/10 bg-white/5 group-hover:border-brand-secondary/40 group-hover:bg-brand-secondary/10 transition-all duration-200">
+              <span
+                className={cn(
+                  "flex h-9 w-9 items-center justify-center rounded-full border transition-all duration-200",
+                  isTransparent
+                    ? "border-brand-secondary/30 bg-white/40 group-hover:border-brand-secondary group-hover:bg-brand-secondary/15"
+                    : "border-white/10 bg-white/5 group-hover:border-brand-secondary/40 group-hover:bg-brand-secondary/10",
+                )}
+              >
                 <Phone className="h-3.5 w-3.5" />
               </span>
               <span className="font-medium tabular-nums">{COMPANY.phone}</span>
@@ -156,7 +192,10 @@ export function Navbar() {
 
           <button
             onClick={() => setIsMobileOpen(!isMobileOpen)}
-            className="lg:hidden p-2 rounded-md text-white transition-colors hover:bg-white/10"
+            className={cn(
+              "lg:hidden p-2 rounded-md transition-colors",
+              isTransparent ? "text-brand-primary hover:bg-brand-secondary/10" : "text-white hover:bg-white/10",
+            )}
             aria-label={isMobileOpen ? "Close menu" : "Open menu"}
             aria-expanded={isMobileOpen}
           >
