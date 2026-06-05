@@ -1,6 +1,10 @@
 import type { Metadata } from "next"
+import { AboutHero } from "@/components/landing/about-hero"
+import { AboutStory } from "@/components/landing/about-story"
+import { AboutValues } from "@/components/landing/about-values"
 import { StatsSection } from "@/components/landing/stats-section"
 import { TrustedBySection } from "@/components/landing/trusted-by-section"
+import { AboutCTA } from "@/components/landing/about-cta"
 
 export const metadata: Metadata = {
   title: "About Us — Ship Smart Solutions",
@@ -16,8 +20,12 @@ export const metadata: Metadata = {
 export default function AboutPage() {
   return (
     <div className="pt-20">
+      <AboutHero />
+      <AboutStory />
+      <AboutValues />
       <StatsSection />
       <TrustedBySection />
+      <AboutCTA />
     </div>
   )
 }
