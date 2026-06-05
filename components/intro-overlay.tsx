@@ -2,9 +2,10 @@
 
 import { useEffect, useState } from "react"
 import { motion, AnimatePresence } from "framer-motion"
+import { Logo } from "@/components/shared/logo"
 
 const SESSION_KEY = "ship-smart-intro-seen"
-const INTRO_DURATION = 2200
+const INTRO_DURATION = 3400
 
 const brandName = "Ship Smart Solutions"
 const tagline = "Logistics"
@@ -16,11 +17,56 @@ const charVariants = {
     y: 0,
     filter: "blur(0px)",
     transition: {
-      delay: 0.4 + i * 0.025,
+      delay: 0.05 * i,
       duration: 0.5,
       ease: [0.25, 0.46, 0.45, 0.94] as [number, number, number, number],
     },
   }),
+}
+
+const overlayVariants = {
+  hidden: {
+    clipPath: "polygon(0 100%, 100% 100%, 100% 100%, 0 100%)",
+  },
+  visible: {
+    clipPath: "polygon(0 0, 100% 0, 100% 100%, 0 100%)",
+    transition: {
+      duration: 0.9,
+      ease: [0.76, 0, 0.24, 1] as [number, number, number, number],
+    },
+  },
+  exit: {
+    clipPath: "polygon(0 0, 100% 0, 100% 0, 0 0)",
+    transition: {
+      duration: 0.8,
+      ease: [0.76, 0, 0.24, 1] as [number, number, number, number],
+      delay: 0.1,
+    },
+  },
+}
+
+const contentVariants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: {
+      delayChildren: 0.9,
+      staggerChildren: 0.08,
+    },
+  },
+  exit: {
+    opacity: 0,
+    transition: { duration: 0.3 },
+  },
+}
+
+const itemVariants = {
+  hidden: { opacity: 0, y: 16 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.5, ease: [0.25, 0.46, 0.45, 0.94] as [number, number, number, number] },
+  },
 }
 
 export function IntroOverlay() {
@@ -60,8 +106,10 @@ export function IntroOverlay() {
       {show && (
         <motion.div
           key="intro"
-          initial={{ y: 0 }}
-          exit={{ y: "-100%", transition: { duration: 0.8, ease: [0.76, 0, 0.24, 1] } }}
+          variants={overlayVariants}
+          initial="hidden"
+          animate="visible"
+          exit="exit"
           className="fixed inset-0 z-[100] flex flex-col items-center justify-center overflow-hidden bg-brand-dark"
           aria-hidden="true"
         >
@@ -82,51 +130,38 @@ export function IntroOverlay() {
             }}
           />
 
-          <div className="relative z-10 flex flex-col items-center px-4">
-            <motion.div
-              initial={{ scale: 0.6, opacity: 0, rotate: -10 }}
-              animate={{ scale: 1, opacity: 1, rotate: 0 }}
-              transition={{ duration: 0.7, ease: [0.25, 0.46, 0.45, 0.94] }}
-              className="relative mb-8"
-            >
-              <div className="absolute inset-0 rounded-2xl bg-gradient-to-br from-brand-secondary to-brand-accent blur-2xl opacity-60" />
-              <div className="relative flex h-20 w-20 sm:h-24 sm:w-24 items-center justify-center rounded-2xl bg-gradient-to-br from-brand-secondary via-brand-accent to-brand-secondary shadow-2xl">
-                <svg
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  className="h-10 w-10 sm:h-12 sm:w-12 text-white"
-                  stroke="currentColor"
-                  strokeWidth="2"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                >
-                  <path d="M10 17h4V5H2v12h3" />
-                  <path d="M20 17h2v-3.34a4 4 0 0 0-1.17-2.83L19 9h-5" />
-                  <circle cx="7.5" cy="17.5" r="2.5" />
-                  <circle cx="17.5" cy="17.5" r="2.5" />
-                </svg>
+          <motion.div
+            variants={contentVariants}
+            initial="hidden"
+            animate="visible"
+            exit="exit"
+            className="relative z-10 flex flex-col items-center px-4"
+          >
+            <motion.div variants={itemVariants} className="relative mb-8">
+              <div className="absolute -inset-6 rounded-3xl bg-gradient-to-br from-brand-secondary/40 to-brand-accent/40 blur-2xl" />
+              <div className="relative">
+                <Logo variant="mark" size="xl" tone="gradient" />
               </div>
             </motion.div>
 
-            <h1 className="flex flex-wrap items-center justify-center gap-x-[1px] font-display text-2xl sm:text-3xl md:text-4xl font-bold tracking-tight text-white">
+            <motion.h1
+              variants={itemVariants}
+              className="flex flex-wrap items-center justify-center gap-x-[1px] font-display text-2xl sm:text-3xl md:text-4xl font-bold tracking-tight text-white"
+            >
               {brandName.split("").map((char, i) => (
                 <motion.span
                   key={`${char}-${i}`}
                   custom={i}
                   variants={charVariants}
-                  initial="hidden"
-                  animate="visible"
                   className={char === " " ? "w-2 sm:w-3" : ""}
                 >
                   {char === " " ? "\u00A0" : char}
                 </motion.span>
               ))}
-            </h1>
+            </motion.h1>
 
             <motion.div
-              initial={{ opacity: 0, y: 8 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.4 + brandName.length * 0.025 + 0.1, duration: 0.5 }}
+              variants={itemVariants}
               className="mt-3 flex items-center gap-2"
             >
               <span className="h-px w-6 bg-brand-secondary/60" />
@@ -135,26 +170,32 @@ export function IntroOverlay() {
               </span>
               <span className="h-px w-6 bg-brand-secondary/60" />
             </motion.div>
-          </div>
+          </motion.div>
 
-          <div className="absolute bottom-12 sm:bottom-16 left-1/2 -translate-x-1/2 w-48 sm:w-64">
+          <motion.div
+            variants={contentVariants}
+            initial="hidden"
+            animate="visible"
+            exit="exit"
+            className="absolute bottom-12 sm:bottom-16 left-1/2 -translate-x-1/2 w-48 sm:w-64"
+          >
             <div className="h-px w-full bg-white/10 overflow-hidden rounded-full">
               <motion.div
                 initial={{ width: "0%" }}
                 animate={{ width: "100%" }}
-                transition={{ duration: 1.4, ease: "easeInOut" }}
+                transition={{ duration: 1.6, ease: "easeInOut" }}
                 className="h-full bg-gradient-to-r from-brand-secondary to-brand-accent"
               />
             </div>
             <motion.p
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ delay: 0.3, duration: 0.4 }}
+              variants={itemVariants}
               className="mt-3 text-center text-[10px] font-mono uppercase tracking-widest text-gray-500"
             >
               Loading freight network
             </motion.p>
-          </div>
+          </motion.div>
+
+          <span className="sr-only">Loading {brandName} experience</span>
         </motion.div>
       )}
     </AnimatePresence>

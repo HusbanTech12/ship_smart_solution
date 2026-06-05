@@ -1,0 +1,140 @@
+"use client"
+
+import { useMemo } from "react"
+import { usePathname } from "next/navigation"
+import { Bell, Menu, Search } from "lucide-react"
+import { UserButton } from "@clerk/nextjs"
+import { cn } from "@/lib/utils"
+import { DASHBOARD_NAV } from "@/lib/constants/navigation"
+import { COMPANY } from "@/lib/constants/company"
+
+interface DashboardTopbarProps {
+  onMobileMenuClick: () => void
+}
+
+function getPageTitle(pathname: string): string {
+  const match = DASHBOARD_NAV
+    .slice()
+    .sort((a, b) => b.href.length - a.href.length)
+    .find((item) => {
+      if (item.href === "/dashboard") return pathname === "/dashboard"
+      return pathname === item.href || pathname.startsWith(`${item.href}/`)
+    })
+
+  return match?.label ?? "Dashboard"
+}
+
+function getBreadcrumbs(pathname: string): string[] {
+  const segments = pathname.split("/").filter(Boolean)
+  return segments
+}
+
+export function DashboardTopbar({ onMobileMenuClick }: DashboardTopbarProps) {
+  const pathname = usePathname()
+
+  const pageTitle = useMemo(() => getPageTitle(pathname), [pathname])
+  const breadcrumbs = useMemo(() => getBreadcrumbs(pathname), [pathname])
+
+  return (
+    <header
+      className={cn(
+        "sticky top-0 z-30 flex h-16 shrink-0 items-center gap-3 border-b border-gray-200 bg-white/85 px-4 backdrop-blur-md sm:gap-4 sm:px-6",
+      )}
+    >
+      <button
+        type="button"
+        onClick={onMobileMenuClick}
+        className="-ml-1 flex h-10 w-10 items-center justify-center rounded-lg text-brand-muted transition-colors duration-200 hover:bg-gray-100 hover:text-foreground lg:hidden"
+        aria-label="Open sidebar"
+        aria-expanded={false}
+      >
+        <Menu className="h-5 w-5" />
+      </button>
+
+      <div className="flex min-w-0 flex-1 flex-col">
+        {breadcrumbs.length > 1 && (
+          <nav
+            aria-label="Breadcrumb"
+            className="hidden text-xs text-brand-muted sm:block"
+          >
+            <ol className="flex items-center gap-1">
+              {breadcrumbs.map((segment, i) => (
+                <li
+                  key={`${segment}-${i}`}
+                  className="flex items-center gap-1 capitalize"
+                >
+                  {i > 0 && (
+                    <span aria-hidden="true" className="text-gray-300">
+                      /
+                    </span>
+                  )}
+                  <span
+                    className={cn(
+                      i === breadcrumbs.length - 1 && "text-brand-primary font-medium",
+                    )}
+                  >
+                    {segment.replace(/-/g, " ")}
+                  </span>
+                </li>
+              ))}
+            </ol>
+          </nav>
+        )}
+        <h1 className="truncate text-lg font-heading font-semibold text-foreground sm:text-xl">
+          {pageTitle}
+        </h1>
+      </div>
+
+      <div className="hidden items-center md:flex">
+        <label className="relative" aria-label="Search dashboard">
+          <Search
+            className="pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-brand-muted"
+            aria-hidden="true"
+          />
+          <input
+            type="search"
+            placeholder="Search shipments, quotes..."
+            className="h-10 w-56 rounded-lg border border-gray-200 bg-white pl-9 pr-3 text-sm text-foreground placeholder:text-brand-muted transition-colors duration-200 hover:border-brand-primary/40 focus:border-brand-primary focus:outline-none focus:ring-2 focus:ring-brand-primary/20 lg:w-64"
+          />
+        </label>
+      </div>
+
+      <button
+        type="button"
+        className="relative flex h-10 w-10 items-center justify-center rounded-lg text-brand-muted transition-colors duration-200 hover:bg-gray-100 hover:text-foreground"
+        aria-label={`Notifications from ${COMPANY.name}`}
+      >
+        <Bell className="h-5 w-5" aria-hidden="true" />
+        <span
+          className="absolute right-2.5 top-2.5 h-2 w-2 rounded-full bg-brand-secondary ring-2 ring-white"
+          aria-hidden="true"
+        />
+      </button>
+
+      <div className="flex items-center pl-1">
+        <UserButton
+          appearance={{
+            elements: {
+              avatarBox:
+                "h-9 w-9 ring-2 ring-white shadow-sm hover:ring-brand-primary/30 transition-all duration-200",
+              userButtonPopoverCard:
+                "shadow-xl border border-gray-200 rounded-xl",
+              userButtonPopoverActionButton:
+                "hover:bg-brand-primary/5 transition-colors duration-200",
+              userButtonPopoverActionButtonText: "text-foreground",
+              userButtonPopoverFooter: "hidden",
+            },
+            variables: {
+              colorPrimary: "#00264D",
+              colorText: "#0A0F1E",
+              colorTextSecondary: "#6B7280",
+              borderRadius: "0.5rem",
+              fontFamily: "var(--font-dm-sans), system-ui, sans-serif",
+            },
+          }}
+          showName={false}
+        />
+      </div>
+    </header>
+  )
+}
