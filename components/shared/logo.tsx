@@ -46,7 +46,7 @@ function LogoMark({
         className={cn(
           "absolute inset-0 rounded-[22%] blur-md opacity-40",
           isWhite
-            ? "bg-white"
+            ? "bg-brand-primary"
             : isDark
               ? "bg-brand-primary"
               : "bg-gradient-to-br from-brand-secondary to-brand-accent",
@@ -56,7 +56,7 @@ function LogoMark({
         className={cn(
           "relative flex h-full w-full items-center justify-center rounded-[22%] shadow-lg ring-1 ring-inset",
           isWhite
-            ? "bg-white ring-white/20"
+            ? "bg-brand-primary ring-brand-primary/20"
             : isDark
               ? "bg-brand-primary ring-brand-primary/20"
               : "bg-gradient-to-br from-brand-secondary via-brand-accent to-brand-secondary ring-white/20",
@@ -79,8 +79,8 @@ function LogoMark({
             >
               {isWhite ? (
                 <>
-                  <stop offset="0%" stopColor="#00264D" />
-                  <stop offset="100%" stopColor="#00264D" />
+                  <stop offset="0%" stopColor="#FFFFFF" />
+                  <stop offset="100%" stopColor="#FFFFFF" />
                 </>
               ) : isDark ? (
                 <>
@@ -107,7 +107,7 @@ function LogoMark({
             cx="29"
             cy="10.5"
             r="2.2"
-            fill={isWhite ? "#00264D" : isDark ? "#E8732A" : "#FFFFFF"}
+            fill={isWhite ? "#FFFFFF" : isDark ? "#E8732A" : "#FFFFFF"}
           />
           <circle
             cx="29"
@@ -121,7 +121,7 @@ function LogoMark({
             cx="11"
             cy="32"
             r="1.6"
-            fill={isWhite ? "#00264D" : isDark ? "#F5A623" : "#FFFFFF"}
+            fill={isWhite ? "#FFFFFF" : isDark ? "#F5A623" : "#FFFFFF"}
             opacity="0.9"
           />
         </svg>

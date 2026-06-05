@@ -4,7 +4,7 @@ import { ContactSection } from "@/components/landing/contact-section"
 export const metadata: Metadata = {
   title: "Contact Us — Ship Smart Solutions",
   description:
-    "Get a free freight quote or speak with our operations team. Call (331) 215-4701 or reach out online.",
+    "Get a free freight quote or speak with our operations team. Call +1 (832) 951-2823 or reach out online.",
   openGraph: {
     type: "website",
     url: "https://www.shipsmartsolution.com/contact",

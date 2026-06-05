@@ -15,12 +15,25 @@ import { ThemeToggle } from "@/components/ui/theme-toggle"
 
 const ADMIN_EMAILS = ["usman@elitesolutionscpa.com", "husbantech08@gmail.com"]
 
+const linkVariants = {
+  rest: { scale: 1 },
+  hover: { scale: 1.05 },
+}
+
 export function Navbar() {
+  const [isScrolled, setIsScrolled] = useState(false)
   const [isMobileOpen, setIsMobileOpen] = useState(false)
   const pathname = usePathname()
   const { user } = useUser()
   const userEmail = user?.primaryEmailAddress?.emailAddress
   const isAdmin = userEmail ? ADMIN_EMAILS.includes(userEmail) : false
+
+  useEffect(() => {
+    const onScroll = () => setIsScrolled(window.scrollY > 20)
+    window.addEventListener("scroll", onScroll, { passive: true })
+    onScroll()
+    return () => window.removeEventListener("scroll", onScroll)
+  }, [])
 
   useEffect(() => {
     if (isMobileOpen) {
@@ -36,37 +49,31 @@ export function Navbar() {
   }, [pathname])
 
   return (
-    <header
-      className={cn(
-        "fixed top-0 left-0 right-0 z-50 transition-all duration-500 ease-out",
-      )}
-    >
+    <header className="fixed top-0 left-0 right-0 z-50 transition-all duration-500">
       <div
         className={cn(
-          "absolute inset-0 transition-all duration-500 ease-out",
-          "bg-white dark:bg-brand-dark border-b border-gray-200 dark:border-gray-800",
+          "absolute inset-0 transition-all duration-500",
+          isScrolled
+            ? "bg-transparent backdrop-blur-md"
+            : "bg-transparent",
         )}
       />
 
       <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex items-center justify-between h-16 lg:h-20 py-2">
+        <div className="flex items-center justify-between h-16 lg:h-20">
           <Link
             href="/"
-            className="group flex items-center transition-opacity duration-300 hover:opacity-90"
+            className="group flex items-center shrink-0 transition-opacity hover:opacity-85"
           >
             <Logo
               variant="full"
               size="md"
-              tone="gradient"
+              tone="white"
               showTagline={false}
             />
           </Link>
 
-          <nav
-            className={cn(
-              "hidden lg:flex items-center gap-1",
-            )}
-          >
+          <nav className="hidden lg:flex items-center gap-2">
             {PUBLIC_NAV.map((item) => {
               const isActive = pathname === item.href
               return (
@@ -74,16 +81,13 @@ export function Navbar() {
                   key={item.href}
                   href={item.href}
                   className={cn(
-                    "relative px-4 py-2 text-sm font-medium transition-colors duration-200",
+                    "rounded-full border px-4 py-1.5 text-sm font-medium tracking-wide transition-all duration-200",
                     isActive
-                      ? "text-brand-primary"
-                      : "text-gray-600 hover:text-brand-primary dark:text-gray-400 dark:hover:text-white",
+                      ? "border-orange-900 bg-orange-900/10 text-orange-900"
+                      : "border-transparent text-orange-800 hover:border-orange-800/30 hover:bg-orange-900/5 hover:text-orange-900",
                   )}
                 >
                   {item.label}
-                  {isActive && (
-                    <span className="absolute bottom-0 left-1/2 -translate-x-1/2 h-0.5 w-4 rounded-full bg-brand-primary" />
-                  )}
                 </Link>
               )
             })}
@@ -91,52 +95,47 @@ export function Navbar() {
               <Link
                 href="/dashboard"
                 className={cn(
-                  "relative px-4 py-2 text-sm font-medium transition-colors duration-200",
+                  "rounded-full border px-4 py-1.5 text-sm font-medium tracking-wide transition-all duration-200",
                   pathname.startsWith("/dashboard")
-                    ? "text-brand-primary"
-                    : "text-gray-600 hover:text-brand-primary dark:text-gray-400 dark:hover:text-white",
+                    ? "border-orange-900 bg-orange-900/10 text-orange-900"
+                    : "border-transparent text-orange-800 hover:border-orange-800/30 hover:bg-orange-900/5 hover:text-orange-900",
                 )}
               >
                 Dashboard
-                {pathname.startsWith("/dashboard") && (
-                  <span className="absolute bottom-0 left-1/2 -translate-x-1/2 h-0.5 w-4 rounded-full bg-brand-primary" />
-                )}
               </Link>
             )}
           </nav>
 
-          <div className="hidden lg:flex items-center gap-3">
+          <div className="hidden lg:flex items-center gap-4">
             <ThemeToggle
-              className={cn(
-                "border-gray-200 dark:border-gray-700 text-gray-500 hover:text-brand-primary dark:text-gray-400",
-              )}
+              className="text-orange-800 hover:text-orange-900 transition-colors"
             />
 
             <Link href="/sign-in">
               <Button
                 variant="ghost"
                 size="sm"
-                className="text-gray-600 hover:text-brand-primary dark:text-gray-400 dark:hover:text-white"
+                className="text-orange-800 hover:text-orange-900 hover:bg-orange-900/10 border border-orange-800/30"
               >
                 Sign In
               </Button>
             </Link>
 
             <Link href="/contact">
-              <Button variant="primary" size="sm">
+              <Button variant="primary" size="sm" className="shadow-sm hover:shadow-md">
                 Get a Free Quote
-                <ArrowRight className="h-3.5 w-3.5 ml-1" />
+                <ArrowRight className="h-3.5 w-3.5 ml-1.5" />
               </Button>
             </Link>
           </div>
 
           <button
             onClick={() => setIsMobileOpen(!isMobileOpen)}
-            className="lg:hidden p-2 rounded-md text-gray-600 hover:text-brand-primary dark:text-gray-400 dark:hover:text-white transition-colors"
+            className="lg:hidden p-2.5 -mr-2 rounded-lg text-orange-800 hover:text-orange-900 hover:bg-orange-900/10 transition-colors"
             aria-label={isMobileOpen ? "Close menu" : "Open menu"}
             aria-expanded={isMobileOpen}
           >
-            {isMobileOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
+            {isMobileOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
           </button>
         </div>
       </div>
@@ -148,80 +147,77 @@ export function Navbar() {
             animate={{ opacity: 1, height: "100dvh" }}
             exit={{ opacity: 0, height: 0 }}
             transition={{ duration: 0.3, ease: "easeInOut" }}
-            className="lg:hidden fixed inset-x-0 top-[72px] bg-brand-dark/98 backdrop-blur-xl z-40 flex flex-col overflow-y-auto"
+            className="lg:hidden fixed inset-x-0 top-16 bg-white dark:bg-brand-dark border-t border-gray-200 dark:border-gray-800 z-40 flex flex-col"
           >
-            <div
-              className="absolute inset-0 opacity-30 pointer-events-none"
-              style={{
-                background:
-                  "radial-gradient(ellipse 80% 50% at 50% 0%, rgba(232,115,42,0.15) 0%, transparent 60%)",
-              }}
-            />
-
-            <nav className="relative flex-1 flex flex-col px-6 py-8">
-              {PUBLIC_NAV.map((item, i) => (
-                <motion.div
-                  key={item.href}
-                  initial={{ opacity: 0, x: -20 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  exit={{ opacity: 0, x: -20 }}
-                  transition={{ delay: i * 0.06, duration: 0.3 }}
-                  className="border-b border-white/5 last:border-b-0"
-                >
-                  <Link
-                    href={item.href}
-                    className={cn(
-                      "flex items-center justify-between py-5 text-2xl font-heading font-semibold transition-colors",
-                      pathname === item.href ? "text-brand-secondary" : "text-white/90 hover:text-white",
-                    )}
+            <nav className="flex-1 flex flex-col px-6 py-6 overflow-y-auto">
+              {PUBLIC_NAV.map((item, i) => {
+                const isActive = pathname === item.href
+                return (
+                  <motion.div
+                    key={item.href}
+                    initial={{ opacity: 0, y: 12 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0, y: -12 }}
+                    transition={{ delay: i * 0.05, duration: 0.25 }}
                   >
-                    {item.label}
-                    {pathname === item.href && (
-                      <span className="h-2 w-2 rounded-full bg-brand-secondary" />
-                    )}
-                  </Link>
-                </motion.div>
-              ))}
+                    <Link
+                      href={item.href}
+                      className={cn(
+                        "flex items-center justify-between py-4 text-lg font-medium border-b border-gray-100 dark:border-gray-800 transition-colors",
+                        isActive
+                          ? "text-brand-primary"
+                          : "text-gray-700 dark:text-gray-300 hover:text-brand-primary dark:hover:text-white",
+                      )}
+                    >
+                      {item.label}
+                      {isActive && (
+                        <span className="h-1.5 w-1.5 rounded-full bg-brand-primary" />
+                      )}
+                    </Link>
+                  </motion.div>
+                )
+              })}
 
               {isAdmin && (
                 <motion.div
-                  initial={{ opacity: 0, x: -20 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  transition={{ delay: PUBLIC_NAV.length * 0.06, duration: 0.3 }}
-                  className="border-b border-white/5"
+                  initial={{ opacity: 0, y: 12 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: PUBLIC_NAV.length * 0.05, duration: 0.25 }}
                 >
                   <Link
                     href="/dashboard"
                     className={cn(
-                      "flex items-center justify-between py-5 text-2xl font-heading font-semibold transition-colors",
-                      pathname.startsWith("/dashboard") ? "text-brand-secondary" : "text-white/90 hover:text-white",
+                      "flex items-center justify-between py-4 text-lg font-medium border-b border-gray-100 dark:border-gray-800 transition-colors",
+                      pathname.startsWith("/dashboard")
+                        ? "text-brand-primary"
+                        : "text-gray-700 dark:text-gray-300 hover:text-brand-primary dark:hover:text-white",
                     )}
                   >
                     Dashboard
                     {pathname.startsWith("/dashboard") && (
-                      <span className="h-2 w-2 rounded-full bg-brand-secondary" />
+                      <span className="h-1.5 w-1.5 rounded-full bg-brand-primary" />
                     )}
                   </Link>
                 </motion.div>
               )}
 
               <motion.div
-                initial={{ opacity: 0, y: 20 }}
+                initial={{ opacity: 0, y: 12 }}
                 animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: 20 }}
-                transition={{ delay: (PUBLIC_NAV.length + 1) * 0.06, duration: 0.3 }}
-                className="mt-8 space-y-4"
+                exit={{ opacity: 0, y: -12 }}
+                transition={{ delay: (PUBLIC_NAV.length + (isAdmin ? 1 : 0)) * 0.05, duration: 0.25 }}
+                className="mt-auto pt-6 space-y-3"
               >
                 <div className="flex items-center gap-3">
-                  <ThemeToggle className="shrink-0 border-white/10 bg-white/5 text-white/70 hover:bg-white/10 hover:text-white" />
+                  <ThemeToggle className="shrink-0 text-gray-500 dark:text-gray-400" />
                   <Link href="/sign-in" className="flex-1">
-                    <Button variant="outline" size="lg" className="w-full border-white/20 text-white/90 hover:bg-white/10">
+                    <Button variant="outline" size="md" className="w-full">
                       Sign In
                     </Button>
                   </Link>
                 </div>
                 <Link href="/contact" className="block">
-                  <Button variant="secondary" size="lg" className="w-full">
+                  <Button variant="primary" size="md" className="w-full shadow-sm">
                     Get a Free Quote
                     <ArrowRight className="ml-2 h-4 w-4" />
                   </Button>

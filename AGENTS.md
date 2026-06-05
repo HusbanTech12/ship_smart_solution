@@ -692,10 +692,10 @@ Never commit `.env.local`. Always add to `.gitignore`.
 export const COMPANY = {
   name: 'Ship Smart Solutions',
   tagline: 'Ship Smarter with Us',
-  phone: '(331) 215-4701',
-  phoneHref: 'tel:+13312154701',
-  email: 'operations@ship-solutions.net',
-  emailHref: 'mailto:operations@ship-solutions.net',
+  phone: '+1 (832) 951-2823',
+  phoneHref: 'tel:+18329512823',
+  email: 'usman@elitesolutionscpa.com',
+  emailHref: 'mailto:usman@elitesolutionscpa.com',
   address: '650 E Diehl Rd, Naperville IL, 60563',
   coverage: 'All 48 contiguous US states',
   stats: {
