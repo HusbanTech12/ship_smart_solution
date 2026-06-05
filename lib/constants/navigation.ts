@@ -1,8 +1,9 @@
 export const PUBLIC_NAV = [
-  { label: "Services", href: "#services" },
-  { label: "About", href: "#stats" },
-  { label: "Testimonials", href: "#testimonials" },
-  { label: "Contact", href: "#contact" },
+  { label: "Home", href: "/" },
+  { label: "Services", href: "/services" },
+  { label: "About", href: "/about" },
+  { label: "Testimonials", href: "/testimonials" },
+  { label: "Contact", href: "/contact" },
 ] as const
 
 export const DASHBOARD_NAV = [
