@@ -3,6 +3,7 @@ import { DM_Sans, Syne, Geist_Mono } from "next/font/google"
 import { ClerkProvider } from "@clerk/nextjs"
 import { ThemeProvider } from "next-themes"
 import { Toaster } from "sonner"
+import { IntroOverlay } from "@/components/intro-overlay"
 import "./globals.css"
 
 const dmSans = DM_Sans({
@@ -62,6 +63,7 @@ export default function RootLayout({
             forcedTheme="light"
             disableTransitionOnChange
           >
+            <IntroOverlay />
             {children}
             <Toaster richColors position="top-right" />
           </ThemeProvider>
