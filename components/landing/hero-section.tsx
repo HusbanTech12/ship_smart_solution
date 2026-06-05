@@ -12,8 +12,6 @@ import {
 } from "lucide-react"
 import Link from "next/link"
 import { Button } from "@/components/ui/button"
-import { AnimatedCounter } from "@/components/shared/animated-counter"
-import { COMPANY } from "@/lib/constants/company"
 
 const trustSignals = [
   "No minimums",
@@ -40,22 +38,6 @@ const truckStats = [
   { label: "ETA", value: "2h 14m" },
   { label: "Status", value: "On time" },
 ]
-
-const heroStats = [
-  { value: 99, suffix: "%+", label: "On-time delivery" },
-  { value: 500, suffix: "+", label: "Loads / month" },
-  { value: 3600, suffix: "+", label: "Assets" },
-  { value: 48, suffix: "", label: "States covered" },
-]
-
-const clientColors: Record<string, string> = {
-  Amazon: "#fb923c",
-  FedEx: "#a855f7",
-  Walmart: "#3b82f6",
-  Costco: "#ef4444",
-  "TDU Tires": "#6b7280",
-  "Moesle Meat": "#f43f5e",
-}
 
 export function HeroSection() {
   const prefersReduced = useReducedMotion()
@@ -216,28 +198,6 @@ export function HeroSection() {
                   </span>
                 ))}
               </motion.div>
-
-              <motion.div
-                initial={anim ? { opacity: 0, y: 10 } : undefined}
-                animate={anim ? { opacity: 1, y: 0 } : undefined}
-                transition={{ duration: 0.6, delay: 0.5 }}
-                className="mt-8 pt-8 border-t border-gray-200"
-              >
-                <p className="text-[10px] font-semibold uppercase tracking-widest text-brand-muted mb-3">
-                  Powering logistics for
-                </p>
-                <div className="flex flex-wrap items-center justify-center lg:justify-start gap-x-6 gap-y-2">
-                  {COMPANY.clients.map((client) => (
-                    <span
-                      key={client}
-                      className="text-sm sm:text-base font-heading font-bold tracking-tight transition-all duration-300 hover:scale-105 cursor-default"
-                      style={{ color: clientColors[client] }}
-                    >
-                      {client}
-                    </span>
-                  ))}
-                </div>
-              </motion.div>
             </div>
 
             <motion.div
@@ -368,26 +328,6 @@ export function HeroSection() {
                 </div>
               </div>
             </motion.div>
-          </div>
-        </div>
-      </div>
-
-      <div className="relative z-10 border-t border-gray-200/80 bg-gradient-to-b from-transparent to-brand-surface/50 backdrop-blur-sm">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
-          <div className="grid grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-8">
-            {heroStats.map((stat) => (
-              <div
-                key={stat.label}
-                className="text-center lg:text-left border-l-2 border-brand-secondary/30 lg:pl-4 first:border-l-0 first:pl-0"
-              >
-                <div className="text-3xl sm:text-4xl font-heading font-bold text-brand-primary">
-                  <AnimatedCounter end={stat.value} suffix={stat.suffix} />
-                </div>
-                <div className="mt-1 text-xs sm:text-sm font-medium text-brand-muted uppercase tracking-wider">
-                  {stat.label}
-                </div>
-              </div>
-            ))}
           </div>
         </div>
       </div>
