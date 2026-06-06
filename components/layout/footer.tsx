@@ -264,8 +264,8 @@ export function Footer() {
         </div>
 
         <div className="border-t border-white/5 bg-black/10">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
-            <div className="flex flex-col items-center gap-4 pt-4 border-t border-white/5">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3">
+            <div className="flex flex-col items-center gap-2">
               <p className="text-xs text-gray-500 text-center">
                 &copy; {new Date().getFullYear()} {COMPANY.name}. All rights reserved.
               </p>
