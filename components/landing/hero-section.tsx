@@ -1,6 +1,6 @@
 "use client"
 
-import { useEffect, useState } from "react"
+import { useEffect, useMemo, useState } from "react"
 import { motion, useReducedMotion } from "framer-motion"
 import {
   ArrowRight,
@@ -18,6 +18,24 @@ const trustSignals = [
   "Instant quoting",
   "24/7 support",
 ]
+
+function seededRandom(seed: number): () => number {
+  let s = seed | 0
+  return () => {
+    s = (s * 1664525 + 1013904223) | 0
+    return (s >>> 0) / 4294967296
+  }
+}
+
+const rng = seededRandom(42)
+const PARTICLES = Array.from({ length: 50 }, (_, i) => ({
+  id: i,
+  left: `${rng() * 100}%`,
+  size: rng() * 4 + 2,
+  delay: rng() * 15,
+  duration: rng() * 10 + 12,
+  drift: rng() > 0.5 ? ("particle" as const) : ("particle-drift" as const),
+}))
 
 const industries = [
   "Retail",
@@ -68,6 +86,19 @@ export function HeroSection() {
           <div className="absolute top-1/4 left-[5%] h-96 w-96 rounded-full bg-brand-secondary/15 blur-3xl animate-float" />
           <div className="absolute top-1/2 right-[10%] h-80 w-80 rounded-full bg-brand-accent/12 blur-3xl animate-float-delayed" />
           <div className="absolute bottom-1/4 left-1/3 h-96 w-96 rounded-full bg-brand-primary/5 blur-3xl animate-float-slow" />
+          {PARTICLES.map((p) => (
+            <span
+              key={p.id}
+              className="absolute rounded-full bg-brand-secondary/60"
+              style={{
+                left: p.left,
+                bottom: "-10px",
+                width: p.size,
+                height: p.size,
+                animation: `${p.drift} ${p.duration}s ${p.delay}s linear infinite`,
+              }}
+            />
+          ))}
         </>
       )}
 

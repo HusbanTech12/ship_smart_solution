@@ -8,6 +8,7 @@ import { cn } from "@/lib/utils"
 import { DASHBOARD_NAV } from "@/lib/constants/navigation"
 import { COMPANY } from "@/lib/constants/company"
 import { ThemeToggle } from "@/components/ui/theme-toggle"
+import { DashboardNavLinks } from "@/components/layout/dashboard-nav-links"
 
 interface DashboardTopbarProps {
   onMobileMenuClick: () => void
@@ -86,6 +87,8 @@ export function DashboardTopbar({ onMobileMenuClick }: DashboardTopbarProps) {
         </h1>
 
       </div>
+
+      <DashboardNavLinks />
 
       <div className="hidden items-center md:flex">
         <label className="relative" aria-label="Search dashboard">

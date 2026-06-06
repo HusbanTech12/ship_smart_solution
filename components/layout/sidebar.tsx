@@ -95,7 +95,7 @@ export function Sidebar({
             aria-label="Go to dashboard home"
           >
             <Logo
-              variant="mark"
+              variant={isCollapsed ? "mark" : "full"}
               size="md"
             />
           </Link>

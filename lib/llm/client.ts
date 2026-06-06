@@ -10,43 +10,34 @@ function getClient() {
   return new GoogleGenerativeAI(key)
 }
 
-function buildSystemInstruction(): string {
-  return [
-    "You are the Ship Smart Solutions virtual assistant.",
-    "You help clients with:",
-    "- Getting freight quotes for reefer, dry van, and flatbed loads",
-    "- Tracking shipment status",
-    "- Understanding services and capabilities",
-    "- Connecting with the operations team",
-    "",
-    "Company info:",
-    "- Phone: +1 (832) 951-2823",
-    "- Email: usman@elitesolutionscpa.com",
-    "- Address: 650 E Diehl Rd, Naperville IL, 60563",
-    "- Coverage: All 48 contiguous US states",
-    "- Services: 53' Reefers (team drivers), 53' Dry Vans (team drivers), Flatbed/Step Deck/RGN",
-    "- Stats: 99%+ on-time delivery, 500+ truckloads/month, 3,600+ assets",
-    "",
-    "Keep answers concise, professional, and logistics-focused.",
-    "If asked about something outside logistics/shipping, politely redirect.",
-    "Always offer to connect them with a human agent for complex requests.",
-  ].join("\n")
-}
+const SYSTEM_INSTRUCTION = [
+  "You are the Ship Smart Solutions virtual assistant.",
+  "You help clients with:",
+  "- Getting freight quotes for reefer, dry van, and flatbed loads",
+  "- Tracking shipment status",
+  "- Understanding services and capabilities",
+  "- Connecting with the operations team",
+  "",
+  "Company info:",
+  "- Phone: +1 (832) 951-2823",
+  "- Email: usman@elitesolutionscpa.com",
+  "- Address: 650 E Diehl Rd, Naperville IL, 60563",
+  "- Coverage: All 48 contiguous US states",
+  "- Services: 53' Reefers (team drivers), 53' Dry Vans (team drivers), Flatbed/Step Deck/RGN",
+  "- Stats: 99%+ on-time delivery, 500+ truckloads/month, 3,600+ assets",
+  "",
+  "Keep answers concise, professional, and logistics-focused.",
+  "If asked about something outside logistics/shipping, politely redirect.",
+  "Always offer to connect them with a human agent for complex requests.",
+].join("\n")
 
-function toGeminiContents(
+function toGeminiMessages(
   messages: { role: string; content: string }[],
 ): { role: "user" | "model"; parts: { text: string }[] }[] {
-  const contents: { role: "user" | "model"; parts: { text: string }[] }[] = []
-
-  for (const msg of messages) {
-    if (msg.role === "system") continue
-    contents.push({
-      role: msg.role === "assistant" ? "model" : "user",
-      parts: [{ text: msg.content }],
-    })
-  }
-
-  return contents
+  return messages.map((msg) => ({
+    role: msg.role === "assistant" ? "model" : "user",
+    parts: [{ text: msg.content }],
+  }))
 }
 
 export async function streamChat(
@@ -55,12 +46,12 @@ export async function streamChat(
   const genAI = getClient()
   const model = genAI.getGenerativeModel({
     model: MODEL,
-    systemInstruction: buildSystemInstruction(),
+    systemInstruction: SYSTEM_INSTRUCTION,
   })
 
-  const contents = toGeminiContents(messages)
-
-  const result = await model.generateContentStream({ contents })
+  const result = await model.generateContentStream({
+    contents: toGeminiMessages(messages),
+  })
 
   return new ReadableStream<Uint8Array>({
     async pull(controller) {

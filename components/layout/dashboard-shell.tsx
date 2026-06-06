@@ -4,7 +4,6 @@ import { useCallback, useEffect, useState } from "react"
 import { Sidebar } from "@/components/layout/sidebar"
 import { DashboardTopbar } from "@/components/layout/dashboard-topbar"
 import { ErrorBoundary } from "@/components/shared/error-boundary"
-import { cn } from "@/lib/utils"
 
 const COLLAPSED_STORAGE_KEY = "ship-smart-sidebar-collapsed"
 

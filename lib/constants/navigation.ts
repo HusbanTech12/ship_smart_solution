@@ -15,3 +15,10 @@ export const DASHBOARD_NAV = [
   { label: "Support", href: "/dashboard/support", icon: "MessageSquare" },
   { label: "Settings", href: "/dashboard/settings", icon: "Settings" },
 ] as const
+
+export const DASHBOARD_PUBLIC_NAV = [
+  { label: "Home", href: "/", icon: "Home" },
+  { label: "About", href: "/about", icon: "Info" },
+  { label: "Services", href: "/services", icon: "Briefcase" },
+  { label: "Contact", href: "/contact", icon: "Mail" },
+] as const
