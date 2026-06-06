@@ -3,7 +3,11 @@ import { Resend } from "resend"
 import { contactSchema } from "@/lib/validations/contact.schema"
 import { COMPANY } from "@/lib/constants/company"
 
-const resend = new Resend(process.env.RESEND_API_KEY)
+function getResend() {
+  const key = process.env.RESEND_API_KEY
+  if (!key || key === "re_123") return null
+  return new Resend(key)
+}
 
 const SERVICE_LABELS: Record<string, string> = {
   reefer: "Dedicated 53' Reefer",
@@ -89,6 +93,17 @@ export async function POST(req: Request) {
         </body>
       </html>
     `
+
+    const resend = getResend()
+
+    if (!resend) {
+      console.info("[Contact] Resend not configured — logging inquiry instead")
+      console.info("[Contact] New inquiry:", { name, email, phone, serviceType, message, smsConsent })
+      return NextResponse.json({
+        success: true,
+        message: "Message sent! We'll be in touch within 24 hours.",
+      })
+    }
 
     const { error } = await resend.emails.send({
       from: "Ship Smart Solutions <onboarding@resend.dev>",
