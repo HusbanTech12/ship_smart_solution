@@ -5,7 +5,7 @@ import { motion, AnimatePresence } from "framer-motion"
 import { Logo } from "@/components/shared/logo"
 
 const SESSION_KEY = "ship-smart-intro-seen"
-const INTRO_DURATION = 3400
+const INTRO_DURATION = 3000
 
 const brandName = "Ship Smart Solutions"
 const tagline = "Logistics"
@@ -25,23 +25,14 @@ const charVariants = {
 }
 
 const overlayVariants = {
-  hidden: {
-    clipPath: "polygon(0 100%, 100% 100%, 100% 100%, 0 100%)",
-  },
+  hidden: { opacity: 0 },
   visible: {
-    clipPath: "polygon(0 0, 100% 0, 100% 100%, 0 100%)",
-    transition: {
-      duration: 0.9,
-      ease: [0.76, 0, 0.24, 1] as [number, number, number, number],
-    },
+    opacity: 1,
+    transition: { duration: 0.5, ease: "easeOut" as const },
   },
   exit: {
-    clipPath: "polygon(0 0, 100% 0, 100% 0, 0 0)",
-    transition: {
-      duration: 0.8,
-      ease: [0.76, 0, 0.24, 1] as [number, number, number, number],
-      delay: 0.1,
-    },
+    opacity: 0,
+    transition: { duration: 0.5, ease: "easeIn" as const },
   },
 }
 
@@ -50,7 +41,7 @@ const contentVariants = {
   visible: {
     opacity: 1,
     transition: {
-      delayChildren: 0.9,
+      delayChildren: 0.5,
       staggerChildren: 0.08,
     },
   },
@@ -110,26 +101,9 @@ export function IntroOverlay() {
           initial="hidden"
           animate="visible"
           exit="exit"
-          className="fixed inset-0 z-[100] flex flex-col items-center justify-center overflow-hidden bg-brand-dark"
+          className="fixed inset-0 z-[100] flex flex-col items-center justify-center bg-black/20 backdrop-blur-xl"
           aria-hidden="true"
         >
-          <div
-            className="absolute inset-0"
-            style={{
-              background:
-                "radial-gradient(ellipse 80% 60% at 50% 50%, rgba(232,115,42,0.10) 0%, transparent 60%), radial-gradient(ellipse 60% 50% at 50% 0%, rgba(0,38,77,0.4) 0%, transparent 60%)",
-            }}
-          />
-
-          <div
-            className="absolute inset-0 opacity-[0.04]"
-            style={{
-              backgroundImage:
-                "linear-gradient(rgba(255,255,255,0.1) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.1) 1px, transparent 1px)",
-              backgroundSize: "60px 60px",
-            }}
-          />
-
           <motion.div
             variants={contentVariants}
             initial="hidden"
@@ -140,13 +114,13 @@ export function IntroOverlay() {
             <motion.div variants={itemVariants} className="relative mb-8">
               <div className="absolute -inset-6 rounded-3xl bg-gradient-to-br from-brand-secondary/40 to-brand-accent/40 blur-2xl" />
               <div className="relative">
-                <Logo variant="mark" size="xl" tone="gradient" />
+                <Logo variant="mark" size="xl" mode="gradient" />
               </div>
             </motion.div>
 
             <motion.h1
               variants={itemVariants}
-              className="flex flex-wrap items-center justify-center gap-x-[1px] font-display text-2xl sm:text-3xl md:text-4xl font-bold tracking-tight text-white"
+              className="flex flex-wrap items-center justify-center gap-x-[1px] font-display text-2xl sm:text-3xl md:text-4xl font-bold tracking-tight text-white drop-shadow-lg"
             >
               {brandName.split("").map((char, i) => (
                 <motion.span
@@ -165,34 +139,11 @@ export function IntroOverlay() {
               className="mt-3 flex items-center gap-2"
             >
               <span className="h-px w-6 bg-brand-secondary/60" />
-              <span className="text-[10px] sm:text-xs font-medium tracking-[0.3em] uppercase text-brand-secondary">
+              <span className="text-[10px] sm:text-xs font-medium tracking-[0.3em] uppercase text-brand-secondary drop-shadow-lg">
                 {tagline}
               </span>
               <span className="h-px w-6 bg-brand-secondary/60" />
             </motion.div>
-          </motion.div>
-
-          <motion.div
-            variants={contentVariants}
-            initial="hidden"
-            animate="visible"
-            exit="exit"
-            className="absolute bottom-12 sm:bottom-16 left-1/2 -translate-x-1/2 w-48 sm:w-64"
-          >
-            <div className="h-px w-full bg-white/10 overflow-hidden rounded-full">
-              <motion.div
-                initial={{ width: "0%" }}
-                animate={{ width: "100%" }}
-                transition={{ duration: 1.6, ease: "easeInOut" }}
-                className="h-full bg-gradient-to-r from-brand-secondary to-brand-accent"
-              />
-            </div>
-            <motion.p
-              variants={itemVariants}
-              className="mt-3 text-center text-[10px] font-mono uppercase tracking-widest text-gray-500"
-            >
-              Loading freight network
-            </motion.p>
           </motion.div>
 
           <span className="sr-only">Loading {brandName} experience</span>

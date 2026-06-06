@@ -1,0 +1,45 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630" fill="none">
+  <rect width="1200" height="630" fill="#1c1917"/>
+  <rect x="0" y="0" width="1200" height="630" fill="url(#bgPattern)" opacity="0.05"/>
+  <defs>
+    <linearGradient id="bgPattern" x1="0" y1="0" x2="1200" y2="630" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#F97316"/>
+      <stop offset="100%" stop-color="#FDE68A"/>
+    </linearGradient>
+    <linearGradient id="ogGlow" x1="600" y1="315" x2="600" y2="630" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#F97316" stop-opacity="0.15"/>
+      <stop offset="100%" stop-color="#F97316" stop-opacity="0"/>
+    </linearGradient>
+    <linearGradient id="smartText" x1="0" y1="0" x2="400" y2="0" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#FB923C"/>
+      <stop offset="50%" stop-color="#FDE68A"/>
+      <stop offset="100%" stop-color="#FB923C"/>
+    </linearGradient>
+  </defs>
+
+  <ellipse cx="600" cy="500" rx="500" ry="200" fill="url(#ogGlow)"/>
+
+  <g transform="translate(520, 120)">
+    <rect x="0" y="0" width="160" height="160" rx="36" fill="url(#ogBg)" stroke="#FFFFFF" stroke-opacity="0.15" stroke-width="2"/>
+    <defs>
+      <linearGradient id="ogBg" x1="0" y1="0" x2="160" y2="160" gradientUnits="userSpaceOnUse">
+        <stop offset="0%" stop-color="#F97316"/>
+        <stop offset="50%" stop-color="#FB923C"/>
+        <stop offset="100%" stop-color="#FDE68A"/>
+      </linearGradient>
+    </defs>
+    <path d="M 55 52 C 55 46 60 42 66 42 L 94 42 C 100 42 105 46 105 52 C 105 58 100 62 94 62 L 66 62 M 66 62 L 66 98 C 66 104 71 108 77 108 L 94 108 C 100 108 105 104 105 98" stroke="#FFFFFF" stroke-width="6" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+    <path d="M 48 80 L 66 80" stroke="#FFFFFF" stroke-width="4" stroke-linecap="round" stroke-opacity="0.5"/>
+    <path d="M 82 80 L 112 80" stroke="#FFFFFF" stroke-width="4" stroke-linecap="round" stroke-opacity="0.5"/>
+    <path d="M 104 74 L 114 80 L 104 86" stroke="#FFFFFF" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round" stroke-opacity="0.3"/>
+    <circle cx="114" cy="46" r="5" fill="#FFFFFF" fill-opacity="0.9"/>
+    <circle cx="114" cy="46" r="2" fill="#F97316" fill-opacity="0.9"/>
+    <circle cx="46" cy="114" r="4" fill="#FFFFFF" fill-opacity="0.7"/>
+  </g>
+
+  <text x="600" y="400" font-family="system-ui, -apple-system, sans-serif" font-size="52" font-weight="700" letter-spacing="-1" fill="#FFF7ED" text-anchor="middle">Ship</text>
+  <text x="600" y="476" font-family="system-ui, -apple-system, sans-serif" font-size="62" font-weight="800" letter-spacing="-1" fill="url(#smartText)" text-anchor="middle">Smart</text>
+  <text x="600" y="514" font-family="system-ui, -apple-system, sans-serif" font-size="18" font-weight="600" letter-spacing="5" fill="#A8A29E" text-anchor="middle" text-transform="uppercase">Professional Trucking &amp; Logistics</text>
+
+  <text x="600" y="580" font-family="system-ui, -apple-system, sans-serif" font-size="14" font-weight="400" fill="#78716C" text-anchor="middle">Reliable 53' Reefer • Dry Van • Flatbed — All 48 States</text>
+</svg>

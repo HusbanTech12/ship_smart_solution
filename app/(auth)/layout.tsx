@@ -6,21 +6,22 @@ export default function AuthLayout({
   children: React.ReactNode
 }>) {
   return (
-    <div className="relative min-h-screen w-full overflow-hidden bg-brand-surface">
+    <div className="relative min-h-screen w-full overflow-hidden bg-background">
       <div
-        className="pointer-events-none absolute inset-0 opacity-60"
+        className="pointer-events-none absolute inset-0 opacity-[0.03] dark:opacity-[0.06]"
         style={{
-          background:
-            "radial-gradient(ellipse 80% 50% at 50% 0%, rgba(232,115,42,0.10) 0%, transparent 60%), radial-gradient(ellipse 60% 50% at 50% 100%, rgba(0,38,77,0.06) 0%, transparent 60%)",
+          backgroundImage:
+            "radial-gradient(circle at 1px 1px, rgba(249,115,22,0.5) 1px, transparent 0)",
+          backgroundSize: "32px 32px",
         }}
         aria-hidden="true"
       />
+
       <div
-        className="pointer-events-none absolute inset-0 opacity-[0.04]"
+        className="pointer-events-none absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-3xl aspect-square rounded-full opacity-[0.08] dark:opacity-[0.05]"
         style={{
-          backgroundImage:
-            "linear-gradient(rgba(0,38,77,0.4) 1px, transparent 1px), linear-gradient(90deg, rgba(0,38,77,0.4) 1px, transparent 1px)",
-          backgroundSize: "48px 48px",
+          background:
+            "radial-gradient(ellipse, #f97316 0%, transparent 70%)",
         }}
         aria-hidden="true"
       />
@@ -40,7 +41,6 @@ export default function AuthLayout({
           <Logo
             variant="full"
             size="lg"
-            tone="gradient"
             showTagline
           />
         </div>

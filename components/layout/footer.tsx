@@ -1,7 +1,7 @@
 "use client"
 
 import { useState } from "react"
-import { ArrowRight, Phone, Mail, MapPin, ShieldCheck, BadgeCheck, Lock, FileCheck, Send } from "lucide-react"
+import { ArrowRight, Phone, Mail, MapPin, Send } from "lucide-react"
 import Link from "next/link"
 import { toast } from "sonner"
 import { COMPANY } from "@/lib/constants/company"
@@ -59,12 +59,6 @@ const socialLinks = [
   { Icon: YoutubeIcon, label: "YouTube", href: "https://youtube.com" },
 ] as const
 
-const trustBadges = [
-  { icon: ShieldCheck, label: "DOT Certified", value: "DOT #1234567" },
-  { icon: BadgeCheck, label: "MC Authority", value: "MC #7654321" },
-  { icon: Lock, label: "Fully Insured", value: "$1.5M Coverage" },
-  { icon: FileCheck, label: "Bonded Carrier", value: "Licensed & Bonded" },
-] as const
 
 export function Footer() {
   const [email, setEmail] = useState("")
@@ -86,7 +80,7 @@ export function Footer() {
   }
 
   return (
-    <footer className="relative bg-gray-950 dark:bg-black text-white">
+    <footer className="relative bg-brand-dark text-white">
       <div
         className="absolute inset-0 opacity-[0.03]"
         style={{
@@ -102,10 +96,9 @@ export function Footer() {
             <div className="lg:col-span-4 space-y-6">
               <div className="space-y-4">
                 <Logo
-                  variant="full"
-                  size="md"
-                  tone="white"
-                  showTagline={true}
+                  variant="mark"
+                  size="lg"
+                  mode="white"
                 />
 
                 <p className="text-sm text-gray-400 leading-relaxed max-w-sm">
@@ -270,54 +263,12 @@ export function Footer() {
           </div>
         </div>
 
-        <div className="border-t border-white/5 bg-black/20">
+        <div className="border-t border-white/5 bg-black/10">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-3 mb-6">
-              {trustBadges.map((badge) => {
-                const Icon = badge.icon
-                return (
-                  <div
-                    key={badge.label}
-                    className="group flex items-center gap-3 rounded-lg border border-white/5 bg-white/[0.02] px-3 py-2.5 transition-all duration-200 hover:border-brand-secondary/20 hover:bg-white/[0.04]"
-                  >
-                    <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-md bg-brand-secondary/10 text-brand-secondary group-hover:bg-brand-secondary/20 transition-colors">
-                      <Icon className="h-4 w-4" />
-                    </span>
-                    <div className="min-w-0">
-                      <div className="text-[10px] uppercase tracking-wider text-gray-500 font-semibold">
-                        {badge.label}
-                      </div>
-                      <div className="text-xs font-semibold text-white truncate">
-                        {badge.value}
-                      </div>
-                    </div>
-                  </div>
-                )
-              })}
-            </div>
-
-            <div className="flex flex-col sm:flex-row items-center justify-between gap-4 pt-4 border-t border-white/5">
-              <p className="text-xs text-gray-500">
+            <div className="flex flex-col items-center gap-4 pt-4 border-t border-white/5">
+              <p className="text-xs text-gray-500 text-center">
                 &copy; {new Date().getFullYear()} {COMPANY.name}. All rights reserved.
               </p>
-              <div className="flex flex-wrap items-center justify-center gap-x-6 gap-y-2 text-xs text-gray-500">
-                <a href="#" className="hover:text-white transition-colors">
-                  Privacy Policy
-                </a>
-                <a href="#" className="hover:text-white transition-colors">
-                  SMS Terms
-                </a>
-                <a href="#" className="hover:text-white transition-colors">
-                  Cookie Policy
-                </a>
-                <Link
-                  href="/contact"
-                  className="inline-flex items-center gap-1 text-brand-secondary font-semibold hover:text-brand-accent transition-colors group"
-                >
-                  Get a free quote
-                  <ArrowRight className="h-3 w-3 transition-transform duration-200 group-hover:translate-x-0.5" />
-                </Link>
-              </div>
             </div>
           </div>
         </div>

@@ -1,17 +1,21 @@
 "use client"
 
-import { useId } from "react"
+import Image from "next/image"
+import { useTheme } from "next-themes"
+import { useEffect, useState } from "react"
 import { cn } from "@/lib/utils"
 
 type LogoVariant = "mark" | "wordmark" | "full"
 type LogoSize = "sm" | "md" | "lg" | "xl"
+type LogoMode = "auto" | "gradient" | "white" | "dark"
 
 type LogoProps = {
   variant?: LogoVariant
   size?: LogoSize
   className?: string
   showTagline?: boolean
-  tone?: "gradient" | "white" | "dark"
+  mode?: LogoMode
+  forceTheme?: "light" | "dark"
 }
 
 const sizeMap = {
@@ -20,6 +24,22 @@ const sizeMap = {
   lg: { mark: 44, gap: "gap-3", wordTitle: "text-2xl", wordSub: "text-[11px]" },
   xl: { mark: 64, gap: "gap-4", wordTitle: "text-4xl", wordSub: "text-sm" },
 } as const
+
+function useResolvedTone(mode: LogoMode, forcedTheme?: "light" | "dark") {
+  const { resolvedTheme } = useTheme()
+  const [tone, setTone] = useState<"gradient" | "white" | "dark">("gradient")
+
+  useEffect(() => {
+    const theme = forcedTheme ?? resolvedTheme
+    if (mode !== "auto") {
+      setTone(mode)
+      return
+    }
+    setTone(theme === "dark" ? "white" : "dark")
+  }, [mode, resolvedTheme, forcedTheme])
+
+  return tone
+}
 
 function LogoMark({
   size = 40,
@@ -30,102 +50,36 @@ function LogoMark({
   className?: string
   tone?: "gradient" | "white" | "dark"
 }) {
-  const reactId = useId()
-  const id = `ship-smart-logo-${size}-${tone}-${reactId}`
-
-  const isWhite = tone === "white"
-  const isDark = tone === "dark"
+  const src =
+    tone === "white" || tone === "dark"
+      ? "/logo-mark-white.svg"
+      : "/logo-mark.svg"
 
   return (
     <div
       className={cn("relative shrink-0", className)}
       style={{ width: size, height: size }}
-      aria-hidden="true"
     >
-      <div
-        className={cn(
-          "absolute inset-0 rounded-[22%] blur-md opacity-40",
-          isWhite
-            ? "bg-brand-primary"
-            : isDark
-              ? "bg-brand-primary"
-              : "bg-gradient-to-br from-brand-secondary to-brand-accent",
-        )}
+      {tone !== "dark" && (
+        <div
+          className="absolute -inset-1 rounded-[22%] blur-md opacity-30"
+          style={{
+            background:
+              tone === "white"
+                ? "#F97316"
+                : "linear-gradient(135deg, #FB923C, #FDE68A)",
+          }}
+        />
+      )}
+      <Image
+        src={src}
+        alt="Ship Smart Solutions"
+        width={size}
+        height={size}
+        className="h-full w-full"
+        unoptimized
+        priority
       />
-      <div
-        className={cn(
-          "relative flex h-full w-full items-center justify-center rounded-[22%] shadow-lg ring-1 ring-inset",
-          isWhite
-            ? "bg-brand-primary ring-brand-primary/20"
-            : isDark
-              ? "bg-brand-primary ring-brand-primary/20"
-              : "bg-gradient-to-br from-brand-secondary via-brand-accent to-brand-secondary ring-white/20",
-        )}
-      >
-        <svg
-          viewBox="0 0 40 40"
-          fill="none"
-          className="h-[60%] w-[60%]"
-          xmlns="http://www.w3.org/2000/svg"
-        >
-          <defs>
-            <linearGradient
-              id={`${id}-sgrad`}
-              x1="0"
-              y1="0"
-              x2="40"
-              y2="40"
-              gradientUnits="userSpaceOnUse"
-            >
-              {isWhite ? (
-                <>
-                  <stop offset="0%" stopColor="#FFFFFF" />
-                  <stop offset="100%" stopColor="#FFFFFF" />
-                </>
-              ) : isDark ? (
-                <>
-                  <stop offset="0%" stopColor="#E8732A" />
-                  <stop offset="100%" stopColor="#F5A623" />
-                </>
-              ) : (
-                <>
-                  <stop offset="0%" stopColor="#FFFFFF" stopOpacity="0.95" />
-                  <stop offset="100%" stopColor="#FFFFFF" stopOpacity="0.85" />
-                </>
-              )}
-            </linearGradient>
-          </defs>
-
-          <path
-            d="M11 13.5C11 10.4624 13.4624 8 16.5 8H22C25.866 8 29 11.134 29 15C29 18.866 25.866 22 22 22H18C15.2386 22 13 24.2386 13 27C13 29.7614 15.2386 32 18 32H25"
-            stroke={`url(#${id}-sgrad)`}
-            strokeWidth="3.4"
-            strokeLinecap="round"
-          />
-
-          <circle
-            cx="29"
-            cy="10.5"
-            r="2.2"
-            fill={isWhite ? "#FFFFFF" : isDark ? "#E8732A" : "#FFFFFF"}
-          />
-          <circle
-            cx="29"
-            cy="10.5"
-            r="1"
-            fill={isWhite ? "#FFFFFF" : "#00264D"}
-            opacity={isWhite ? 0.9 : 1}
-          />
-
-          <circle
-            cx="11"
-            cy="32"
-            r="1.6"
-            fill={isWhite ? "#FFFFFF" : isDark ? "#F5A623" : "#FFFFFF"}
-            opacity="0.9"
-          />
-        </svg>
-      </div>
     </div>
   )
 }
@@ -154,9 +108,7 @@ function Wordmark({
           cfg.wordTitle,
           isWhite
             ? "text-white"
-            : isDark
-              ? "text-brand-primary"
-              : "text-brand-primary",
+            : "text-brand-primary",
         )}
       >
         <span>Ship </span>
@@ -191,8 +143,10 @@ export function Logo({
   size = "md",
   className,
   showTagline = true,
-  tone = "gradient",
+  mode = "auto",
+  forceTheme,
 }: LogoProps) {
+  const tone = useResolvedTone(mode, forceTheme)
   const cfg = sizeMap[size]
 
   if (variant === "mark") {

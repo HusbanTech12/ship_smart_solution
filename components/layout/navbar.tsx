@@ -9,11 +9,10 @@ import { useUser } from "@clerk/nextjs"
 import { cn } from "@/lib/utils"
 import { COMPANY } from "@/lib/constants/company"
 import { PUBLIC_NAV } from "@/lib/constants/navigation"
+import { ADMIN_EMAILS } from "@/lib/constants/admins"
 import { Button } from "@/components/ui/button"
 import { Logo } from "@/components/shared/logo"
 import { ThemeToggle } from "@/components/ui/theme-toggle"
-
-const ADMIN_EMAILS = ["usman@elitesolutionscpa.com", "husbantech08@gmail.com"]
 
 const linkVariants = {
   rest: { scale: 1 },
@@ -66,10 +65,8 @@ export function Navbar() {
             className="group flex items-center shrink-0 transition-opacity hover:opacity-85"
           >
             <Logo
-              variant="full"
+              variant="mark"
               size="md"
-              tone="white"
-              showTagline={false}
             />
           </Link>
 

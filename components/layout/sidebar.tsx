@@ -95,10 +95,8 @@ export function Sidebar({
             aria-label="Go to dashboard home"
           >
             <Logo
-              variant={isCollapsed ? "mark" : "full"}
+              variant="mark"
               size="md"
-              tone="gradient"
-              showTagline={!isCollapsed}
             />
           </Link>
           <button

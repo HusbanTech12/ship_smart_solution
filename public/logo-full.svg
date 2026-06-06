@@ -1,0 +1,50 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 120" fill="none">
+  <defs>
+    <linearGradient id="logoBgGrad" x1="0" y1="0" x2="120" y2="120" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#F97316"/>
+      <stop offset="50%" stop-color="#FB923C"/>
+      <stop offset="100%" stop-color="#FDE68A"/>
+    </linearGradient>
+    <linearGradient id="logoGlowGrad" x1="0" y1="0" x2="120" y2="120" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#F97316" stop-opacity="0.4"/>
+      <stop offset="100%" stop-color="#FDE68A" stop-opacity="0.1"/>
+    </linearGradient>
+    <linearGradient id="sStrokesGrad" x1="0" y1="0" x2="120" y2="120" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#FFFFFF" stop-opacity="0.95"/>
+      <stop offset="100%" stop-color="#FFFFFF" stop-opacity="0.7"/>
+    </linearGradient>
+    <linearGradient id="smartGrad" x1="0" y1="0" x2="160" y2="0" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#FB923C"/>
+      <stop offset="50%" stop-color="#FDE68A"/>
+      <stop offset="100%" stop-color="#FB923C"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Logo mark (same as mark SVG) -->
+  <g transform="translate(0, 0)">
+    <rect x="6" y="6" width="108" height="108" rx="26" fill="url(#logoGlowGrad)" opacity="0.5"/>
+    <rect x="10" y="10" width="100" height="100" rx="22" fill="url(#logoBgGrad)" stroke="#FFFFFF" stroke-width="2.5" stroke-opacity="0.2"/>
+    <rect x="14" y="14" width="92" height="92" rx="18" fill="none" stroke="#FFFFFF" stroke-width="0.8" stroke-opacity="0.15"/>
+    <path d="M 40 38 C 40 33 44 29 49 29 L 71 29 C 76 29 80 33 80 38 C 80 43 76 47 71 47 L 49 47 M 49 47 L 49 73 C 49 78 53 82 58 82 L 71 82 C 76 82 80 78 80 73" stroke="url(#sStrokesGrad)" stroke-width="5.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+    <path d="M 36 60 L 50 60" stroke="#FFFFFF" stroke-width="3.5" stroke-linecap="round" stroke-opacity="0.6"/>
+    <path d="M 62 60 L 84 60" stroke="#FFFFFF" stroke-width="3.5" stroke-linecap="round" stroke-opacity="0.6"/>
+    <path d="M 78 55 L 86 60 L 78 65" stroke="#FFFFFF" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" stroke-opacity="0.4"/>
+    <circle cx="86" cy="34" r="4" fill="#FFFFFF" fill-opacity="0.9"/>
+    <circle cx="86" cy="34" r="1.8" fill="#F97316" fill-opacity="0.9"/>
+    <circle cx="34" cy="86" r="3.5" fill="#FFFFFF" fill-opacity="0.8"/>
+  </g>
+
+  <!-- Wordmark -->
+  <g transform="translate(140, 26)">
+    <!-- Ship -->
+    <text x="0" y="36" font-family="system-ui, -apple-system, sans-serif" font-size="36" font-weight="700" letter-spacing="-0.5" fill="#292524">Ship</text>
+
+    <!-- Smart (gradient) -->
+    <text x="0" y="76" font-family="system-ui, -apple-system, sans-serif" font-size="42" font-weight="800" letter-spacing="-0.5">
+      <tspan fill="url(#smartGrad)">Smart</tspan>
+    </text>
+
+    <!-- Solutions -->
+    <text x="2" y="94" font-family="system-ui, -apple-system, sans-serif" font-size="11" font-weight="600" letter-spacing="3" fill="#78716C" text-transform="uppercase">Solutions</text>
+  </g>
+</svg>

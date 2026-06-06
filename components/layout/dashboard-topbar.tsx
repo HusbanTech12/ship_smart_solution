@@ -3,10 +3,10 @@
 import { useMemo } from "react"
 import Link from "next/link"
 import { usePathname } from "next/navigation"
-import { Bell, Menu, Search, Globe } from "lucide-react"
+import { Bell, Menu, Search } from "lucide-react"
 import { UserButton } from "@clerk/nextjs"
 import { cn } from "@/lib/utils"
-import { DASHBOARD_NAV, PUBLIC_NAV } from "@/lib/constants/navigation"
+import { DASHBOARD_NAV } from "@/lib/constants/navigation"
 import { COMPANY } from "@/lib/constants/company"
 import { ThemeToggle } from "@/components/ui/theme-toggle"
 
@@ -85,10 +85,9 @@ export function DashboardTopbar({ onMobileMenuClick }: DashboardTopbarProps) {
         <h1 className="truncate text-lg font-heading font-semibold text-foreground sm:text-xl">
           {pageTitle}
         </h1>
-        <nav className="hidden md:flex items-center gap-1.5 mt-1.5">
-          <Globe className="h-3 w-3 text-brand-muted shrink-0" aria-hidden="true" />
-          {PUBLIC_NAV.map((item) => {
-            const isActive = pathname === item.href
+        <nav className="hidden sm:flex items-center gap-1.5 mt-1.5">
+          {DASHBOARD_NAV.map((item) => {
+            const isActive = pathname === item.href || pathname.startsWith(`${item.href}/`)
             return (
               <Link
                 key={item.href}

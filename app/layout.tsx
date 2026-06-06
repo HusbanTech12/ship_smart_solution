@@ -29,10 +29,25 @@ export const metadata: Metadata = {
   title: "Ship Smart Solutions — Professional Trucking Services",
   description:
     "Reliable 53' reefer, dry van, and flatbed services across all 48 states. 99%+ on-time delivery. 500+ truckloads/month.",
+  icons: {
+    icon: "/favicon.svg",
+    shortcut: "/favicon.svg",
+  },
   openGraph: {
     type: "website",
     url: "https://www.shipsmartsolution.com",
-    images: [{ url: "/og-image.jpg", width: 1200, height: 630 }],
+    siteName: "Ship Smart Solutions",
+    title: "Ship Smart Solutions — Professional Trucking Services",
+    description:
+      "Reliable 53' reefer, dry van, and flatbed services across all 48 states. 99%+ on-time delivery. 500+ truckloads/month.",
+    images: [{ url: "/og-image.svg", width: 1200, height: 630 }],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Ship Smart Solutions — Professional Trucking Services",
+    description:
+      "Reliable 53' reefer, dry van, and flatbed services across all 48 states. 99%+ on-time delivery. 500+ truckloads/month.",
+    images: ["/og-image.svg"],
   },
   keywords: [
     "trucking",
