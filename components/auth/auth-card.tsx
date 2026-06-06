@@ -38,6 +38,7 @@ const sharedAppearance = {
     footerPagesLink: "text-brand-muted hover:text-brand-primary",
     logoBox: "hidden",
     clerkBadge: "hidden",
+    internallyClerkDevBadge: "hidden",
   } as const,
   layout: {
     socialButtonsPlacement: "top" as const,

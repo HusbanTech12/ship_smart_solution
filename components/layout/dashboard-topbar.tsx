@@ -1,7 +1,6 @@
 "use client"
 
 import { useMemo } from "react"
-import Link from "next/link"
 import { usePathname } from "next/navigation"
 import { Bell, Menu, Search } from "lucide-react"
 import { UserButton } from "@clerk/nextjs"
@@ -85,25 +84,7 @@ export function DashboardTopbar({ onMobileMenuClick }: DashboardTopbarProps) {
         <h1 className="truncate text-lg font-heading font-semibold text-foreground sm:text-xl">
           {pageTitle}
         </h1>
-        <nav className="hidden sm:flex items-center gap-1.5 mt-1.5">
-          {DASHBOARD_NAV.map((item) => {
-            const isActive = pathname === item.href || pathname.startsWith(`${item.href}/`)
-            return (
-              <Link
-                key={item.href}
-                href={item.href}
-                className={cn(
-                  "rounded-full border px-2.5 py-0.5 text-[11px] font-medium tracking-wide transition-all duration-200",
-                  isActive
-                    ? "border-brand-primary bg-brand-primary/10 text-brand-primary"
-                    : "border-transparent text-brand-muted hover:border-brand-primary/30 hover:bg-brand-primary/5 hover:text-brand-primary",
-                )}
-              >
-                {item.label}
-              </Link>
-            )
-          })}
-        </nav>
+
       </div>
 
       <div className="hidden items-center md:flex">
