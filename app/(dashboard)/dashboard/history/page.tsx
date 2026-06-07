@@ -20,7 +20,7 @@ export default async function HistoryPage() {
         title="Shipment History"
         description="Search, filter, and export records of your completed deliveries."
       />
-      <div className="rounded-xl border border-dashed border-gray-300 bg-white p-10 text-center shadow-sm">
+      <div className="rounded-xl border border-dashed border-border bg-card p-10 text-center shadow-sm">
         <div className="mx-auto flex h-12 w-12 items-center justify-center rounded-full bg-brand-primary/10 text-brand-primary">
           <Clock className="h-6 w-6" aria-hidden="true" />
         </div>

@@ -95,7 +95,7 @@ export function ChatWidget() {
     <>
       <button
         onClick={toggleChat}
-        className="fixed bottom-6 right-6 z-50 flex h-14 w-14 items-center justify-center rounded-full bg-brand-secondary text-white shadow-lg transition-all duration-200 ease-out hover:brightness-110 hover:scale-105 active:scale-95 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-secondary focus-visible:ring-offset-2"
+        className="fixed bottom-4 right-4 sm:bottom-6 sm:right-6 z-50 flex h-12 w-12 sm:h-14 sm:w-14 items-center justify-center rounded-full bg-brand-secondary text-white shadow-lg transition-all duration-200 ease-out hover:brightness-110 hover:scale-105 active:scale-95 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-secondary focus-visible:ring-offset-2"
         aria-label={isOpen ? "Close chat" : "Open chat"}
       >
         {isOpen ? (
@@ -106,10 +106,18 @@ export function ChatWidget() {
       </button>
 
       {!isOpen && messages.length > 0 && (
-        <span className="fixed bottom-24 right-8 z-50 flex h-3 w-3">
+        <span className="fixed bottom-[4.5rem] right-[1.125rem] sm:bottom-[6.5rem] sm:right-[1.625rem] z-50 flex h-3 w-3">
           <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-brand-secondary opacity-75" />
           <span className="relative inline-flex h-3 w-3 rounded-full bg-brand-secondary" />
         </span>
+      )}
+
+      {isOpen && (
+        <div
+          className="fixed inset-0 z-40 bg-black/20 backdrop-blur-sm sm:hidden"
+          aria-hidden="true"
+          onClick={toggleChat}
+        />
       )}
 
       <AnimatePresence>
@@ -120,8 +128,11 @@ export function ChatWidget() {
             initial="hidden"
             animate="visible"
             exit="exit"
-            className="fixed bottom-24 right-6 z-50 flex w-[380px] flex-col overflow-hidden rounded-2xl border border-border bg-card shadow-2xl"
-            style={{ height: "520px", maxHeight: "calc(100vh - 120px)" }}
+            className="fixed z-50 flex flex-col overflow-hidden border border-border bg-card shadow-2xl
+                       inset-x-0 bottom-0 sm:inset-x-auto sm:bottom-24 sm:right-6
+                       rounded-t-2xl sm:rounded-2xl
+                       w-full sm:w-[380px]"
+            style={{ height: "calc(100dvh - 80px)", maxHeight: "100dvh", minHeight: "300px" }}
           >
             <div className="flex items-center justify-between border-b border-border bg-brand-primary px-4 py-3 text-white">
               <div className="flex items-center gap-2">

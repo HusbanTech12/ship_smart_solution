@@ -4,6 +4,7 @@ import { useCallback, useEffect, useState } from "react"
 import { Sidebar } from "@/components/layout/sidebar"
 import { DashboardTopbar } from "@/components/layout/dashboard-topbar"
 import { ErrorBoundary } from "@/components/shared/error-boundary"
+import { useHydrated } from "@/hooks/useHydrated"
 
 const COLLAPSED_STORAGE_KEY = "ship-smart-sidebar-collapsed"
 
@@ -12,19 +13,16 @@ interface DashboardShellProps {
 }
 
 export function DashboardShell({ children }: DashboardShellProps) {
-  const [isCollapsed, setIsCollapsed] = useState(false)
-  const [isMobileOpen, setIsMobileOpen] = useState(false)
-  const [hydrated, setHydrated] = useState(false)
-
-  useEffect(() => {
+  const [isCollapsed, setIsCollapsed] = useState(() => {
+    if (typeof window === "undefined") return false
     try {
-      const stored = window.localStorage.getItem(COLLAPSED_STORAGE_KEY)
-      if (stored === "true") setIsCollapsed(true)
+      return window.localStorage.getItem(COLLAPSED_STORAGE_KEY) === "true"
     } catch {
-      /* noop */
+      return false
     }
-    setHydrated(true)
-  }, [])
+  })
+  const [isMobileOpen, setIsMobileOpen] = useState(false)
+  const hydrated = useHydrated()
 
   useEffect(() => {
     if (!hydrated) return

@@ -21,7 +21,7 @@ export default async function QuotePage() {
         title="Get a Quote"
         description="Tell us about your freight needs and we'll get back to you within 30 minutes."
       />
-      <div className="rounded-xl border border-dashed border-gray-300 bg-white p-10 text-center shadow-sm">
+      <div className="rounded-xl border border-dashed border-border bg-card p-10 text-center shadow-sm">
         <div className="mx-auto flex h-12 w-12 items-center justify-center rounded-full bg-brand-secondary/10 text-brand-secondary">
           <FileText className="h-6 w-6" aria-hidden="true" />
         </div>

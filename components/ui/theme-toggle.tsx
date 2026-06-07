@@ -1,9 +1,9 @@
 "use client"
 
 import { useTheme } from "next-themes"
-import { useEffect, useState } from "react"
 import { Sun, Moon } from "lucide-react"
 import { cn } from "@/lib/utils"
+import { useHydrated } from "@/hooks/useHydrated"
 
 interface ThemeToggleProps {
   className?: string
@@ -11,9 +11,7 @@ interface ThemeToggleProps {
 
 export function ThemeToggle({ className }: ThemeToggleProps) {
   const { theme, setTheme, resolvedTheme } = useTheme()
-  const [mounted, setMounted] = useState(false)
-
-  useEffect(() => setMounted(true), [])
+  const mounted = useHydrated()
 
   if (!mounted) {
     return (

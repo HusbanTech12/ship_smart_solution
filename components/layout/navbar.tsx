@@ -7,17 +7,11 @@ import Link from "next/link"
 import { usePathname } from "next/navigation"
 import { useUser } from "@clerk/nextjs"
 import { cn } from "@/lib/utils"
-import { COMPANY } from "@/lib/constants/company"
 import { PUBLIC_NAV } from "@/lib/constants/navigation"
 import { ADMIN_EMAILS } from "@/lib/constants/admins"
 import { Button } from "@/components/ui/button"
 import { Logo } from "@/components/shared/logo"
 import { ThemeToggle } from "@/components/ui/theme-toggle"
-
-const linkVariants = {
-  rest: { scale: 1 },
-  hover: { scale: 1.05 },
-}
 
 export function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false)
@@ -42,10 +36,6 @@ export function Navbar() {
     }
     return () => { document.body.style.overflow = "" }
   }, [isMobileOpen])
-
-  useEffect(() => {
-    setIsMobileOpen(false)
-  }, [pathname])
 
   return (
     <header className="fixed top-0 left-0 right-0 z-50 transition-all duration-500">
@@ -80,8 +70,8 @@ export function Navbar() {
                   className={cn(
                     "rounded-full border px-4 py-1.5 text-sm font-medium tracking-wide transition-all duration-200",
                     isActive
-                      ? "border-orange-900 bg-orange-900/10 text-orange-900"
-                      : "border-transparent text-orange-800 hover:border-orange-800/30 hover:bg-orange-900/5 hover:text-orange-900",
+                      ? "border-brand-primary bg-brand-primary/10 text-brand-primary dark:text-foreground"
+                      : "border-transparent text-foreground/70 hover:border-brand-primary/30 hover:bg-brand-primary/5 hover:text-brand-primary dark:hover:text-foreground",
                   )}
                 >
                   {item.label}
@@ -92,10 +82,10 @@ export function Navbar() {
               <Link
                 href="/dashboard"
                 className={cn(
-                  "rounded-full border px-4 py-1.5 text-sm font-medium tracking-wide transition-all duration-200",
-                  pathname.startsWith("/dashboard")
-                    ? "border-orange-900 bg-orange-900/10 text-orange-900"
-                    : "border-transparent text-orange-800 hover:border-orange-800/30 hover:bg-orange-900/5 hover:text-orange-900",
+                    "rounded-full border px-4 py-1.5 text-sm font-medium tracking-wide transition-all duration-200",
+                    pathname.startsWith("/dashboard")
+                      ? "border-brand-primary bg-brand-primary/10 text-brand-primary dark:text-foreground"
+                      : "border-transparent text-foreground/70 hover:border-brand-primary/30 hover:bg-brand-primary/5 hover:text-brand-primary dark:hover:text-foreground",
                 )}
               >
                 Dashboard
@@ -104,15 +94,12 @@ export function Navbar() {
           </nav>
 
           <div className="hidden lg:flex items-center gap-4">
-            <ThemeToggle
-              className="text-orange-800 hover:text-orange-900 transition-colors"
-            />
+            <ThemeToggle />
 
             <Link href="/sign-in">
               <Button
                 variant="ghost"
                 size="sm"
-                className="text-orange-800 hover:text-orange-900 hover:bg-orange-900/10 border border-orange-800/30"
               >
                 Sign In
               </Button>
@@ -128,7 +115,7 @@ export function Navbar() {
 
           <button
             onClick={() => setIsMobileOpen(!isMobileOpen)}
-            className="lg:hidden p-2.5 -mr-2 rounded-lg text-orange-800 hover:text-orange-900 hover:bg-orange-900/10 transition-colors"
+            className="lg:hidden p-2.5 -mr-2 rounded-lg text-foreground/70 hover:text-foreground hover:bg-brand-primary/5 transition-colors"
             aria-label={isMobileOpen ? "Close menu" : "Open menu"}
             aria-expanded={isMobileOpen}
           >
@@ -140,11 +127,12 @@ export function Navbar() {
       <AnimatePresence>
         {isMobileOpen && (
           <motion.div
+            key={pathname}
             initial={{ opacity: 0, height: 0 }}
             animate={{ opacity: 1, height: "100dvh" }}
             exit={{ opacity: 0, height: 0 }}
             transition={{ duration: 0.3, ease: "easeInOut" }}
-            className="lg:hidden fixed inset-x-0 top-16 bg-white dark:bg-brand-dark border-t border-gray-200 dark:border-gray-800 z-40 flex flex-col"
+            className="lg:hidden fixed inset-x-0 top-16 bg-background border-t border-border z-40 flex flex-col"
           >
             <nav className="flex-1 flex flex-col px-6 py-6 overflow-y-auto">
               {PUBLIC_NAV.map((item, i) => {
@@ -160,10 +148,10 @@ export function Navbar() {
                     <Link
                       href={item.href}
                       className={cn(
-                        "flex items-center justify-between py-4 text-lg font-medium border-b border-gray-100 dark:border-gray-800 transition-colors",
+                        "flex items-center justify-between py-4 text-lg font-medium border-b border-border transition-colors",
                         isActive
                           ? "text-brand-primary"
-                          : "text-gray-700 dark:text-gray-300 hover:text-brand-primary dark:hover:text-white",
+                          : "text-foreground/70 hover:text-brand-primary dark:hover:text-foreground",
                       )}
                     >
                       {item.label}
@@ -184,10 +172,10 @@ export function Navbar() {
                   <Link
                     href="/dashboard"
                     className={cn(
-                      "flex items-center justify-between py-4 text-lg font-medium border-b border-gray-100 dark:border-gray-800 transition-colors",
+                      "flex items-center justify-between py-4 text-lg font-medium border-b border-border transition-colors",
                       pathname.startsWith("/dashboard")
                         ? "text-brand-primary"
-                        : "text-gray-700 dark:text-gray-300 hover:text-brand-primary dark:hover:text-white",
+                        : "text-foreground/70 hover:text-brand-primary dark:hover:text-foreground",
                     )}
                   >
                     Dashboard

@@ -30,9 +30,6 @@ const ICON_MAP: Record<string, LucideIcon> = {
   Settings,
 }
 
-const EXPANDED_WIDTH = "w-[260px]"
-const COLLAPSED_WIDTH = "w-[72px]"
-
 interface SidebarProps {
   isCollapsed: boolean
   onToggleCollapse: () => void

@@ -2,7 +2,7 @@
 
 import { SignIn, SignUp } from "@clerk/nextjs"
 import { useTheme } from "next-themes"
-import { useEffect, useState } from "react"
+import { useHydrated } from "@/hooks/useHydrated"
 
 type AuthMode = "sign-in" | "sign-up"
 
@@ -104,11 +104,7 @@ const darkElements = {
 
 export function AuthCard({ mode }: AuthCardProps) {
   const { resolvedTheme } = useTheme()
-  const [mounted, setMounted] = useState(false)
-
-  useEffect(() => {
-    setMounted(true)
-  }, [])
+  const mounted = useHydrated()
 
   const isDark = mounted && resolvedTheme === "dark"
   const variables = isDark ? darkVariables : lightVariables

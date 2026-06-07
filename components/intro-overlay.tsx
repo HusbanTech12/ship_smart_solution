@@ -1,8 +1,9 @@
 "use client"
 
-import { useEffect, useState } from "react"
+import { useEffect, useState, useCallback } from "react"
 import { motion, AnimatePresence } from "framer-motion"
 import { Logo } from "@/components/shared/logo"
+import { useHydrated } from "@/hooks/useHydrated"
 
 const SESSION_KEY = "ship-smart-intro-seen"
 const INTRO_DURATION = 3000
@@ -61,25 +62,31 @@ const itemVariants = {
 }
 
 export function IntroOverlay() {
-  const [show, setShow] = useState(false)
-  const [mounted, setMounted] = useState(false)
+  const mounted = useHydrated()
+  const [show, setShow] = useState(() => {
+    if (typeof window === "undefined") return false
+    try {
+      return !sessionStorage.getItem(SESSION_KEY)
+    } catch {
+      return true
+    }
+  })
+
+  const handleTimer = useCallback(() => {
+    const timer = setTimeout(() => {
+      setShow(false)
+      try {
+        sessionStorage.setItem(SESSION_KEY, "1")
+      } catch { /* noop */ }
+    }, INTRO_DURATION)
+    return () => clearTimeout(timer)
+  }, [])
 
   useEffect(() => {
-    setMounted(true)
-    try {
-      const seen = sessionStorage.getItem(SESSION_KEY)
-      if (!seen) {
-        setShow(true)
-        const timer = setTimeout(() => {
-          setShow(false)
-          sessionStorage.setItem(SESSION_KEY, "1")
-        }, INTRO_DURATION)
-        return () => clearTimeout(timer)
-      }
-    } catch {
-      setShow(true)
+    if (show && mounted) {
+      return handleTimer()
     }
-  }, [])
+  }, [show, mounted, handleTimer])
 
   useEffect(() => {
     if (show) {

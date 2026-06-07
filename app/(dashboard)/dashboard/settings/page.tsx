@@ -24,7 +24,7 @@ export default async function SettingsPage() {
         description="Manage your profile, notifications, and account preferences."
       />
 
-      <section className="rounded-xl border border-gray-200 bg-white p-6 shadow-sm">
+      <section className="rounded-xl border border-border bg-card p-6 shadow-sm">
         <div className="flex items-start gap-4">
           <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-brand-primary/10 text-brand-primary">
             <SettingsIcon className="h-5 w-5" aria-hidden="true" />

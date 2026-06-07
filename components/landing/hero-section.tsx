@@ -1,6 +1,6 @@
 "use client"
 
-import { useEffect, useMemo, useState } from "react"
+import { useEffect, useState } from "react"
 import { motion, useReducedMotion } from "framer-motion"
 import {
   ArrowRight,
@@ -64,7 +64,6 @@ export function HeroSection() {
 
   useEffect(() => {
     if (prefersReduced) {
-      setProgress(55)
       return
     }
     const t = setTimeout(() => setProgress(55), 400)
@@ -297,7 +296,7 @@ export function HeroSection() {
                                 ? "bg-brand-secondary border-brand-secondary"
                                 :                               step.status === "active"
                                 ? "bg-card border-brand-secondary"
-                                : "bg-card border-gray-300 dark:border-gray-600"
+                                : "bg-card border-border"
                             }`}
                           >
                             {step.status === "done" ? (
@@ -305,7 +304,7 @@ export function HeroSection() {
                             ) : step.status === "active" ? (
                               <MapPin className="h-4 w-4 text-brand-secondary" />
                             ) : (
-                              <MapPin className="h-4 w-4 text-gray-400" />
+                              <MapPin className="h-4 w-4 text-brand-muted" />
                             )}
                           </div>
                           <div className="text-center">

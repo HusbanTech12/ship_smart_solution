@@ -2,7 +2,7 @@
 
 import { useRef } from "react"
 import { motion, useInView, useReducedMotion } from "framer-motion"
-import { Award, Clock, Warehouse, TruckIcon, PackageCheck, TrendingUp } from "lucide-react"
+import { Award, Clock, Warehouse, TruckIcon, PackageCheck } from "lucide-react"
 import { AnimatedCounter } from "@/components/shared/animated-counter"
 
 const stats = [

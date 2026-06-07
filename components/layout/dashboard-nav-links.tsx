@@ -23,8 +23,8 @@ export function DashboardNavLinks() {
           className={cn(
             "rounded-full border px-4 py-1.5 text-sm font-medium tracking-wide transition-all duration-200",
             pathname === link.href
-              ? "border-orange-900 bg-orange-900/10 text-orange-900"
-              : "border-transparent text-orange-800 hover:border-orange-800/30 hover:bg-orange-900/5 hover:text-orange-900",
+              ? "border-brand-primary bg-brand-primary/10 text-brand-primary dark:text-foreground"
+              : "border-transparent text-foreground/70 hover:border-brand-primary/30 hover:bg-brand-primary/5 hover:text-brand-primary dark:hover:text-foreground",
           )}
         >
           {link.label}

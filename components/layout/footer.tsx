@@ -1,7 +1,7 @@
 "use client"
 
 import { useState } from "react"
-import { ArrowRight, Phone, Mail, MapPin, Send } from "lucide-react"
+import { Phone, Mail, MapPin, Send } from "lucide-react"
 import Link from "next/link"
 import { toast } from "sonner"
 import { COMPANY } from "@/lib/constants/company"

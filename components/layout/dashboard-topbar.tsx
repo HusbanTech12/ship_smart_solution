@@ -66,7 +66,7 @@ export function DashboardTopbar({ onMobileMenuClick }: DashboardTopbarProps) {
                   className="flex items-center gap-1 capitalize"
                 >
                   {i > 0 && (
-                    <span aria-hidden="true" className="text-gray-300 dark:text-gray-600">
+                    <span aria-hidden="true" className="text-border-light dark:text-border">
                       /
                     </span>
                   )}

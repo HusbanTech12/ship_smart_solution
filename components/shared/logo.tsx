@@ -2,8 +2,9 @@
 
 import Image from "next/image"
 import { useTheme } from "next-themes"
-import { useEffect, useState } from "react"
+import { useMemo } from "react"
 import { cn } from "@/lib/utils"
+import { useHydrated } from "@/hooks/useHydrated"
 
 type LogoVariant = "mark" | "wordmark" | "full"
 type LogoSize = "sm" | "md" | "lg" | "xl"
@@ -27,18 +28,14 @@ const sizeMap = {
 
 function useResolvedTone(mode: LogoMode, forcedTheme?: "light" | "dark") {
   const { resolvedTheme } = useTheme()
-  const [tone, setTone] = useState<"gradient" | "white" | "dark">("gradient")
+  const mounted = useHydrated()
 
-  useEffect(() => {
+  return useMemo(() => {
+    if (mode !== "auto") return mode
+    if (!mounted) return "gradient"
     const theme = forcedTheme ?? resolvedTheme
-    if (mode !== "auto") {
-      setTone(mode)
-      return
-    }
-    setTone(theme === "dark" ? "white" : "dark")
-  }, [mode, resolvedTheme, forcedTheme])
-
-  return tone
+    return theme === "dark" ? "white" : "dark"
+  }, [mode, resolvedTheme, forcedTheme, mounted])
 }
 
 function LogoMark({
@@ -98,7 +95,6 @@ function Wordmark({
   const cfg = sizeMap[size]
 
   const isWhite = tone === "white"
-  const isDark = tone === "dark"
 
   return (
     <div className={cn("flex flex-col leading-none", className)}>

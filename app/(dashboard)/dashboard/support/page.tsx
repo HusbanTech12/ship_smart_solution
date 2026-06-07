@@ -22,7 +22,7 @@ export default async function SupportPage() {
         description="Get instant answers from our AI assistant, or reach a human anytime."
       />
       <div className="grid grid-cols-1 gap-4 md:grid-cols-3">
-        <div className="rounded-xl border border-gray-200 bg-white p-6 shadow-sm">
+        <div className="rounded-xl border border-border bg-card p-6 shadow-sm">
           <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-brand-primary/10 text-brand-primary">
             <MessageSquare className="h-5 w-5" aria-hidden="true" />
           </div>
@@ -36,7 +36,7 @@ export default async function SupportPage() {
         </div>
         <a
           href={COMPANY.phoneHref}
-          className="group rounded-xl border border-gray-200 bg-white p-6 shadow-sm transition-all duration-200 hover:-translate-y-0.5 hover:border-brand-secondary/40 hover:shadow-md"
+          className="group rounded-xl border border-border bg-card p-6 shadow-sm transition-all duration-200 hover:-translate-y-0.5 hover:border-brand-secondary/40 hover:shadow-md"
         >
           <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-brand-secondary/10 text-brand-secondary">
             <Phone className="h-5 w-5" aria-hidden="true" />
@@ -51,7 +51,7 @@ export default async function SupportPage() {
         </a>
         <a
           href={COMPANY.emailHref}
-          className="group rounded-xl border border-gray-200 bg-white p-6 shadow-sm transition-all duration-200 hover:-translate-y-0.5 hover:border-brand-accent/40 hover:shadow-md"
+          className="group rounded-xl border border-border bg-card p-6 shadow-sm transition-all duration-200 hover:-translate-y-0.5 hover:border-brand-accent/40 hover:shadow-md"
         >
           <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-brand-accent/10 text-brand-accent">
             <Mail className="h-5 w-5" aria-hidden="true" />

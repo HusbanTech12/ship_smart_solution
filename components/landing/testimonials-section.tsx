@@ -138,7 +138,7 @@ export function TestimonialsSection() {
               {testimonials.map((t) => (
                 <div
                   key={t.name}
-                  className="flex h-8 w-8 items-center justify-center rounded-full border-2 border-white bg-brand-primary text-[10px] font-bold text-white"
+                  className="flex h-8 w-8 items-center justify-center rounded-full border-2 border-white dark:border-card bg-brand-primary text-[10px] font-bold text-white"
                 >
                   {getInitials(t.name)}
                 </div>
